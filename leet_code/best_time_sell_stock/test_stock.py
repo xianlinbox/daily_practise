@@ -15,7 +15,7 @@ class TestStockStrategy(unittest.TestCase):
 
     def test_case_3(self):
         prices = [7, 6, 4, 3, 1]
-        self.assertEqual(0, self.Solution.maxProfit(prices=prices))
+        self.assertEqual(0, self.solution.maxProfit(prices=prices))
 
 
 if __name__ == "__main__":
