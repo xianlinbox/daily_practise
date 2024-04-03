@@ -12,10 +12,13 @@ class TestJump(unittest.TestCase):
         self.assertFalse(self.solution.canJump([3, 2, 1, 0, 4]))
 
     def test_case_3(self):
-        self.assertTrue(self.solution.canJump([0]))
+        self.assertTrue(self.solution.canJump([1]))
 
     def test_case_4(self):
-        self.assertFalse(self.solution.canJump([3]))
+        self.assertTrue(self.solution.canJump([0]))
+
+    def test_case_5(self):
+        self.assertTrue(self.solution.canJump([3, 2, 2, 0, 4]))
 
 
 if __name__ == "__main__":
