@@ -3,15 +3,16 @@ from typing import List
 
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
-        stop_point = len(nums) - 1
-        i = 0
-        while i < len(nums) - 1:
-            if nums[i] == 0:
-                if i >= 1 and nums[i - 1] > 1:
-                    i += nums[i - 1] - 1
-                    continue
-                else:
-                    stop_point = i
-                    break
-            i += 1
-        return stop_point >= len(nums) - 1
+        if nums[0] == 0 and len(nums) > 1:
+            return False
+
+        left_steps = 1
+        for i in range(0, len(nums) - 1):
+            if nums[i] == 0 and left_steps == 0:
+                return False
+
+            if nums[i] > left_steps:
+                left_steps = nums[i]
+            left_steps = left_steps - 1
+
+        return True
