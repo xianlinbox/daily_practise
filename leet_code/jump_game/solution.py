@@ -16,3 +16,6 @@ class Solution:
             left_steps = left_steps - 1
 
         return True
+
+    def jump(self, nums: List[int]) -> int:
+        pass
