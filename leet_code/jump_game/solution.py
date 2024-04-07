@@ -23,6 +23,12 @@ class Solution:
         count = 0
         for i in range(0, len(nums)):
             if jump_steps >= left_steps:
-                # count += 1
                 break
+
+            if nums[i] > jump_steps:
+                jump_steps = nums[i]
+
+            count += 1
+            left_steps -= 1
+
         return count
