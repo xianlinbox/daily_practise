@@ -29,6 +29,11 @@ class TestJump(unittest.TestCase):
     def test_case_8(self):
         self.assertEqual(2, self.solution.jump([1, 2, 3]))
 
+    def test_case_9(self):
+        self.assertEqual(
+            2, self.solution.jump([7, 0, 9, 6, 9, 6, 1, 7, 9, 0, 1, 2, 9, 0, 3])
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

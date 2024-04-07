@@ -18,20 +18,19 @@ class Solution:
         return True
 
     def jump(self, nums: List[int]) -> int:
-        left_steps = len(nums) - 1
-        jump_steps = 0
+        furthest = 0
+        end = 0
         count = 0
         for i in range(0, len(nums)):
-            print(i, jump_steps, left_steps)
-            if jump_steps >= left_steps:
+            if i == len(nums) - 1:
                 break
 
-            if jump_steps < nums[i]:
-                jump_steps = nums[i]
+            furthest = max(furthest, i + nums[i])
+            if furthest >= len(nums) - 1:
                 count += 1
-            elif jump_steps <= 0:
-                count += 1
+                break
 
-            left_steps -= 1
-            jump_steps -= 1
+            if i == end:
+                count += 1
+                end = furthest
         return count
