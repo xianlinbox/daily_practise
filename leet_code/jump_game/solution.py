@@ -18,4 +18,11 @@ class Solution:
         return True
 
     def jump(self, nums: List[int]) -> int:
-        pass
+        left_steps = len(nums) - 1
+        jump_steps = 0
+        count = 0
+        for i in range(0, len(nums)):
+            if jump_steps >= left_steps:
+                # count += 1
+                break
+        return count
