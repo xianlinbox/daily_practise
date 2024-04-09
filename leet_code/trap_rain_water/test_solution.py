@@ -14,6 +14,12 @@ class TestJump(unittest.TestCase):
     def test_case_3(self):
         self.assertEqual(0, self.solution.trap([1]))
 
+    def test_case_4(self):
+        self.assertEqual(1, self.solution.trap([1, 0, 1]))
+
+    def test_case_5(self):
+        self.assertEqual(1, self.solution.trap([1, 0, 3]))
+
 
 if __name__ == "__main__":
     unittest.main()
