@@ -14,7 +14,14 @@ class Solution:
         current_right_max = 0
         for reverse_height in height:
             current_right_max = max(current_right_max, reverse_height)
-            right_max_heights.append(current_left_max)
+            right_max_heights.append(current_right_max)
+
+        height.reverse()
+        right_max_heights.reverse()
+
+        print(left_max_heights)
+        print(right_max_heights)
+        print(height)
         result = 0
         for i in range(0, len(height)):
             result += min(left_max_heights[i], right_max_heights[i]) - height[i]
