@@ -8,6 +8,7 @@ class Solution:
             remain_gas = gas[i] - cost[i]
             j = i
             while remain_gas > 0:
+                print(i, j)
                 j += 1
                 remain_gas += gas[j % len(gas)] - cost[j % len(gas)]
                 if j == i:
