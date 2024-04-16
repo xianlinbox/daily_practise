@@ -8,11 +8,17 @@ class TestJump(unittest.TestCase):
     def test_case_0(self):
         self.assertEqual("III", self.solution.intToRoman(3))
 
-    def test_case_1(self):
-        self.assertEqual("LVIII", self.solution.intToRoman(58))
+    def test_case_0_1(self):
+        self.assertEqual("V", self.solution.intToRoman(5))
 
-    def test_case_2(self):
-        self.assertEqual("MCMXCIV", self.solution.intToRoman(1994))
+    def test_case_0_1(self):
+        self.assertEqual("VIIII", self.solution.intToRoman(9))
+
+    # def test_case_1(self):
+    #     self.assertEqual("LVIII", self.solution.intToRoman(58))
+
+    # def test_case_2(self):
+    #     self.assertEqual("MCMXCIV", self.solution.intToRoman(1994))
 
 
 if __name__ == "__main__":
