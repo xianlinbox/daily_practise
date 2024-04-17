@@ -6,16 +6,9 @@ class Solution:
         rules = [
             ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"],
             ["X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"],
+            ["C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"],
+            ["M", "MM", "MMM"],
         ]
-
-        #         I             1
-        # V             5
-        # X             10
-        # L             50
-        # C             100
-        # D             500
-        # M             1000
-
         digits = list(str(num))
         digits.reverse()
         result = ""
