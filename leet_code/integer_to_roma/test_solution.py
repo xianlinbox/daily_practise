@@ -38,6 +38,15 @@ class TestJump(unittest.TestCase):
     def test_case_3(self):
         self.assertEqual("MCMXCIV", self.solution.intToRoman(1994))
 
+    def test_case_4(self):
+        self.assertEqual("X", self.solution.intToRoman(10))
+
+    def test_case_4_1(self):
+        self.assertEqual("C", self.solution.intToRoman(100))
+
+    def test_case_4_2(self):
+        self.assertEqual("M", self.solution.intToRoman(1000))
+
 
 if __name__ == "__main__":
     unittest.main()
