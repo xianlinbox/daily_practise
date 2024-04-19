@@ -27,6 +27,10 @@ class TestJump(unittest.TestCase):
         result = self.solution.candy([1, 2, 87, 87, 87, 2, 1])
         self.assertEqual(13, result)
 
+    def test_case_5(self):
+        result = self.solution.candy([4, 3, 2, 1])
+        self.assertEqual(10, result)
+
 
 if __name__ == "__main__":
     unittest.main()
