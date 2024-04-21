@@ -15,7 +15,11 @@ class TestJump(unittest.TestCase):
 
     def test_case_2(self):
         result = self.solution.threeSum([0, 0, 0])
-        self.assertEqual([0, 0, 0], result)
+        self.assertEqual([[0, 0, 0]], result)
+
+    def test_case_3(self):
+        result = self.solution.threeSum([0, 0, 0, 0])
+        self.assertEqual([[0, 0, 0]], result)
 
 
 if __name__ == "__main__":
