@@ -3,14 +3,23 @@ from typing import List
 
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
-        i = 0
-        j = len(nums) - 1
-        k = j / 2
         result = []
-        while True:
-            if i >= k and j <= k:
-                break
-            if nums[i] + nums[k] + nums[j] >0:
-                
-            elif nums[i] + nums[k] + nums[j] == 0:
-                result.append([i, j, k])
+        nums.sort()
+        for index, item in enumerate(nums):
+            target = 0 - item
+            i = index + 1
+            j = len(nums) - 1
+            while True:
+                if i >= j:
+                    break
+                if nums[i] + nums[j] == target:
+                    if [nums[index], nums[i], nums[j]] not in result:
+                        result.append([nums[index], nums[i], nums[j]])
+                    i = i + 1
+                    j = j - 1
+                elif nums[i] + nums[j] > target:
+                    j = j - 1
+                else:
+                    i = i + 1
+
+        return result
