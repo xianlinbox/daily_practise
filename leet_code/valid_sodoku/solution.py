@@ -16,7 +16,7 @@ class Solution:
                 item = board[row][column]
                 if item == ".":
                     continue
-                matrix_index = int(row / 3 * 3) + int(column / 3)
+                matrix_index = int(row / 3) * 3 + int(column / 3)
                 if (
                     item not in row_check[row]
                     and item not in column_check[column]
