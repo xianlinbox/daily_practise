@@ -12,7 +12,7 @@ class Solution:
         result = []
 
         while left <= right and up <= down:
-            print(up, down, left, right, result).__annotations__
+            print(up, down, left, right, result)
             for i in range(left, right + 1):
                 result.append(matrix[up][i])
             up += 1

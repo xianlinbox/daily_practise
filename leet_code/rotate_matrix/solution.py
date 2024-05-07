@@ -1,0 +1,10 @@
+from typing import List
+
+# https://leetcode.com/problems/rotate-image/description/?envType=study-plan-v2&envId=top-interview-150
+
+
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
