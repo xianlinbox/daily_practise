@@ -5,6 +5,14 @@ from typing import List
 
 class Solution:
     def rotate(self, matrix: List[List[int]]) -> None:
-        """
-        Do not return anything, modify matrix in-place instead.
-        """
+        rows = len(matrix)
+        columns = len(matrix[0])
+        temp_matrix = [[0 for i in range(rows)] for j in range(columns)]
+
+        for row in range(rows):
+            for column in range(columns):
+                temp_matrix[column][rows - row - 1] = matrix[row][column]
+
+        for row in range(rows):
+            for column in range(columns):
+                matrix[row][column] = temp_matrix[row][column]
