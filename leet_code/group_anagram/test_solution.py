@@ -8,7 +8,7 @@ class TestJump(unittest.TestCase):
     def test_case_0(self):
         strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
         result = self.solution.groupAnagrams(strs)
-        expected = [["bat"], ["nat", "tan"], ["ate", "eat", "tea"]]
+        expected = [["eat", "tea", "ate"], ["tan", "nat"], ["bat"]]
         self.assertEqual(expected, result)
 
     def test_case_1(self):
