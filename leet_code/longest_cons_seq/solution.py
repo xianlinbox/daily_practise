@@ -11,7 +11,9 @@ class Solution:
         seq_length = -1
         for i in range(number_count - 1):
             print(start_point, seq_length)
-            if nums[i + 1] != nums[i] + 1:
+            if nums[i + 1] == nums[i]:
+                start_point += 1
+            elif nums[i + 1] != nums[i] + 1:
                 seq_length = max(i - start_point + 1, seq_length)
                 start_point = i + 1
 
