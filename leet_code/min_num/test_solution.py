@@ -15,8 +15,7 @@ class TestJump(unittest.TestCase):
         points = [[1, 2], [3, 4], [5, 6], [7, 8]]
         result = self.solution.findMinArrowShots(points)
         expected = 4
-
-    #     self.assertEqual(expected, result)
+        self.assertEqual(expected, result)
 
     def test_case_2(self):
         points = [[1, 2], [2, 3], [3, 4], [4, 5]]

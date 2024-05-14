@@ -12,9 +12,8 @@ class Solution:
             current = points[i]
             if current[0] <= previous[1]:
                 previous = [current[0], min(previous[1], current[1])]
-                if i == len(points) - 1:
-                    overlaps.append(previous)
-            else:
-                overlaps.append(previous)
-                previous = current
+                continue
+            overlaps.append(previous)
+            previous = current
+        overlaps.append(previous)
         return len(overlaps)
