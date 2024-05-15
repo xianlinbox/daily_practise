@@ -35,6 +35,24 @@ class TestJump(unittest.TestCase):
         expected = "/.../b/d"
         self.assertEqual(expected, result)
 
+    def test_case_5(self):
+        path = "/a/../../b/../c//.//"
+        result = self.solution.simplifyPath(path)
+        expected = "/c"
+        self.assertEqual(expected, result)
+
+    def test_case_6(self):
+        path = "/a//b////c/d//././/.."
+        result = self.solution.simplifyPath(path)
+        expected = "/a/b/c"
+        self.assertEqual(expected, result)
+
+    def test_case_7(self):
+        path = "/a/.."
+        result = self.solution.simplifyPath(path)
+        expected = "/"
+        self.assertEqual(expected, result)
+
 
 if __name__ == "__main__":
     unittest.main()
