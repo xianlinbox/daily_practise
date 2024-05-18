@@ -11,6 +11,18 @@ class TestJump(unittest.TestCase):
         expected = 9
         self.assertEqual(expected, result)
 
+    def test_case_1(self):
+        tokens = ["4", "13", "5", "/", "+"]
+        result = self.solution.evalRPN(tokens)
+        expected = 6
+        self.assertEqual(expected, result)
+
+    def test_case_2(self):
+        tokens = ["10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"]
+        result = self.solution.evalRPN(tokens)
+        expected = 22
+        self.assertEqual(expected, result)
+
 
 if __name__ == "__main__":
     unittest.main()
