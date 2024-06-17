@@ -7,26 +7,34 @@ class Solution:
     def calculate(self, s: str) -> int:
         operators = []
         numbers = []
+        #  "(1+(4+5+2)-3)+(6+8)"
         for char in s:
             match char:
                 case ' ':
                     continue
                 case '+' | '-':
                     if len(numbers) >= 2:
-                        op = operators.pop()
-                        numbers.append(self.calcaulte(numbers, op))
+                        while not operators and operators[-1] != '(':
+                            op = operators.pop()
+                            numbers.append(self.calcaulte(numbers, op))
                     operators.append(char)
                 case '(':
                     operators.append(char)
                 case ')':
                     curr_op = operators.pop()
                     while  curr_op != '(':
-                        self.calcaulte(numbers, curr_op)
+                        numbers.append(self.calcaulte(numbers, curr_op))
                         curr_op = operators.pop()
                 case _:
                     numbers.append(int(char))
-        
-        return self.calcaulte(numbers, operators.pop())
+            print(numbers)
+            print("****")
+            print(operators)
+            print("###")
+        if len(numbers) >=2:
+            return self.calcaulte(numbers, operators.pop())
+        else:
+            return numbers.pop()
     
     def calcaulte(self, numbers, op) -> str:
         number_1 = numbers.pop()
