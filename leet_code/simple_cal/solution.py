@@ -8,11 +8,16 @@ class Solution:
         operators = []
         numbers = []
         #  "(1+(4+5+2)-3)+(6+8)"
+        temp = -1
         for char in s:
             match char:
                 case ' ':
                     continue
                 case '+' | '-':
+                    if temp != -1:
+                        numbers.append(temp)
+                        temp = -1
+
                     if len(numbers) >= 2:
                         while not operators and operators[-1] != '(':
                             op = operators.pop()
@@ -26,11 +31,15 @@ class Solution:
                         numbers.append(self.calcaulte(numbers, curr_op))
                         curr_op = operators.pop()
                 case _:
-                    numbers.append(int(char))
+                    if temp == -1:
+                        temp = int(char)
+                    else:
+                        temp = temp * 10 + int(char)
             print(numbers)
-            print("****")
             print(operators)
-            print("###")
+        if temp != -1: 
+            numbers.append(temp)
+
         if len(numbers) >=2:
             return self.calcaulte(numbers, operators.pop())
         else:

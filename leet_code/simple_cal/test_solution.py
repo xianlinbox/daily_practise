@@ -23,6 +23,12 @@ class TestJump(unittest.TestCase):
         expected = 23
         self.assertEqual(expected, result)
 
+    def test_case_4(self):
+        s = "233 +3"
+        result = self.solution.calculate(s)
+        expected = 236
+        self.assertEqual(expected, result)
+
 
 if __name__ == "__main__":
     unittest.main()
