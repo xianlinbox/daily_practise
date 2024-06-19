@@ -10,6 +10,7 @@ class Solution:
         #  "(1+(4+5+2)-3)+(6+8)"
         temp = -1
         for char in s:
+            print(char)
             match char:
                 case ' ':
                     continue
@@ -17,15 +18,20 @@ class Solution:
                     if temp != -1:
                         numbers.append(temp)
                         temp = -1
-
                     if len(numbers) >= 2:
-                        while not operators and operators[-1] != '(':
+                        while operators:
+                            if operators[-1] == "(":
+                                break
+                            print("hanlde one")
                             op = operators.pop()
                             numbers.append(self.calcaulte(numbers, op))
                     operators.append(char)
                 case '(':
                     operators.append(char)
                 case ')':
+                    if temp != -1:
+                        numbers.append(temp)
+                        temp = -1
                     curr_op = operators.pop()
                     while  curr_op != '(':
                         numbers.append(self.calcaulte(numbers, curr_op))
@@ -39,7 +45,7 @@ class Solution:
             print(operators)
         if temp != -1: 
             numbers.append(temp)
-
+    
         if len(numbers) >=2:
             return self.calcaulte(numbers, operators.pop())
         else:
