@@ -5,19 +5,22 @@ from typing import List
 
 class Solution:
     def calculate(self, s: str) -> int:
+        chars = list(s.replace(" ",""))
         operators = []
         numbers = []
-        #  "(1+(4+5+2)-3)+(6+8)"
-        temp = -1
-        for char in s:
-            print(char)
+        temp = None
+        isNegative = False
+        for i in range(0,len(chars)):
+            char = chars[i]
             match char:
-                case ' ':
-                    continue
                 case '+' | '-':
-                    if temp != -1:
+                    if temp != None:
+                        if isNegative:
+                            temp = int("-"+str(temp))
+                            operators.pop()
+                            isNegative=False
                         numbers.append(temp)
-                        temp = -1
+                        temp = None
                     if len(numbers) >= 2:
                         while operators:
                             if operators[-1] == "(":
@@ -29,28 +32,39 @@ class Solution:
                 case '(':
                     operators.append(char)
                 case ')':
-                    if temp != -1:
+                    if temp != None:
+                        print(str(temp)+")")
+                        print(isNegative)
+                        if isNegative:
+                            temp = int("-"+str(temp))
+                            operators.pop()
+                            isNegative= False
+                        print(temp)
                         numbers.append(temp)
-                        temp = -1
+                        temp = None
                     curr_op = operators.pop()
                     while  curr_op != '(':
                         numbers.append(self.calcaulte(numbers, curr_op))
                         curr_op = operators.pop()
                 case _:
-                    if temp == -1:
+                    if temp == None:
+                        isNegative = i >= 1 and chars[i-1] == "-" and (i-2<0 or chars[i-2]=='(')
                         temp = int(char)
                     else:
                         temp = temp * 10 + int(char)
-            print(numbers)
+            print(numbers)        
             print(operators)
-        if temp != -1: 
+                    
+        if temp != None: 
             numbers.append(temp)
-    
         if len(numbers) >=2:
             return self.calcaulte(numbers, operators.pop())
         else:
             return numbers.pop()
     
+    def check_digit(self, char):
+        return char in ['(']
+        
     def calcaulte(self, numbers, op) -> str:
         number_1 = numbers.pop()
         number_2 = numbers.pop()

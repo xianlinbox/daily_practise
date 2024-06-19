@@ -2,7 +2,7 @@ import unittest
 from solution import Solution
 
 
-class TestJump(unittest.TestCase):
+class TestCalculation(unittest.TestCase):
     solution = Solution()
 
     def test_case_0(self):
@@ -28,6 +28,13 @@ class TestJump(unittest.TestCase):
         result = self.solution.calculate(s)
         expected = 236
         self.assertEqual(expected, result)
+
+    def test_case_5(self):
+        s = "1-(     -2)"
+        result = self.solution.calculate(s)
+        expected = 3
+        self.assertEqual(expected, result)
+        
 
 
 if __name__ == "__main__":
