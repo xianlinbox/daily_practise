@@ -25,7 +25,6 @@ class Solution:
                         while operators:
                             if operators[-1] == "(":
                                 break
-                            print("hanlde one")
                             op = operators.pop()
                             numbers.append(self.calcaulte(numbers, op))
                     operators.append(char)
@@ -33,13 +32,10 @@ class Solution:
                     operators.append(char)
                 case ')':
                     if temp != None:
-                        print(str(temp)+")")
-                        print(isNegative)
                         if isNegative:
                             temp = int("-"+str(temp))
                             operators.pop()
                             isNegative= False
-                        print(temp)
                         numbers.append(temp)
                         temp = None
                     curr_op = operators.pop()
@@ -52,19 +48,21 @@ class Solution:
                         temp = int(char)
                     else:
                         temp = temp * 10 + int(char)
-            print(numbers)        
-            print(operators)
                     
         if temp != None: 
+            if isNegative:
+                temp = int("-"+str(temp))
+                operators.pop()
+                isNegative= False
             numbers.append(temp)
         if len(numbers) >=2:
             return self.calcaulte(numbers, operators.pop())
         else:
-            return numbers.pop()
-    
-    def check_digit(self, char):
-        return char in ['(']
-        
+            result = numbers.pop()
+            if operators:
+                result = int("-"+str(result))
+            return result
+
     def calcaulte(self, numbers, op) -> str:
         number_1 = numbers.pop()
         number_2 = numbers.pop()
