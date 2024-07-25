@@ -47,23 +47,74 @@ Moving Accounts
 
 ### User
 
-### Group
+For long term credential
 
 ### Role
 
+Short term credential, use STS
+
+- Instance Role
+- Service Role
+- Cross Account Role
+
+Assume a role will get new role priviledge but lost the old ones. we can use resource based policy to give both user priviledge.
+
+### Group
+
+grouped policy to easier assign multi policy to multi users/roles
+
 ### Policy
+
+Define what a User/Role can/Can't do
 
 - AWS Managed Policy
 - Custom Policy
 - Inline Policy
+- Resource-based policy
 
-### Permission Boundaries
+Anatomy: json document with effect, action, resource, condition, policy variables
+Deny has precedence over Allow
+Service control policies (SCPs) are a type of organization policy that you can use to manage permissions in your organization.
 
-### Organisation SCP
-
-#### Policy Schema
+Organisation level/Acoount -> SCP; User/Role -> Permission boundary;
 
 ### STS: Security Token Service
+
+Assume user a role, Provide access to resources temporarily
+Ability to revoke active sessions and credentials for a role.
+
+### AWS Resource Access Manager
+
+Share resources you own to other account within your org.
+Avoid resource duplication
+
+The Resouce can be shared:
+
+1. VPC Subnet, Prefix List
+2. Route53 Resolver rules
+3. ...
+
+## Federation & Cognito
+
+- Give user out of AWS access to AWS resources.
+- Support any SAML2.0 and Microsoft AD identity providers, implemented by AssumeRoleWithSAML.
+- AWS SSO is new federation way replace old SAML2.0
+- For not support SAML Identity provider, we need to custom identity broker to do the AssumeRole work by ourselves.
+
+WebIdentity without Cognito (Not recommend)
+
+1. Get webidentity from Google/Aamzon ...
+2. AssumeRoleWithWebIdentity
+3. Use this new role to access AWS resources
+
+WebIdentity with Cognito (recommend)
+
+1. Get web identity from Google/Aamzon ...
+2. Exchange web identity with coginito for a cognito token
+3. Use cognito token to AssumeRole
+4. Access resource with short term credential
+
+Add IAM policy by condition to limit web identity access priviledge
 
 ## Best Practices
 
