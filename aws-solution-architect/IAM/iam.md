@@ -123,7 +123,7 @@ Add IAM policy by condition to limit web identity access priviledge
 ## Tools
 
 - Access Advisor:
-- Access Analyzer:
+- Access Analyzer: Policy Validation/Policy Generation
 
 ## Tips:
 
