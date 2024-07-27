@@ -63,7 +63,7 @@ Encryption Type:
 
 WAF for granular config for one application.
 Firewall Manager: Manage rules for all the accounts in the organisation, define the common sets for all the accounts
-Shield for additional feature on top of WAF.
+Shield for additional feature on top of
 
 ## AWS Inspector
 
