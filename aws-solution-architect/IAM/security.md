@@ -61,8 +61,23 @@ Encryption Type:
 
 ## AWS Shield, WAF, AWS Firewall Manager
 
+WAF for granular config for one application.
+Firewall Manager: Manage rules for all the accounts in the organisation, define the common sets for all the accounts
+Shield for additional feature on top of WAF.
+
 ## AWS Inspector
 
 ## AWS GuardDuty
+
+Intelligent Thread discovery service
+using data:
+
+1. Cloudtrail logs
+2. DNS logs
+3. VPC FLow logs
+4. S3 logs/eks/volumes logs etc.
+
+Integrate with EventBridge for notify findings.
+GuardDutyDelegateAdminAccount.
 
 ## IAM Condition key
