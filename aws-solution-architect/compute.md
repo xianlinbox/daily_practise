@@ -20,3 +20,21 @@ RAM is not included in the metrics
 ## Recovery
 
 we can use cloud alarm to recovery failed instance with same config
+
+# High Performance Computing
+
+Services to help HPC:
+
+1. Data Management & Transfer
+
+- Direct Connect
+- Snowball & SnowMobile
+- AWS DataSync
+
+2. Computing Network
+
+3. Storage
+
+4. Automation and orchestration
+
+# Auto Scaling
