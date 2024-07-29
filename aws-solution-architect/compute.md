@@ -71,11 +71,30 @@ App Runner: similar as Heroku,easy way to deploy web appliction/API in AWS
 
 ECS/EKS Anywhere: run containser service in on-prem infra
 
-Lambda:
+# Lambda
+
 limits: memory/storage/CPU/Runtime/language/concurrent/size
 
-Load Balancer:
+# # Load Balancer:
+
 CLB -> ALB (Http/webcocket)/NLB (TLS/TCP; high performance, low latency)/GWLB (ip level)
 Cross Zone Load balancing (diff LB has different setting and charges)
 Sticky Session
 Routing algorithm:(LOR,Round Robin, Flow Hash)
+
+# API Gateway:
+
+compare ALB, it provides limit/authentication/cache and more functionalities
+Limits: 29s timeout/10M payload
+Endpoint Types:
+
+1. Edge Optimized
+2. Regional
+3. Private
+
+Cache: 0.5G-237G, per request URL, can manually refresh
+
+Usage Plans & API keys: we can config the limits for each client. client are identified by API key.
+
+Web Socket API:stateful/bi-direction, use case:chat
+Private API gateway: only accessiable from VPC interface endpoint
