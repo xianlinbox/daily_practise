@@ -98,3 +98,30 @@ Usage Plans & API keys: we can config the limits for each client. client are ide
 
 Web Socket API:stateful/bi-direction, use case:chat
 Private API gateway: only accessiable from VPC interface endpoint
+
+# App Sync
+
+AWS version GraphQL, can integrated with AWS cognito
+
+# Route 53
+
+Map hostname to IP
+
+CNAME: map a host name to another one
+Alias: Map a hostname to an aws resource (can't do it for an EC2 DNS name)
+Records TTL: save traffic to ROute 53
+Routing policy for multi records: return all client chose/ weighted/ latency based/ failover/ geo-location/ip-based routing
+Traffic Flow: setting management for complex routing
+
+Hosted Zones: A container of records defines how to route traffic
+
+- Pulic Hosted Zones:
+- Private Hosted Zones:
+
+DNSSEC: securing DNS traffic
+Health Check
+Hybrid DNS:
+Resolver Rules:
+
+- Inbound Resolver Endpoint
+- Outbound Resolver Endpoint
