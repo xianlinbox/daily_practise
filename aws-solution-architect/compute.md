@@ -41,3 +41,41 @@ Services to help HPC:
 
 1. Instance Refresh
 2. Update Strategy
+
+# ECS/ECR/EKS/Fargate
+
+ECS components:
+
+- ECS Cluster
+- ECS Service
+- Task Definition
+- Tasks: an instance of task
+- ECS IAM role
+
+Integated with ALB, Parameter Store, Secrets Manager
+
+Networking:
+
+- None
+- Bridge
+- Host
+- awsvpc
+
+Fargate:
+
+ECR: support cross-region/cross-account replication
+
+EKS:
+
+App Runner: similar as Heroku,easy way to deploy web appliction/API in AWS
+
+ECS/EKS Anywhere: run containser service in on-prem infra
+
+Lambda:
+limits: memory/storage/CPU/Runtime/language/concurrent/size
+
+Load Balancer:
+CLB -> ALB (Http/webcocket)/NLB (TLS/TCP; high performance, low latency)/GWLB (ip level)
+Cross Zone Load balancing (diff LB has different setting and charges)
+Sticky Session
+Routing algorithm:(LOR,Round Robin, Flow Hash)
