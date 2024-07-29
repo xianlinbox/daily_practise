@@ -37,4 +37,7 @@ Services to help HPC:
 
 4. Automation and orchestration
 
-# Auto Scaling
+# Auto Scaling Group
+
+1. Instance Refresh
+2. Update Strategy
