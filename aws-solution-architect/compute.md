@@ -132,7 +132,7 @@ They both use edge location and support shield
 Accelator is more for redirect, can also work for TCP/UDP, MQTT
 Cloud Front is more for for CDN
 
-#Architecture Style
+# Architecture Style
 
 1. EC2 with elastic ip
 2. Ec2 instances with route 53
@@ -142,3 +142,14 @@ Cloud Front is more for for CDN
 6. API Gateway + Lambda
 7. API gateway + AWS services
 8. API Gateway + HTTP server backend
+
+# AWS outpost
+
+Build AWS service on company's data center, it can extended to cloud if needed.
+
+# AWS wave length/Local Zones
+
+Wave Length: Deloy service in the edge device and get extremely low latency service.
+Local Zones: Amazon provided more detail local zone
+
+# Edge Optimized
