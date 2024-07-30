@@ -8,6 +8,8 @@ Volume Types (size/IO/thoughtput):
 - io: low latenct SSD
 - st/sc : low cost HDD (can't used as the boot volume)
 
+With gp2 you get a baseline of 100 IOPS and then 3 IOPS per GiB after the first 33.33GiB, with a max of 16,000 IOPS. Pricing is based on volume size.
+
 Snapshot: incremental,can copy for DR, saved in S3 and can pre-warm for fast loading.
 
 Data Lifecycle Manager: help to manage snapshots
@@ -65,3 +67,27 @@ A dashboard:
 ## S3 Achitecture
 
 S3 can as the host of static content, combine with EC2 or Cloud front to provide the content, we also can provide pre-signed URL to client to direct talk to S3.
+
+# FSx
+
+lauch 3rd party service (windows file server/Lusture) as a full managed service in AWS
+FSx Deployment options: Scratch FS/Persistent FS
+
+FSx architecture Solution:
+
+1. MIgration from one AZ to multi AZ: DataSync/Backup.
+2. Decrease FSx Size: it can only increase, decrease need to create a new one and data sync
+3. Data lazy loading: only load data is needed before processing. not all at once.
+
+# DataSync
+
+Move large amount of data from and to
+it need DataSync agent to do the work.
+
+# Data Exchange
+
+Buy and load third party data (mckinsey, reteuers ect) through AWS
+
+# Transfer Family
+
+FTP protocal data transfer in/out S3 & EFS
