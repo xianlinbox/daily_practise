@@ -31,3 +31,37 @@ Storage Tier for cost saving, using lifecycle policy to move data to different t
 VPC peering, On-prem Direct connect
 Access point with pemission config on path
 Cross Region Replication
+
+# S3
+
+Save for objects.
+
+Anti Pattern:
+
+1. lots of small files
+2. Use as a file syste,
+3. Search/Indexing
+
+Replication:CRR/SRR
+Combine with lifecycle rules and Replciation time control for in time replication
+Default Event notification which can combine with event bridge to other aws services.
+MUlti-upload/Byte fetch range
+S3 Select: filter on the server.
+S3 analytics: provide recommandation for how to store your data in S3
+
+Storage Lens:
+
+A dashboard:
+
+- summary metrics
+- Cost Optimization Metrics
+- Data Protection Metrics
+- Access Management Metrics
+- Event Metrics
+- Performance Metrics
+- Activity Metrics
+  Free and Paid advanced metrics
+
+## S3 Achitecture
+
+S3 can as the host of static content, combine with EC2 or Cloud front to provide the content, we also can provide pre-signed URL to client to direct talk to S3.
