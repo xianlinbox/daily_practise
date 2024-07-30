@@ -125,3 +125,20 @@ Resolver Rules:
 
 - Inbound Resolver Endpoint
 - Outbound Resolver Endpoint
+
+# Global Accelerator & Cloud Front
+
+They both use edge location and support shield
+Accelator is more for redirect, can also work for TCP/UDP, MQTT
+Cloud Front is more for for CDN
+
+#Architecture Style
+
+1. EC2 with elastic ip
+2. Ec2 instances with route 53
+3. ALB with Auto Scaling Group
+4. ALB +ECS (backed by ASG or Fargate)
+5. ALB + Lambda
+6. API Gateway + Lambda
+7. API gateway + AWS services
+8. API Gateway + HTTP server backend
