@@ -60,8 +60,8 @@ AS the name, it's a transitive gateway. any VPC connect to this Gateway, can tal
 
 provide a provate way connect to AWS services. No Gateways for access AWS services
 
-Endpoint gateway: one per VPC/ only works for S3 and DynamoDB/need to update routetable/DNS resolution must be enabled
-Endpoint Interface: works for all except DynamoDB. enable private DNS, can be accessed from DirectConnect or VPN
+Endpoint gateway: one per VPC/ only works for S3 and DynamoDB/need to update routetable/DNS resolution must be enabled. can only for aws internal service, A gateway endpoint is a gateway that is a target for a route in your route table used for traffic destined to either Amazon S3 or DynamoDB. There is no charge for using gateway endpoints.
+Endpoint Interface: An interface endpoint is an elastic network interface with a private IP address from the IP address range of your subnet. It serves as an entry point for traffic destined to a service that is owned by AWS or owned by an AWS customer or partner. You are billed for hourly usage and data processing charges.
 
 Policies: an json defines how to access the services
 
@@ -75,3 +75,64 @@ connection trouble shooting steps:
 3. route table can route to S3
 4. Enabled DNS resolution
 5. S3 Bucket policy allow connection
+
+# Private Link
+
+A highly available, scalable technology that enables you to privately connect your VPC to supported AWS services, services hosted by other AWS accounts (VPC endpoint services), and supported by AWS Marketplace Partner Service
+
+An AWS PrivateLink consists of a VPC endpoint (VPCE) and a corresponding Endpoint Service:
+
+# Site 2 Site VPN
+
+On-prem VPN
+Customer gateway
+Vitual Private Gateway
+Using BGP and ASN
+can use NAT instance to share internet connection with VPN
+
+## Cloud Hub
+
+1. connect 10 customer gateway through Vitual private gateway
+2. 1 Customer gateway can connect to multi VGW also (not recommend), use direct connect and one for each.
+
+Shared service vpc: building a proxy vpc talk to on-prem.
+
+# Client VPN
+
+# Direct Connect
+
+Init in AWS Direct Connect Location
+
+1. dedicated connection
+2. more expensive
+3. bypass ISP,private access to service through VIF (virtual inteface)
+4. not redundunt by default
+
+Connect Types:
+
+- dedicated connection
+- hosted connection
+
+leader time for new connection can be 1 month
+Link aggreagtion group can aggreagte multi DC into one:
+
+1. must be dedicated connection
+2. must be same capacity
+3. must teminated at same Direct Connect endpoint
+
+Direct Connect Gateway: connect to many VPC in different region
+SiteLink: allow you send data from on Direct connect bypass aws regions
+
+VPC Flow Log: using it to identify network issues, can work with cloudwatch, athena, S3 together
+
+# Network protection
+
+the service we have seen:
+
+1. NACL
+2. Security Group
+3. WAF
+4. Shield
+5. Firewall Manager
+
+Network Firewall : up to 1000 rules
