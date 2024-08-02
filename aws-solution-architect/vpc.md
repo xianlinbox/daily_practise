@@ -45,3 +45,33 @@ Connection not transitive, you need to build peering for all connection
 Can cross region and cross account
 If 2 VPC has same CIDR, the longest prefix match will use to decide which VPC traffic go to.
 No Transtive Peering/No Edge Routing (Peering can't make your private subsets use another VPC NAT Gateway)
+
+# Transit Gateway
+
+AS the name, it's a transitive gateway. any VPC connect to this Gateway, can talk with each other
+
+- reginal resources, can work cross region
+- can peering with each other, inter/intra region
+- using routable table to limit VPC connection
+- support ip multicast
+- can work with other gateways, like DirectConnect, VPN
+
+# VPC Endpoints
+
+provide a provate way connect to AWS services. No Gateways for access AWS services
+
+Endpoint gateway: one per VPC/ only works for S3 and DynamoDB/need to update routetable/DNS resolution must be enabled
+Endpoint Interface: works for all except DynamoDB. enable private DNS, can be accessed from DirectConnect or VPN
+
+Policies: an json defines how to access the services
+
+1. it can't override other policies
+2. S3 can only deny access from a public ip, for private ip, we can use sourceVpc/sourceVpce to limit
+
+connection trouble shooting steps:
+
+1. check Ec2 instance security group allow traffic out.
+2. check Endpoints Gateway policy allow
+3. route table can route to S3
+4. Enabled DNS resolution
+5. S3 Bucket policy allow connection
