@@ -36,3 +36,12 @@ IPV6:
 
 - it is all public
 - private subnet instances can't be reach by IPV6, but can reach to an ipv6 service, by Egress only internet gateway.
+
+# VPC Peering
+
+Connect 2 VPC like they are one,
+CIDR of these 2 VPC can't overlap
+Connection not transitive, you need to build peering for all connection
+Can cross region and cross account
+If 2 VPC has same CIDR, the longest prefix match will use to decide which VPC traffic go to.
+No Transtive Peering/No Edge Routing (Peering can't make your private subsets use another VPC NAT Gateway)
