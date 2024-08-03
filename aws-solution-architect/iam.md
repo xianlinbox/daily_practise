@@ -129,3 +129,5 @@ Add IAM policy by condition to limit web identity access priviledge
 
 1. Not Action vs Deny: Not Action which allow you to add Action in another policy.
 2. AWS CloudTrail — Provides event history of your AWS account activity, including actions taken through the AWS Management Console, AWS SDKs, command line tools, and other AWS services.
+3. we can't have user defined in both SSO and AD at the same time.
+4. Group & users are link to single account, can't assign a user to another account's group
