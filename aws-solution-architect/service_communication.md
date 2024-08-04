@@ -1,0 +1,26 @@
+# Step functions
+
+visualize serveless workflow for orchestrate lambdas; it can parrel, sequence, timeout, condition, error handling
+
+- it can integrated with almost all other AWS services, eg: SQS/SNS/Batch/EC2/DynamoDB
+- it can be triggered by Console/CLI/API/Api gateway/lambda/event bridge
+- Task type: lambda/activity/service/wait
+- Workflow types: Express (at least once, 5 minutes)/Standard( Exact once, 1 year)
+
+# SQS
+
+- max size for a message is 256k, the large file can use S3 link instead
+- has a FIFO model. but 300m/s without batching,batching is 3000 m/s
+- Dead letter Queue.after a threshold times of processing, the message can send to DLQ, it must same type of the original queue. good for debug failure message. it can has a retention day. we can redrive message in DLQ back to normal queue.
+
+# Amazon MQ
+
+A manged message broker service of AWS for RabbitMQ and ActiveMQ, you can just replatform you MQ rather than refactor to use SQS.
+
+# AWS SNS
+
+1. up to 12.5m subscriper for each topic;each account can have 100k topics be default
+2. there is a message filter feature to let subscripter only take special message in that topic
+3. SNS ensured FIFO per topic
+4. compare eventbridge, eb has more targets and more focus on event driven architecture, SNS is more focus on pub/sub
+5. SNS+SQS: fistributed one requets to multi SQS, support cross region communication

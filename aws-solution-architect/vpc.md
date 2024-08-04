@@ -136,3 +136,7 @@ the service we have seen:
 5. Firewall Manager
 
 Network Firewall : up to 1000 rules
+
+# Tips
+
+VPC Endpoint not allow cross region connection

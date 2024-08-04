@@ -67,7 +67,7 @@ ECR: support cross-region/cross-account replication
 
 EKS:
 
-App Runner: similar as Heroku,easy way to deploy web appliction/API in AWS
+App Runner: similar as Heroku,easy way to deploy web appliction/API in AWS, it's a regional service, can only use in one region
 
 ECS/EKS Anywhere: run containser service in on-prem infra
 
