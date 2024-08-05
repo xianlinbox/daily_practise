@@ -11,7 +11,12 @@ we can move instance between groups
 
 ## Launch Types
 
-On-Demand/Spot/Reserved/Dedicated instance/Dedicated host/Graviton
+On-Demand: short, predicatable pricing,reliable
+Spot: short, cheap, not reliable
+Reserved: (long workload, min 1 year)
+Dedicated instance: no share hardware
+Dedicated host: own physical server, good for license at core/cpu level
+Graviton 2/3: best pricing, only support linux. use for caching,HPC
 
 ## Metrics
 
@@ -74,6 +79,8 @@ ECS/EKS Anywhere: run containser service in on-prem infra
 # Lambda
 
 limits: memory/storage/CPU/Runtime/language/concurrent/size
+
+CPU is not configurable, it go with RAM, more RAM means more CPU
 
 # # Load Balancer:
 
@@ -153,3 +160,5 @@ Wave Length: Deloy service in the edge device and get extremely low latency serv
 Local Zones: Amazon provided more detail local zone
 
 # Edge Optimized
+
+use an ACM certificate with an API Gateway edge-optimized custom domain name, you must request or import the certificate in the us-east-1 Region.
