@@ -64,6 +64,17 @@ A dashboard:
 - Activity Metrics
   Free and Paid advanced metrics
 
+## settings
+
+ACL disabled:
+
+- bucket owner enforced (default): access policy decided permission, owner has all control.
+
+ACLs enabled:
+
+- Bucket owner preferred – The bucket owner owns and has full control over new objects that other accounts write to the bucket with the bucket-owner-full-control canned ACL.\
+- Object writer – The AWS account that uploads an object owns the object, has full control over it, and can grant other users access to it through ACLs.
+
 ## S3 Achitecture
 
 S3 can as the host of static content, combine with EC2 or Cloud front to provide the content, we also can provide pre-signed URL to client to direct talk to S3.
