@@ -80,4 +80,6 @@ using data:
 Integrate with EventBridge for notify findings.
 GuardDutyDelegateAdminAccount.
 
+Amazon GuardDuty can manage multiple AWS accounts from a single administrator account through AWS Organizations integration
+
 ## IAM Condition key
