@@ -13,6 +13,9 @@ visualize serveless workflow for orchestrate lambdas; it can parrel, sequence, t
 - has a FIFO model. but 300m/s without batching,batching is 3000 m/s
 - Dead letter Queue.after a threshold times of processing, the message can send to DLQ, it must same type of the original queue. good for debug failure message. it can has a retention day. we can redrive message in DLQ back to normal queue.
 
+short polling: query subset of servers then return, may not return all the messages in first response.
+long polling: query all the servers then return, only timeout will return empty message.
+
 # Amazon MQ
 
 A manged message broker service of AWS for RabbitMQ and ActiveMQ, you can just replatform you MQ rather than refactor to use SQS.

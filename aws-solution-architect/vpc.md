@@ -89,6 +89,7 @@ Customer gateway
 Vitual Private Gateway
 Using BGP and ASN
 can use NAT instance to share internet connection with VPN
+provide IPsec-encrypted private connection that also reduces network costs, increases bandwidth throughput, and provides a more consistent network experience than internet-based VPN connections.
 
 ## Cloud Hub
 
@@ -101,12 +102,13 @@ Shared service vpc: building a proxy vpc talk to on-prem.
 
 # Direct Connect
 
-Init in AWS Direct Connect Location
+Build a dedicated connection between AWS direct connection location and on-prem data center.
 
 1. dedicated connection
 2. more expensive
 3. bypass ISP,private access to service through VIF (virtual inteface)
 4. not redundunt by default
+5. can't provide encryption
 
 Connect Types:
 

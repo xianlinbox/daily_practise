@@ -25,6 +25,7 @@ Key Materials Origin:
 3. Custom Key store (eg: CloudHSM)
 
 KMS support multi region keys. it's a primary-replica logic not a global one.
+kms:GenerateDataKey (can use for client encryption)/kms:GetPublicKey/kms:GetKeyPolicy
 
 ### CloudHSM
 

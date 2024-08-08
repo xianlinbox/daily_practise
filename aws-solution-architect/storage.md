@@ -19,6 +19,8 @@ Encryption: not encryped by default, can enable at account level.
 
 Local Instance Store: a phisical ephemeral device attach to EC2 instance, high io; can't resize, need manage lifecycle by user.
 
+we can config RAID 0 for I/O perforamance, RAID 1 for redundency.
+
 # EFS
 
 Attach to multi EC2 (cross region even on-premise), expensive, cost per usage (no need planning usage).
@@ -103,3 +105,7 @@ Buy and load third party data (mckinsey, reteuers ect) through AWS
 # Transfer Family
 
 FTP protocal data transfer in/out S3 & EFS
+
+Tips:
+
+1. Database cloning is only available for Aurora and not for RDS.
