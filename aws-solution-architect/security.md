@@ -8,6 +8,8 @@ Event Bridge
 CloudWatch metrics
 S3 analysis
 
+CLoud trail can't analysis VPC flow logs
+
 ## KMS
 
 AWS provided software encryption key management system.
@@ -26,6 +28,8 @@ Key Materials Origin:
 
 KMS support multi region keys. it's a primary-replica logic not a global one.
 kms:GenerateDataKey (can use for client encryption)/kms:GetPublicKey/kms:GetKeyPolicy
+
+KMS doesn't support annonymous requests, so public access S3 object can't use it for encryption. (and bucket owner also must be the object owner. can't use object writer setting )
 
 ### CloudHSM
 
@@ -63,10 +67,15 @@ Encryption Type:
 ## AWS Shield, WAF, AWS Firewall Manager
 
 WAF for granular config for one application.
+Network firewall: a managed service that makes it easy to deploy essential network protections for all of your Amazon Virtual Private Clouds (VPCs).
 Firewall Manager: Manage rules for all the accounts in the organisation, define the common sets for all the accounts
 Shield for additional feature on top of
 
+WAF can protect the following resources: ALB/CloudFront/API Gateway/AppSync?Cognito User pool
+
 ## AWS Inspector
+
+an automated vulnerability management service that continually scans Amazon Elastic Compute Cloud (EC2) and container workloads for software vulnerabilities and unintended network exposure.
 
 ## AWS GuardDuty
 

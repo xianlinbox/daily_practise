@@ -45,6 +45,17 @@ Moving Accounts
 1. Remove from Old OU
 2. Sent invitation from new OU
 
+Available Feature sets:
+
+- All features: default one which can use all features
+- Consolidate billing feature: basic management,can't set SCP for all accounts
+
+### AWS Config
+
+Manage config rules cross all the accounts in the organisation,
+
+- it allows to remediate the resources are not compliance with config rules; use SSM or APIs
+
 ### User
 
 For long term credential
@@ -62,6 +73,11 @@ Assume a role will get new role priviledge but lost the old ones. we can use res
 ### Group
 
 grouped policy to easier assign multi policy to multi users/roles
+
+A security group controls the traffic that is allowed to reach and leave the resources that it is associated with
+
+when we create a security group, it has no inbound rule and an outbound rule to all traffic out.
+the traffic is stateful, request is in and repsonse can out no matter what the outbound rule is.
 
 ### Policy
 
