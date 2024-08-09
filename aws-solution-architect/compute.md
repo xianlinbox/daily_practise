@@ -26,6 +26,10 @@ RAM is not included in the metrics
 
 we can use cloud alarm to recovery failed instance with same config
 
+## Termination protection
+
+prevent your instance from being accidentally terminated, you can enable termination protection for the instance. The DisableApiTermination attribute controls whether the instance can be terminated using the AWS Management Console, AWS Command Line Interface (AWS CLI), or API. It didn't protect ASG scaling.
+
 # High Performance Computing
 
 Services to help HPC:
