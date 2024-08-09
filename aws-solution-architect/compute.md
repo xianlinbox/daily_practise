@@ -46,6 +46,7 @@ Services to help HPC:
 
 1. Instance Refresh
 2. Update Strategy
+   can't be triggered by S3 event directly
 
 # ECS/ECR/EKS/Fargate
 

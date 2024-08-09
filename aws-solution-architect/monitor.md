@@ -7,6 +7,7 @@ Dashboards: show metrics of multi regions
 Synthetics Canary: configurable script to monito app api,url; can integrate with Alarms. it provide blueprints for common tasks.
 
 Track IP address need access log or cloud trail data event.
+Cloud watch agent can't publish data to firehose stream.
 
 ## Event Bridge
 

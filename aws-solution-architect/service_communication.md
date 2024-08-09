@@ -3,7 +3,7 @@
 visualize serveless workflow for orchestrate lambdas; it can parrel, sequence, timeout, condition, error handling
 
 - it can integrated with almost all other AWS services, eg: SQS/SNS/Batch/EC2/DynamoDB
-- it can be triggered by Console/CLI/API/Api gateway/lambda/event bridge
+- it can be triggered by Console/CLI/API/Api gateway/lambda/event bridge, not an S3 event directly.
 - Task type: lambda/activity/service/wait
 - Workflow types: Express (at least once, 5 minutes)/Standard( Exact once, 1 year)
 

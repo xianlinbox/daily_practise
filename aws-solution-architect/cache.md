@@ -14,6 +14,8 @@ Origin resources:
 3. Customer origin, Http backends(ALB, EC2), the backend must be public and allow access from cloud front, we can use custom header(keep secret) to only allow cloud front access backends
 4. Support orgin groups for fail over, can cross region
 
+307 temporary Redirect scenario: when use s3 as origin, it may take 24 hours to propagate new bucket to all the regions. If we want to avoid it, we can add the region in source.
+
 Geo Restriction:
 
 1. header

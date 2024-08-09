@@ -38,6 +38,7 @@ RDS proxy to avoid too many connections issue
 only compatible to PG & Mysql
 Load/offload data directly to S3
 Very high availability
+has a lab mode to enable Aurora features that are available in the current Aurora database version but are not enabled by default
 
 ## Endpoints
 

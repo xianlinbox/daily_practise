@@ -30,3 +30,7 @@ Data security & privacy service
 automate the creation of EC2 AMI
 
 # IoT core
+
+# AWS Media Services
+
+Deliver live content to a global audience

@@ -93,10 +93,13 @@ FSx architecture Solution:
 2. Decrease FSx Size: it can only increase, decrease need to create a new one and data sync
 3. Data lazy loading: only load data is needed before processing. not all at once.
 
+we can monitor storage capacity and file system activity using Amazon CloudWatch; monitor FSx API calls using AWS CloudTrail, monitor end-user actions with file access auditing using Amazon CloudWatch Logs and Amazon Kinesis Data Firehose
+
 # DataSync
 
 Move large amount of data from and to
 it need DataSync agent to do the work.
+A single Datasync task can 10GB/s
 
 # Data Exchange
 
