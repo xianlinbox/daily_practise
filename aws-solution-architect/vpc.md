@@ -98,6 +98,8 @@ provide IPsec-encrypted private connection that also reduces network costs, incr
 
 Shared service vpc: building a proxy vpc talk to on-prem.
 
+Use this approach if you have multiple branch offices and existing internet connections and would like to implement a convenient, potentially low-cost hub-and-spoke model for primary or backup connectivity between these remote offices.
+
 # Client VPN
 
 # Direct Connect

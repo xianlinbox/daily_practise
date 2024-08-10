@@ -53,6 +53,8 @@ MUlti-upload/Byte fetch range
 S3 Select: filter on the server.
 S3 analytics: provide recommandation for how to store your data in S3
 
+S3 transfer accelerator
+
 Storage Lens:
 
 A dashboard:
