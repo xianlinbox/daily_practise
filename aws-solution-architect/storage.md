@@ -114,3 +114,5 @@ FTP protocal data transfer in/out S3 & EFS
 Tips:
 
 1. Database cloning is only available for Aurora and not for RDS.
+
+#Volume Gateway

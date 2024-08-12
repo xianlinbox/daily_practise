@@ -15,6 +15,8 @@ Gateway support refresh cache
 
 SnowCone and Snowball Edge: hardware device for move large data. there is S3 adapter can improve the file write speeds.
 
+SnowMobile: for data 10PB+, Snowball for data <10PB
+
 # Database Migration Service
 
 Migrated DB to another one; must create an EC2 instance to perform replication task

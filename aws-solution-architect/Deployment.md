@@ -49,7 +49,7 @@ Run command on all the instances
 no need SSH, it is an api call
 Session manager provide a secure ssh between ec2 to local device
 OpsCenter: create opsitem then SSM automation run command to fix it
-Patch Manager:define patchbaseline, then run on all the services. Apply to both windows and linux
+Patch Manager:define patchbaseline, then run on all the services. Apply to both windows and linux: AWS-RunPatchBaseline
 
 # Cloud Map
 
