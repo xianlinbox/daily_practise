@@ -62,7 +62,7 @@ AS the name, it's a transitive gateway. any VPC connect to this Gateway, can tal
 
 # VPC Endpoints
 
-provide a provate way connect to AWS services. No Gateways for access AWS services
+enables VPC connected to AWS services or powered by Private Link services
 
 Endpoint gateway: one per VPC/ only works for S3 and DynamoDB/need to update routetable/DNS resolution must be enabled. can only for aws internal service, A gateway endpoint is a gateway that is a target for a route in your route table used for traffic destined to either Amazon S3 or DynamoDB. There is no charge for using gateway endpoints.
 Endpoint Interface: An interface endpoint is an elastic network interface with a private IP address from the IP address range of your subnet. It serves as an entry point for traffic destined to a service that is owned by AWS or owned by an AWS customer or partner. You are billed for hourly usage and data processing charges.
@@ -130,6 +130,12 @@ Link aggreagtion group can aggreagte multi DC into one:
 
 Direct Connect Gateway: connect to many VPC in different region
 SiteLink: allow you send data from on Direct connect bypass aws regions
+
+Provided virtual Interface:
+
+- Public: using public IP access all AWS public services
+- Private: access VPC using private IP
+- Transit: access one or more transit Gateway.
 
 VPC Flow Log: using it to identify network issues, can work with cloudwatch, athena, S3 together
 
