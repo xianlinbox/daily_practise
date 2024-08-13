@@ -99,6 +99,7 @@ provide IPsec-encrypted private connection that also reduces network costs, incr
 
 1. connect 10 customer gateway through Vitual private gateway
 2. 1 Customer gateway can connect to multi VGW also (not recommend), use direct connect and one for each.
+3. operates on a simple hub-and-spoke model that you can use with or without a VPC.
 
 Shared service vpc: building a proxy vpc talk to on-prem.
 
