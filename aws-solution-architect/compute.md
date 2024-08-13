@@ -110,6 +110,7 @@ Usage Plans & API keys: we can config the limits for each client. client are ide
 
 Web Socket API:stateful/bi-direction, use case:chat
 Private API gateway: only accessiable from VPC interface endpoint
+For an API Gateway, a "504 Gateway Timeout" error implies an "Endpoint Request Timed-out Exception".
 
 # App Sync
 

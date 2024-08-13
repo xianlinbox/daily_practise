@@ -46,6 +46,10 @@ Can cross region and cross account
 If 2 VPC has same CIDR, the longest prefix match will use to decide which VPC traffic go to.
 No Transtive Peering/No Edge Routing (Peering can't make your private subsets use another VPC NAT Gateway)
 
+# VPC sharing
+
+Sharing VPCs is useful when network isolation between teams does not need to be strictly managed by the VPC owner, but the account level users and permissions must be. With Shared VPC, multiple AWS accounts create their application resources (such as Amazon EC2 instances) in shared, centrally managed Amazon VPCs. In this model, the account that owns the VPC (owner) shares one or more subnets with other accounts (participants). After a subnet is shared, the participants can view, create, modify, and delete their application resources in the subnets shared with them. Participants cannot view, modify, or delete resources that belong to other participants or the VPC owner. Security between resources in shared VPCs is managed using security groups, network access control lists (NACLs), or through a firewall between the subnets.
+
 # Transit Gateway
 
 AS the name, it's a transitive gateway. any VPC connect to this Gateway, can talk with each other

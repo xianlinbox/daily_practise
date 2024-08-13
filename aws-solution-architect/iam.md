@@ -50,7 +50,7 @@ Available Feature sets:
 - All features: default one which can use all features
 - Consolidate billing feature: basic management,can't set SCP for all accounts
 
-SCPs affect all users and roles in attached accounts, including the root user. The only exceptions are those described in Tasks and entities not restricted by SCPs.
+SCPs affect all users and roles in attached accounts, including the root user. The only exceptions are those described in Tasks and entities not restricted by SCPs. It has no effect on service-link Role
 
 ### AWS Config
 

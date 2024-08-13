@@ -38,6 +38,11 @@ User use this service to get the AWS resources it needed.
 
 serless application model: use for deploy serverless application. it can help to shift the traffic between new version and old version.
 
+1. Deploys new versions of your Lambda function
+2. Gradually shifts customer traffic to the new version
+3. Defines pre-traffic and post-traffic test functions to verify that the newly deployed code is configured correctly
+4. Automatically rolls back the deployment if CloudWatch alarms are triggered
+
 # Cloud Devlopment Kit
 
 generate code to cloud formation template

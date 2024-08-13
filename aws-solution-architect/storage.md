@@ -84,6 +84,10 @@ ACLs enabled:
 
 S3 can as the host of static content, combine with EC2 or Cloud front to provide the content, we also can provide pre-signed URL to client to direct talk to S3.
 
+## event notification
+
+S3 Event Notifications feature to receive notifications when certain events happen in your S3 bucket, the destination can be: SNS/SS/EventBridge/Lambda
+
 # FSx
 
 lauch 3rd party service (windows file server/Lusture) as a full managed service in AWS

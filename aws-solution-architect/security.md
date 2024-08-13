@@ -71,7 +71,9 @@ Network firewall: a managed service that makes it easy to deploy essential netwo
 Firewall Manager: Manage rules for all the accounts in the organisation, define the common sets for all the accounts
 Shield for additional feature on top of
 
-WAF can protect the following resources: ALB/CloudFront/API Gateway/AppSync?Cognito User pool
+WAF can protect the following resources: ALB/CloudFront/API Gateway/AppSync/Cognito User pool
+
+WAF can configure geo match/ipset to allow/block
 
 ## AWS Inspector
 

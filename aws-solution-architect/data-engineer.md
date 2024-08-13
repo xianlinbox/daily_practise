@@ -13,6 +13,8 @@ Family:
 
 ## Streams:
 
+let consumer read data from.
+
 - Load data in shards/partition, message are ordered per shard, shard can change over time
 - data retention is 24 hours to 365 days
 - can replay data
@@ -25,6 +27,8 @@ Family:
   * Provisioned: mange shards overtime
 
 ## Firehose
+
+push data to destionation, no storage.
 
 kind of ETL, read data, transform, load into another storage
 Producer: Kinesis streams/ Iot/ CLouwatch
@@ -84,7 +88,7 @@ column storage of data
 PB scale
 Massively Parallel Query Execution
 can integrated with Tableau or Quicksight
-Snapshot
+Redshift periodically takes snapshots of that cluster every eight hours or every 5 GB per node of data changes. For copy encrypted snapshot to another region, we need to create a grant in destination region, use it in source region when copy snapshots.
 Cross region snapshot copy (enable snapshot copy grant)
 Redshift spectrum: query data in S3 without load it
 Has a workload manager
