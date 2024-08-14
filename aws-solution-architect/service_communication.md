@@ -17,6 +17,7 @@ visualize serveless workflow for orchestrate lambdas; it can parrel, sequence, t
 short polling: query subset of servers then return, may not return all the messages in first response.
 long polling: query all the servers then return, only timeout will return empty message.
 visibility timout:a period of time during which Amazon SQS prevents all consumers from receiving and processing the message
+SQS doesn't allow a message be consumed by multi consumer at the sam time.
 
 # Amazon MQ
 

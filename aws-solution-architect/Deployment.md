@@ -1,6 +1,7 @@
 # Beanstalk
 
 a developer centric view of app deployment, it deploys all the components aws managed. good for replatfotm your on-prem app to cloud
+Just need to provide the code.
 
 Managed service , control instance and os config by beanstalk,
 
@@ -59,3 +60,7 @@ Patch Manager:define patchbaseline, then run on all the services. Apply to both 
 # Cloud Map
 
 Resoucer discovery service
+
+# Server Migration Service
+
+automates the migration of your on-premises VMware vSphere, Microsoft Hyper-V/SCVMM, and Azure virtual machines to the AWS Cloud

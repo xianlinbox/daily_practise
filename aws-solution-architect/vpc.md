@@ -80,6 +80,10 @@ connection trouble shooting steps:
 4. Enabled DNS resolution
 5. S3 Bucket policy allow connection
 
+DNS hostnames and DNS resolution are disabled by default. enable them for private hosted zone. The DNS match is based on specific match and follow precedence rule, will not cause an error.
+
+when create public zone, A NS and SOA is created and configured
+
 # Private Link
 
 A highly available, scalable technology that enables you to privately connect your VPC to supported AWS services, services hosted by other AWS accounts (VPC endpoint services), and supported by AWS Marketplace Partner Service

@@ -119,4 +119,12 @@ Tips:
 
 1. Database cloning is only available for Aurora and not for RDS.
 
-#Volume Gateway
+# Storage Gateway
+
+hybrid cloud storage service that gives you on-premises access to virtually unlimited cloud storage
+
+## 3 Types:
+
+Tape gateway: presents virtual tapes to leading to backup applications
+Volume gateway: presents iSCSI block storage volumes to your on-premises applications. cached (frequent access data)/stored (full data then backup)
+File gateway: presents Server Message Block (SMB) or Network File System (NFS) based access to data
