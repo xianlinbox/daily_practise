@@ -156,6 +156,34 @@ the service we have seen:
 
 Network Firewall : up to 1000 rules
 
+# Transit VPC
+
+Transit VPC uses customer-managed Amazon Elastic Compute Cloud (Amazon EC2) VPN instances in a dedicated transit VPC with an Internet gateway
+
 # Tips
 
 VPC Endpoint not allow cross region connection
+
+# VPC Connection
+
+## internet to VPC:
+
+1. Site to site VPN/ software VPN (running on EC2)
+2. VPN + transit gateway
+3. Direct connect
+4. Direct connect + VPN
+5. Direct connect + transit gateway
+6. Direct connect + transit gateway +VPN
+7. Cloud Hub
+
+## VPC to VPC
+
+1. VPC peering
+2. Transit Gateway
+3. PrivateLink
+4. VPN
+
+## VPC access internet/AWS services
+
+1. NAT Gateway or Instance connect to internet gateway
+2. Endpoint gateway (only S3 & Dynamo)/interface to internal services.

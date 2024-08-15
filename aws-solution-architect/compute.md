@@ -87,6 +87,10 @@ limits: memory/storage/CPU/Runtime/language/concurrent/size
 
 CPU is not configurable, it go with RAM, more RAM means more CPU
 
+By default, it runs in AWS owned VPC, has public access, if VPC-enabled, it will only access your VPC network.
+
+layers: help lambda to reuse code
+
 # # Load Balancer:
 
 CLB -> ALB (Http/webcocket)/NLB (TLS/TCP; high performance, low latency)/GWLB (ip level)
