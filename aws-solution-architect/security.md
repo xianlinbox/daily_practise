@@ -74,6 +74,7 @@ Shield for additional feature on top of
 WAF can protect the following resources: ALB/CloudFront/API Gateway/AppSync/Cognito User pool
 
 WAF can configure geo match/ipset to allow/block
+WAF ACL log can sent to cloudwatch, S3, Firehose.
 
 ## AWS Inspector
 

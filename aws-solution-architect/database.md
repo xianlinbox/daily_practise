@@ -20,7 +20,8 @@ AWS managed RDBMS
 Lauched in VPC, storage in EBS.
 snapshot
 RDS events
-Multi-AZ / Read Replica
+Multi-AZ: created a standy instance, can't use for read/write until it became primary.
+Read Replica: Read replicas can be within an Availability Zone, Cross-AZ, or Cross-Region. but cross Region make cause extra transfer fee.
 Cloudtrail can't track RDS queries
 
 RDS for Oracle:

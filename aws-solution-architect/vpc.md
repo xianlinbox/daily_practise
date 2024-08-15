@@ -29,7 +29,7 @@ NAT Gateway: AWS managed NAT services. resilient in singe AZ, multi-zone need to
 NACL(Network access control): stateless firewall rules apply to all the instances in the subnet; support allow/deny rules.
 Security Group: apply at instance level and only allow rule, no deny rule; can reference each other
 
-VPC Flow logs: can define at vpc, subnet, eni level
+VPC Flow logs: can define at vpc, subnet, eni level, destination can be Cloudwatch, S3, Firehose.
 Bastion Host: an public ec2 instance help you ssh into an private ec2 instance. AWS proviece SSM session manager for this task in a more secure way.
 
 IPV6:
