@@ -172,3 +172,9 @@ Local Zones: Amazon provided more detail local zone
 # Edge Optimized
 
 use an ACM certificate with an API Gateway edge-optimized custom domain name, you must request or import the certificate in the us-east-1 Region.
+
+# System Manager
+
+an AWS service that you can use to view and control your infrastructure on AWS.AWS Systems Manager Agent (SSM Agent) is Amazon software that can be installed and configured on an EC2 instance, an on-premises server, or a virtual machine (VM). SSM Agent makes it possible for Systems Manager to update, manage, and configure these resources.
+
+System Manager supports an SSM document for Patch Manager. AWS-RunPatchBaseline, which performs patching operations on instances for both security-related and other types of updates. AWS-ApplyPatchBaseline SSM document supports patching on Windows instances only

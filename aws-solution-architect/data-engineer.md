@@ -21,7 +21,7 @@ let consumer read data from.
 - data into kinesis, it's immutable, can't be deleted until data rentation gone
 - data producers: sdk/kinesis agent/kinesis product lib
 - 1mb/s, 1000 message/s write per shard, othereise ProvsionedThroughputExceptiob
-- 2mb/s 5 api call/s read per shard, can use Consume enhance fan out to remove api calls limitation
+- 2mb/s 5 api call/s read per shard, can use Consumer enhance fan-out to remove api calls limitation
 - Capacity Model:
   - On-demand: no capacity planning, scale automatically
   * Provisioned: mange shards overtime
