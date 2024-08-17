@@ -141,7 +141,7 @@ Add IAM policy by condition to limit web identity access priviledge
 ## Tools
 
 - Access Advisor:
-- Access Analyzer: Policy Validation/Policy Generation
+- Access Analyzer: Policy Validation/Policy Generation, cannot be used for near real-time detection
 
 ## Tips:
 

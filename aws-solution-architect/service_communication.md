@@ -18,6 +18,7 @@ short polling: query subset of servers then return, may not return all the messa
 long polling: query all the servers then return, only timeout will return empty message.
 visibility timout:a period of time during which Amazon SQS prevents all consumers from receiving and processing the message
 SQS doesn't allow a message be consumed by multi consumer at the sam time.
+Message timers let you specify an initial invisibility period for a message added to a queue.
 
 # Amazon MQ
 

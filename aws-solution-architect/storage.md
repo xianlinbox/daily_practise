@@ -48,7 +48,7 @@ Anti Pattern:
 
 Replication:CRR/SRR
 Combine with lifecycle rules and Replciation time control for in time replication
-Default Event notification which can combine with event bridge to other aws services.
+
 MUlti-upload/Byte fetch range
 S3 Select: filter on the server.
 S3 analytics: provide recommandation for how to store your data in S3
@@ -86,7 +86,9 @@ S3 can as the host of static content, combine with EC2 or Cloud front to provide
 
 ## event notification
 
-S3 Event Notifications feature to receive notifications when certain events happen in your S3 bucket, the destination can be: SNS/SS/EventBridge/Lambda
+S3 Event Notifications feature to receive notifications when certain events happen in your S3 bucket, the destination can be: SNS/SQS/EventBridge/Lambda, can check the API called but can't check api inside permission,
+
+we can enable object-level logging and add cloudtrail to capture this log for analysis.
 
 # FSx
 
