@@ -54,7 +54,7 @@ SCPs affect all users and roles in attached accounts, including the root user. T
 
 ### AWS Config
 
-Manage config rules cross all the accounts in the organisation,
+Manage config rules cross all the accounts in the organisation,ue to assess, audit, and evaluate the configurations of your AWS resources.
 
 - it allows to remediate the resources are not compliance with config rules; use SSM or APIs
 
@@ -80,6 +80,8 @@ A security group controls the traffic that is allowed to reach and leave the res
 
 when we create a security group, it has no inbound rule and an outbound rule to all traffic out.
 the traffic is stateful, request is in and repsonse can out no matter what the outbound rule is.
+
+security group is not a valid condition/principal in Policy or a
 
 ### Policy
 

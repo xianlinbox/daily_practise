@@ -36,6 +36,8 @@ VPC peering, On-prem Direct connect
 Access point with pemission config on path
 Cross Region Replication
 
+EFS can attach to both on-prem server and EC2 instance.
+
 # S3
 
 Save for objects.

@@ -3,10 +3,10 @@
 Retire: give up
 Retain: left as it is
 Relocate: just move to another place. no additional operation needed
-Re-host: no cloud optimization done.
-Re-platform: no change on core architecture,but use some cloud optimization
+Rehost: no cloud optimization done.
+Replatform: no change on core architecture,but use some cloud optimization
 Repurchase: Moving to a different product on cloud.
-Re-factor/Re-architecture: change code or architecture needed.
+Refactor/Rearchitecture: change code or architecture needed.
 
 # Hybrid Cloud
 

@@ -90,7 +90,7 @@ Massively Parallel Query Execution
 can integrated with Tableau or Quicksight
 Redshift periodically takes snapshots of that cluster every eight hours or every 5 GB per node of data changes. For copy encrypted snapshot to another region, we need to create a grant in destination region, use it in source region when copy snapshots.
 Cross region snapshot copy (enable snapshot copy grant)
-Redshift spectrum: query data in S3 without load it
+Redshift spectrum: query data in S3 without load it， itresides on dedicated Amazon Redshift servers that are independent of your cluster。
 Has a workload manager
 Concurrecy scaling: support high performance
 

@@ -13,12 +13,14 @@ visualize serveless workflow for orchestrate lambdas; it can parrel, sequence, t
 - has a FIFO model. but 300 message/s without batching, batching is 3000 message/s, which means batch size is maxium 10.
 
 - Dead letter Queue.after a threshold times of processing, the message can send to DLQ, it must same type of the original queue. good for debug failure message. it can has a retention day. we can redrive message in DLQ back to normal queue.
+- Delay queues: let you postpone the delivery of all new messages to a queue for several seconds,maxium 15minutes
 
 short polling: query subset of servers then return, may not return all the messages in first response.
 long polling: query all the servers then return, only timeout will return empty message.
-visibility timout:a period of time during which Amazon SQS prevents all consumers from receiving and processing the message
+visibility timout:a period of time during which Amazon SQS prevents other consumers from receiving and processing the message
 SQS doesn't allow a message be consumed by multi consumer at the sam time.
 Message timers let you specify an initial invisibility period for a message added to a queue.
+SQS queue depth metrics for
 
 # Amazon MQ
 

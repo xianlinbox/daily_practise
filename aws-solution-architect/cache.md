@@ -38,3 +38,5 @@ Support Custom error response.
 Managed Redis or Memcache
 
 Redis vs Memcache: Memcached is designed for simplicity while Redis offers a rich set of features that make it effective for a wide range of use cases.
+
+Redis can enable authentication.

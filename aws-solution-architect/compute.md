@@ -30,6 +30,15 @@ we can use cloud alarm to recovery failed instance with same config
 
 prevent your instance from being accidentally terminated, you can enable termination protection for the instance. The DisableApiTermination attribute controls whether the instance can be terminated using the AWS Management Console, AWS Command Line Interface (AWS CLI), or API. It didn't protect ASG scaling.
 
+## Lauch Configuration
+
+A launch configuration is an instance configuration template that an Auto Scaling group uses to launch EC2 instances.
+When you create a launch configuration, the default value for the instance placement tenancy is null and the instance tenancy is controlled by the tenancy attribute of the VPC.
+
+LC(null/default) + VPC(dedicated) => dedicated
+LC(dedicated) + VPC(default/dedicated) => dedicated
+LC(default/null) + VPC(default) => shared
+
 # High Performance Computing
 
 Services to help HPC:
@@ -51,6 +60,8 @@ Services to help HPC:
 1. Instance Refresh
 2. Update Strategy
    can't be triggered by S3 event directly
+3. Rebalancing AZ: start new one then terminate old one.
+4. ASG Scaling sequence: terminate unhealthy one, start the new one
 
 # ECS/ECR/EKS/Fargate
 
@@ -93,10 +104,11 @@ layers: help lambda to reuse code
 
 # # Load Balancer:
 
-CLB -> ALB (Http/webcocket)/NLB (TLS/TCP; high performance, low latency)/GWLB (ip level)
+CLB -> ALB/ELB (Http/webcocket)/NLB (TLS/TCP; high performance, low latency)/GWLB (ip level)
 Cross Zone Load balancing (diff LB has different setting and charges)
 Sticky Session
 Routing algorithm:(LOR,Round Robin, Flow Hash)
+Don't support cross region load balancing
 
 # API Gateway:
 
@@ -146,8 +158,8 @@ Resolver Rules:
 # Global Accelerator & Cloud Front
 
 They both use edge location and support shield
-Accelator is more for redirect, can also work for TCP/UDP, MQTT
-Cloud Front is more for for CDN
+Accelator is more for redirect, can also work for TCP/UDP, MQTT, ip -> endpoints, can used for distribute traffic.
+CloudFront is more for CDN, DNS -> IP, if DNS cached, CloudFront can't help on anything.
 
 # Architecture Style
 
