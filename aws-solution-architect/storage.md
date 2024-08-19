@@ -48,7 +48,7 @@ Anti Pattern:
 2. Use as a file syste,
 3. Search/Indexing
 
-Replication:CRR/SRR
+Replication:Cross Region Replication/SRR (same region replication)
 Combine with lifecycle rules and Replciation time control for in time replication
 
 MUlti-upload/Byte fetch range
@@ -91,6 +91,14 @@ S3 can as the host of static content, combine with EC2 or Cloud front to provide
 S3 Event Notifications feature to receive notifications when certain events happen in your S3 bucket, the destination can be: SNS/SQS/EventBridge/Lambda, can check the API called but can't check api inside permission,
 
 we can enable object-level logging and add cloudtrail to capture this log for analysis.
+
+## Pricing
+
+S3 don't need to pay for the following scenario:
+
+1. data transfer in from internet
+2. data transfer out to cloudfront
+3. data transfer out to EC2 in the same region
 
 # FSx
 

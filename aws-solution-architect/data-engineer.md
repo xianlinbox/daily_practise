@@ -38,7 +38,7 @@ records up to 1mb
 failed data can sent to failover S3 bucket
 we can set a buffer to make data load more efficiently, buffer can flush based on size/time, neal real-time
 doesn't support re-play
-kinesis agent can sent to firehose directly
+kinesis agent can sent to firehose directly when firehose set data stream as the source.
 
 ## Analytics
 

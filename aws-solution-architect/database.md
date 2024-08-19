@@ -42,6 +42,17 @@ RDS for Lambda:
 
 RDS proxy to avoid too many connections issue
 
+## Backups
+
+1. support multi region
+2. Manual snapshots can share to up 20 aws accounts. automated snapshots can't share to other account.
+
+## DMS(data migration service)
+
+1. Can config data validation in the task to validate the job.
+2. Has Table metrics to get stastics data.
+3. premigration assessment: evaluates specified components of a database migration task to help identify any problems.
+
 # Aurora
 
 only compatible to PG & Mysql
