@@ -116,9 +116,9 @@ compare ALB, it provides limit/authentication/cache and more functionalities
 Limits: 29s timeout/10M payload
 Endpoint Types:
 
-1. Edge Optimized
-2. Regional
-3. Private
+1. Edge Optimized: For geographically distributed clients, default one. it route api call to the nearest CloudFront location then internal to api gateway.
+2. Regional: for clients in the same region
+3. Private: can only be accessed from your Amazon Virtual Private Cloud (VPC) using an interface VPC endpoint
 
 Cache: 0.5G-237G, per request URL, can manually refresh
 
@@ -158,7 +158,10 @@ Resolver Rules:
 # Global Accelerator & Cloud Front
 
 They both use edge location and support shield
-Accelator is more for redirect, can also work for TCP/UDP, MQTT, ip -> endpoints, can used for distribute traffic.
+
+Accelator is more for redirect, can also work for TCP/UDP, MQTT, ip -> endpoints, can used for distribute traff
+Global Accelerator can only to: ELB/ALB/EC2/Elastic IP.
+
 CloudFront is more for CDN, DNS -> IP, if DNS cached, CloudFront can't help on anything.
 
 # Architecture Style

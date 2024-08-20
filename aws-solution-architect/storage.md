@@ -17,7 +17,7 @@ Aws backup: manage aws services backup including ebs
 
 Encryption: not encryped by default, can enable at account level.
 
-Local Instance Store: a phisical ephemeral device attach to EC2 instance, high io; can't resize, need manage lifecycle by user.
+Local Instance Store: a phisical ephemeral device attach to EC2 instance, high io; can't resize, need manage lifecycle by user.we should use EBS mostly. only extremely high IOPS may consider local instance store. EBS is maximum 256K for provisioned IOPS SSD
 
 we can config RAID 0 for I/O perforamance, RAID 1 for redundency.
 

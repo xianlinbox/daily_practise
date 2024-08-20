@@ -24,11 +24,13 @@ Multi-AZ:
 
 - created a standy instance, standby can't use for read/write until it became primary.
 - The data will replicated to standby synchronously.
+- upgrades happened at the same time
 
 Read Replica:
 
 - Read replicas can be within an Availability Zone, Cross-AZ, or Cross-Region. but cross Region make cause extra transfer fee.
 - it uses the engines' native asynchronous replication to update the read replica
+- upgrade the read replica ones before upgrade source db.
 
 Cloudtrail can't track RDS queries
 
@@ -59,6 +61,13 @@ only compatible to PG & Mysql
 Load/offload data directly to S3
 Very high availability
 has a lab mode to enable Aurora features that are available in the current Aurora database version but are not enabled by default
+
+Multi-AZ:
+
+- update data to all read replicas synchronously.
+- all instances are upgraded at the same time.
+
+Read Replica:
 
 ## Endpoints
 
