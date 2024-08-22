@@ -55,7 +55,8 @@ MUlti-upload/Byte fetch range
 S3 Select: filter on the server.
 S3 analytics: provide recommandation for how to store your data in S3
 
-S3 transfer accelerator
+S3 transfer accelerator: use edge location for faster upload
+S3 access point: simplify data access for any AWS service or customer application that stores data in S3. With S3 Access Points, customers can create unique access control policies for each access point to easily control access to shared datasets. mostly for the shared data.
 
 Storage Lens:
 

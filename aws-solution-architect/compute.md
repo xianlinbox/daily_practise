@@ -148,7 +148,7 @@ Hosted Zones: A container of records defines how to route traffic
 - Private Hosted Zones:
 
 DNSSEC: securing DNS traffic
-Health Check
+Health Check: monitor the health and performance of your web applications, web servers, and other resources.with Amazon Application Recovery Controller (ARC), you can set up routing control health checks with DNS failover records to manage traffic failover for your application.
 Hybrid DNS:
 Resolver Rules:
 
