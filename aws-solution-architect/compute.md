@@ -110,6 +110,8 @@ Sticky Session
 Routing algorithm:(LOR,Round Robin, Flow Hash)
 Don't support cross region load balancing
 
+Target types: instance ID/IP/ALB
+
 # API Gateway:
 
 compare ALB, it provides limit/authentication/cache and more functionalities
