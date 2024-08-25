@@ -11,6 +11,8 @@ Architecture model:
 - ALB + ASG
 - SQS + ASG only
 
+Support Blue/Green deployment, but need to decouple production database first.
+
 # Code Deploy
 
 Instances are not managed by Beanstalk

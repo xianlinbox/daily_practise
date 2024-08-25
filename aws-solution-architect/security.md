@@ -10,6 +10,8 @@ S3 analysis
 
 CLoud trail can't analysis VPC flow logs
 
+Log file integrity: To determine whether a log file was modified, deleted, or unchanged after CloudTrail delivered it,
+
 ## KMS
 
 AWS provided software encryption key management system.
