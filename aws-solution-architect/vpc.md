@@ -67,7 +67,7 @@ AS the name, it's a transitive gateway. any VPC connect to this Gateway, can tal
 
 enables VPC connected to AWS services or powered by Private Link services
 
-Endpoint gateway: one per VPC/ only works for S3 and DynamoDB/need to update routetable/DNS resolution must be enabled. can only for aws internal service, A gateway endpoint is a gateway that is a target for a route in your route table used for traffic destined to either Amazon S3 or DynamoDB. There is no charge for using gateway endpoints.
+Endpoint gateway: one per VPC/ only works for S3 and DynamoDB/need to update routetable/DNS resolution must be enabled. can only for aws internal service, A gateway endpoint is a gateway that is a target for a route in your route table used for traffic destined to either Amazon S3 or DynamoDB. There is no charge for using gateway endpoints. currently don't support access from anothe region
 Endpoint Interface: An interface endpoint is an elastic network interface with a private IP address from the IP address range of your subnet. It serves as an entry point for traffic destined to a service that is owned by AWS or owned by an AWS customer or partner. You are billed for hourly usage and data processing charges.
 
 Policies: an json defines how to access the services

@@ -66,6 +66,8 @@ Encryption Type:
 - Client Side Encryption: encrypt data out of AWS
 - Glacier: all data is encrypted under AWS control.
 
+Glacier select: allows you to to perform filtering directly against a Glacier object using standard SQL statements.
+
 ## AWS Shield, WAF, AWS Firewall Manager
 
 WAF for granular config for one application.

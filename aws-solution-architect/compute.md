@@ -39,6 +39,10 @@ LC(null/default) + VPC(dedicated) => dedicated
 LC(dedicated) + VPC(default/dedicated) => dedicated
 LC(default/null) + VPC(default) => shared
 
+## Change Subnet
+
+It's not possible to move an existing instance to another subnet, Availability Zone, or VPC. Instead, you can create a new Amazon Machine Image (AMI) from the source instance to manually migrate the instance.
+
 # High Performance Computing
 
 Services to help HPC:
