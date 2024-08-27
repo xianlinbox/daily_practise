@@ -114,7 +114,27 @@ Sticky Session
 Routing algorithm:(LOR,Round Robin, Flow Hash)
 Don't support cross region load balancing
 
+ALB can't assign IP, if you need an IP, you need to put a NLB before it and assign IP to the NLB.
+
 Target types: instance ID/IP/ALB
+
+ALB vs ELB
+
+| item              | ALB                           | ELB                        |
+| ----------------- | ----------------------------- | -------------------------- |
+| protocols         | HTTP/HTTPS/grpc               | TCP/UDP                    |
+| traffic spikes    | need to report to AWS support | handle by itself           |
+| static ip         | not suppport                  | support                    |
+| TLS termination   | yes                           | yes                        |
+| Targets           | instance id, ip, lambda       | instance id/ip/ALB         |
+| routing algorithm | LOR,RR,                       | flow hash, random          |
+| maximum targets   | 1000-5000                     | 500-1000                   |
+| security group    | target reachable to ALB only  | target reachable to client |
+| WAF               | yes                           | no                         |
+| Authentication    | yes                           | no                         |
+| Sticky Session    | yes                           | no                         |
+
+Global Accelerator can do similar thing as NLB. But more expensive
 
 # API Gateway:
 

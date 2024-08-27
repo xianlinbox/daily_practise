@@ -71,6 +71,8 @@ A dashboard:
 - Activity Metrics
   Free and Paid advanced metrics
 
+  By default, you can create up to 100 buckets in each of your AWS accounts
+
 ## settings
 
 For the majority of modern use cases in S3, we recommend that you keep ACLs disabled by applying the Bucket owner enforced setting and using your bucket policy to share data with users outside of your account as needed. This approach simplifies permissions management.
