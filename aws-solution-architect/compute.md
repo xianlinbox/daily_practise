@@ -154,15 +154,24 @@ Hosted Zones: A container of records defines how to route traffic
 - Private Hosted Zones:
 
 DNSSEC: securing DNS traffic
-Health Check:
 
-- Monitor the health and performance of your web applications, web servers, and other resources.
-- with Amazon Application Recovery Controller (ARC), you can set up routing control health checks with DNS failover records to manage traffic failover for your application.
-- charge extra if the endpoint is not aws resources.
-- use aggregate data, 18% health report is count healthy.
-- TCP health check: build connection in 10s
-- HTTP/HTTPS health check: build connection within 4s, then return http code in 2s.
-- HTTPS health checks don't validate SSL/TLS certificates, so checks don't fail if a certificate is invalid or expired. Route 53 health checkers are outside the VPC. so must have a public IP.
+## Health Checker
+
+Monitor the health and performance of your web applications, web servers, and other resources.
+
+The type for health check:
+
+1. Endpoint (in or out AWS)
+2. Compute metrics from other health checks
+3. Cloudwatch metrics alarms (not the metrics)
+
+- we can use Application Recovery Controller to set up routing control health checks with DNS failover records to manage traffic failover for your application.
+- if monitor endpoint with domain name , it will only use IP v4 to monitor. as the health check is outside the VPC. so the endpoint must have a public IP.
+- build connection within 4s, then return http code in 2s.
+- Https health checks don't validate SSL/TLS certificates, so checks don't fail if a certificate is invalid or expired. But the endpoint must support TLS 1.0+
+- additional charge apply to no AWS endpoint. even the health check is disabled.
+- 18% report healthy is healthy for ROute 53
+- Support TCP, need to build connection in 10s
 
 Hybrid DNS:
 Resolver Rules:
