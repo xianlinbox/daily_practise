@@ -162,7 +162,7 @@ Health Check:
 - use aggregate data, 18% health report is count healthy.
 - TCP health check: build connection in 10s
 - HTTP/HTTPS health check: build connection within 4s, then return http code in 2s.
-- HTTPS health checks don't validate SSL/TLS certificates, so checks don't fail if a certificate is invalid or expired.
+- HTTPS health checks don't validate SSL/TLS certificates, so checks don't fail if a certificate is invalid or expired. Route 53 health checkers are outside the VPC. so must have a public IP.
 
 Hybrid DNS:
 Resolver Rules:
