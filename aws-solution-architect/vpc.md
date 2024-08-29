@@ -145,6 +145,12 @@ Provided virtual Interface:
 - Private: access VPC using private IP
 - Transit: access one or more transit Gateway.
 
+Solution to build Site to Site VPN on DX:
+
+1. Build virtual private gateway in VPC
+2. Build Public virtual interface in DX to connect to Virtual private gateway IPsec endpoint (this is a public resource).
+3. Create the S2S VPN between on-prem customer gateway to Virtual private gateway
+
 VPC Flow Log: using it to identify network issues, can work with cloudwatch, athena, S3 together
 
 # Network protection
