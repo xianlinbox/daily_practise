@@ -118,9 +118,9 @@ ALB can't assign IP, if you need an IP, you need to put a NLB before it and assi
 
 Target types: instance ID/IP/ALB
 
-ALB vs ELB
+ALB vs NLB
 
-| item              | ALB                           | ELB                        |
+| item              | ALB                           | NLB                        |
 | ----------------- | ----------------------------- | -------------------------- |
 | protocols         | HTTP/HTTPS/grpc               | TCP/UDP                    |
 | traffic spikes    | need to report to AWS support | handle by itself           |
@@ -170,8 +170,8 @@ Traffic Flow: setting management for complex routing
 
 Hosted Zones: A container of records defines how to route traffic
 
-- Pulic Hosted Zones:
-- Private Hosted Zones:
+- Pulic Hosted Zones: contain records that specify how you want to route traffic on the internet
+- Private Hosted Zones: contain records that specify how you want to route traffic in an Amazon VPC
 
 DNSSEC: securing DNS traffic
 
@@ -205,6 +205,8 @@ They both use edge location and support shield
 
 Accelator is more for redirect, can also work for TCP/UDP, MQTT, ip -> endpoints, can used for distribute traff
 Global Accelerator can only to: ELB/ALB/EC2/Elastic IP.
+
+GA provided custom routing accelerator, which allows use your own app logic to routing, this one only support VPC subnet endpoints, each containing one or more EC2 instances that are running your application
 
 CloudFront is more for CDN, DNS -> IP, if DNS cached, CloudFront can't help on anything.
 

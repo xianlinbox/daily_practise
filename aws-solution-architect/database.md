@@ -53,7 +53,21 @@ RDS proxy to avoid too many connections issue
 
 1. Can config data validation in the task to validate the job.
 2. Has Table metrics to get stastics data.
-3. premigration assessment: evaluates specified components of a database migration task to help identify any problems.
+3. pre-migration assessment: evaluates specified components of a database migration task to help identify any problems.
+4. when create endpoints, in DMS console it will create IAM role automatically, CLI/API will not
+
+### Redshift as the destination of DMS
+
+The process is DMS move data to S3 first, then ingest S3 data into Redshift tables.
+
+1. don't enable S3 version as a intermediate storage
+2. Redshift and DMS must in the same region and same account
+3. Redshift is locked down by default, need to grant user for accessing
+4. can't change a schema started with \_
+5. don't support varchar 60kb+
+6. can't DELETE a multi column primary key
+7. only support AWS DNS name
+8. 4-hours timeout
 
 # Aurora
 

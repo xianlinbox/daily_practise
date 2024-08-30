@@ -32,6 +32,14 @@ Stack Sets: deploy to multi accounts in OU
 Drift: alert manual changes out of CF
 Resource Input
 
+## Term
+
+1. template: blueprints in JSON/YAML format
+2. Stack: a singe resource unit
+3. Changeset: a summary of you proposed changes
+4. stackset: A stack set lets you create stacks in AWS accounts across regions by using a single CloudFormation template. it is a regional resource
+5. stack instance: a reference to an attempted or actual stack in a given account within a given Region.
+
 # Service Catalog
 
 Admin created the services can be used. each service is a cloud formation template. help new user to know what they can get or use
