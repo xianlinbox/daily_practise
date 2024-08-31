@@ -154,3 +154,18 @@ Add IAM policy by condition to limit web identity access priviledge
 2. AWS CloudTrail — Provides event history of your AWS account activity, including actions taken through the AWS Management Console, AWS SDKs, command line tools, and other AWS services.
 3. we can't have user defined in both SSO and AD at the same time.
 4. Group & users are link to single account, can't assign a user to another account's group
+
+## IAM Role
+
+It has 3 permission policies:
+
+1. Permission policies: after assume this role. what you can do.
+2. Permissions boundary: set the maximum permissions that an identity-based policy can grant to an IAM entity.
+3. Trust relationship: define which principal can assume this role.
+
+### process for assume role cross AWS accounts
+
+1. In destination account, create a IAM role and attach the permission for the work and trust policy for who can assume this role.
+2. In source account, add IAM policy to allow your worker resource to assume the IAM role and do the work.
+
+Lambda don't have service-linked roles.
