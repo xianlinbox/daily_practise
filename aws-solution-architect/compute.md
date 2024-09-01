@@ -210,6 +210,11 @@ GA provided custom routing accelerator, which allows use your own app logic to r
 
 CloudFront is more for CDN, DNS -> IP, if DNS cached, CloudFront can't help on anything.
 
+## GA vs Route53
+
+1. Both can help routing traffic to specific resources
+2. GA support static ip address to hide the backend complexity. Route 53 not support
+
 # Architecture Style
 
 1. EC2 with elastic ip

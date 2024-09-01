@@ -28,6 +28,14 @@ Cloud front signed URL for special security requirement.
 
 Support Custom error response.
 
+### Typical solution for Online video
+
+1.  Amazon S3 for storage,
+2.  AWS Elemental MediaConvert for file-based video processing,
+3.  Amazon CloudFront for delivery.
+4.  A family of video streaming protocols including Apple’s HTTP Live Streaming (HLS), Dynamic Adaptive Streaming over HTTP (DASH), Microsoft’s Smooth Streaming (MSS), and Adobe’s HTTP Dynamic Streaming (HDS) improves the user experience by delivering video as it is being watched, generally fetching content a few seconds ahead of when it will be needed.
+5.  To use HLS, Elemental MediaConvert will split the video into short segments and will also create a manifest file. CloudFront need point to the manifest file.
+
 ## Edge Function
 
 1. Cloud front functions: deployed at cloud front location; js;no access to network/fs/request body
