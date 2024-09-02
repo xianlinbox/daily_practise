@@ -169,3 +169,11 @@ It has 3 permission policies:
 2. In source account, add IAM policy to allow your worker resource to assume the IAM role and do the work.
 
 Lambda don't have service-linked roles.
+
+### Confused Deputy Problem
+
+we trusted a company, it can use AssumeRole to get the pemission to access AWS resource, another client of this company may also get the permission. this is called deputy problem.
+
+1. Including the external ID condition in the role’s trust policy.
+2. Company in charge of generate unique external ID to different client
+3. config external ID in the trust policy.

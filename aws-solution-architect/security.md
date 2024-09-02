@@ -80,6 +80,8 @@ WAF can protect the following resources: ALB/CloudFront/API Gateway/AppSync/Cogn
 WAF can configure geo match/ipset to allow/block
 WAF ACL log can sent to cloudwatch, S3, Firehose.
 
+A web access control list (web ACL) gives you fine-grained control over all of the HTTP(S) web requests that your protected resource responds to. You can protect Amazon CloudFront, Amazon API Gateway, Application Load Balancer, and AWS AppSync resources.
+
 ## AWS Inspector
 
 an automated vulnerability management service that continually scans Amazon Elastic Compute Cloud (EC2) and container workloads for software vulnerabilities and unintended network exposure.
