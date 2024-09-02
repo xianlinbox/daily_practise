@@ -40,6 +40,20 @@ we can set a buffer to make data load more efficiently, buffer can flush based o
 doesn't support re-play
 kinesis agent can sent to firehose directly when firehose set data stream as the source.
 
+## use KCL for multiple application
+
+KCL concepts:
+
+- KCL consumer application: an application that is custom-built using KCL
+- Consumer application instance:
+- worker: a high level class that a KCL consumer application instance uses to start processing data.
+- Lease: data that defines the binding between a worker and a shard.
+- Lease Table: a unique Amazon DynamoDB table that is used to keep track of the shards in a KDS data stream that are being leased and processed by the workers of the KCL consumer application.
+- Record Processor: the logic that defines how your KCL consumer application processes the data that it gets from the data stream
+
+1. You can only use Dynamo DB as the checking point
+2. Each KCL must use its own Dynamo DB table
+
 ## Analytics
 
 Provide seach capability (SQL) on stream data.
