@@ -18,9 +18,9 @@ AWS provided software encryption key management system.
 Key Type: Symmetric and Asymmetric
 Keys:
 
-- Customer managed keys: all management controled by customer.
-- AWS managed keys: auto rotate each 1 year
-- AWS owned keys:
+- Customer managed keys: The KMS keys that you create.
+- AWS managed keys: KMS keys that AWS services create in your AWS account, can't modify. auto rotate each 1 year
+- AWS owned keys: KMS keys that AWS services create in a service account
 
 Key Materials Origin:
 
@@ -102,3 +102,11 @@ GuardDutyDelegateAdminAccount.
 Amazon GuardDuty can manage multiple AWS accounts from a single administrator account through AWS Organizations integration
 
 ## IAM Condition key
+
+# Security Group vs Network ACL
+
+1. Layer of defense : Instance vs subnet
+2. Scope of application: single instance vs all instances in the subnet
+3. Default rule: allow all traffic vs deny all traffic
+4. Order of rules: no order vs in order
+5. Stateful?: Stateful, if inbound allowed then outbound also allowed, vs stateless, need to config both inbound and outbound.

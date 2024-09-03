@@ -13,6 +13,7 @@ Origin resources:
 2. Media store container
 3. Customer origin, Http backends(ALB, EC2), the backend must be public and allow access from cloud front, we can use custom header(keep secret) to only allow cloud front access backends
 4. Support orgin groups for fail over, can cross region
+5. To use SSL on your custom Origin, for ELB we can use ACM assigned certificate, others need a third party CA. (502 Bad gateway, X-Cache: error from CloundFront)
 
 307 temporary Redirect scenario: when use s3 as origin, it may take 24 hours to propagate new bucket to all the regions. If we want to avoid it, we can add the region in source.
 

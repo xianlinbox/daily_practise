@@ -136,6 +136,8 @@ ALB vs NLB
 
 Global Accelerator can do similar thing as NLB. But more expensive
 
+Connection Draining: To ensure that an ELB stops sending requests to instances that are de-registering or unhealthy while keeping the existing connections open, use connection draining. This enables the load balancer to complete in-flight requests made to instances that are de-registering or unhealthy.
+
 # API Gateway:
 
 compare ALB, it provides limit/authentication/cache and more functionalities

@@ -22,6 +22,12 @@ SQS doesn't allow a message be consumed by multi consumer at the sam time.
 Message timers let you specify an initial invisibility period for a message added to a queue.
 SQS queue depth metrics for
 
+## Encrypted SQS queue
+
+support Server-side encryption (SSE). Server-side encryption (SSE) lets you store the data in encrypted format in the SQS queues. By default, SQS encrypts all the messages in queues using SQS-managed encryption keys (SSE-SQS).
+
+Another option is to use the SSE-KMS, encryption with the AWS Key Management Service Key. You may choose a default key provided by AWS or your own Customer Manager Key (CMK). The KMS key that you assign to your queue must have a key policy that includes permissions for all principals that are authorized to use the queue.
+
 # Amazon MQ
 
 A manged message broker service of AWS for RabbitMQ and ActiveMQ, you can just replatform you MQ rather than refactor to use SQS.

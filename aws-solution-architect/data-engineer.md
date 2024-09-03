@@ -135,3 +135,5 @@ Federated query: to query more data source
 # Quicksight
 
 bi with inteactive dashboard
+
+## QuickSight build connection with VPC
