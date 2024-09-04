@@ -86,7 +86,7 @@ Networking:
 - Host
 - awsvpc
 
-Fargate:
+Fargate: running containers in serverless way, the underline is EKS/ECS.
 
 ECR: support cross-region/cross-account replication
 

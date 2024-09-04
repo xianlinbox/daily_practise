@@ -118,7 +118,7 @@ AWS managed time series Database
 
 # Athena
 
-Serverless query service to analyze data stored in S3
+Serverless query service to analyze data stored in S3. It can work directly with data stored in any S3 storage class
 Use standard SQL to query
 Support csv, parquet, json different file format
 Commonly with quicksight to create dashboard
@@ -137,3 +137,8 @@ Federated query: to query more data source
 bi with inteactive dashboard
 
 ## QuickSight build connection with VPC
+
+QuickSight Enterprise edition is fully integrated with the Amazon VPC service.
+
+1. adding an elastic network interface in your VPC. This network interface allows QuickSight to exchange network traffic with a network instance within your VPC.
+2. provide all of the standard security controls for this network traffic,
