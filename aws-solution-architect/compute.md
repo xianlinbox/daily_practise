@@ -194,6 +194,10 @@ The type for health check:
 - additional charge apply to no AWS endpoint. even the health check is disabled.
 - 18% report healthy is healthy for ROute 53
 - Support TCP, need to build connection in 10s
+- If a record in a group of records that have the same name and type doesn't have an associated health check, treat it as healthy
+- If none of the records in a group of records are healthy, choose one based on the routing policy
+- All the records with non-zero weights must be unhealthy before Route 53 starts to respond to DNS queries using records that have weights of zero.
+- active-active failover,Route 53 can respond to a DNS query using any healthy record; active-passive failover,Route 53 includes only the healthy primary resource, when all primary unhealth, include healthy secondary resources.
 
 Hybrid DNS:
 Resolver Rules:
