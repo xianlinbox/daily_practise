@@ -177,6 +177,14 @@ Hosted Zones: A container of records defines how to route traffic
 
 DNSSEC: securing DNS traffic
 
+## cross account Route53 config
+
+An app in account A can't resolve CNAME records created in private zones of Route53 in account B. To make it possible, we need to:
+
+1. From an instance in Account B, authorize the association between the private hosted zone in Account B and the virtual private cloud in Account A.
+2. From an instance in Account A, create the association between the private hosted zone in Account A and the virtual private cloud in Account B.
+3. Delete the association authorization after the association is created.
+
 ## Health Checker
 
 Monitor the health and performance of your web applications, web servers, and other resources.

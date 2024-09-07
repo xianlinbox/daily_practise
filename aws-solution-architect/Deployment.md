@@ -27,7 +27,7 @@ Deploy to ASG: In-place update/ green-blue deployment(must have ELB)
 IaC on AWS. backone for most of deploy service (Beanstalk, CodeDeploy)
 
 Retain Policy
-Custom Resource
+Custom Resource: enable you to write custom provisioning logic in templates that AWS CloudFormation runs anytime you create,
 Stack Sets: deploy to multi accounts in OU
 Drift: alert manual changes out of CF
 Resource Input
