@@ -50,10 +50,18 @@ Available Feature sets:
 - All features: default one which can use all features
 - Consolidate billing feature: basic management,can't set SCP for all accounts
 
+Each organization consists of:
+
+- A management account
+- Zero or more member accounts
+- Zero or more organizational units (OUs)
+- Zero or more policies.
+
 ## SCP (sevice control policy)
 
 - SCPs affect all users and roles in attached accounts, including the root user. The only exceptions are those described in Tasks and entities not restricted by SCPs. It has no effect on service-link Role
 - The following elements aren't supported in SCPs: Principal/NotPrincipal/NotResource
+- SCPs don't affect users or roles in the management account. They affect only the member accounts in your organization.
 
 ### AWS Config
 

@@ -110,3 +110,9 @@ Amazon GuardDuty can manage multiple AWS accounts from a single administrator ac
 3. Default rule: allow all traffic vs deny all traffic
 4. Order of rules: no order vs in order
 5. Stateful?: Stateful, if inbound allowed then outbound also allowed, vs stateless, need to config both inbound and outbound.
+
+# Solution for ami CVE assessment
+
+1. Use AWS Lambda to write automatic approval rules. Store the approved AMI list in AWS Systems Manager Parameter Store
+2. Use Amazon Inspector to run the CVE assessment package on the EC2 instances launched from the approved AMIs.
+3. Amazon EventBridge (CloudWatch Events) can then be used to create scheduled triggers that run AWS Systems Manager Automation documents on a recurring schedule (30 days).

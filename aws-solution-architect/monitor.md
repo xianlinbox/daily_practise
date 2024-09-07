@@ -9,7 +9,7 @@ Synthetics Canary: configurable script to monito app api,url; can integrate with
 Track IP address need access log or cloud trail data event.
 Cloud watch agent can't publish data to firehose stream.
 
-## Event Bridge
+## EventBridge
 
 Defaut event bus/Partner Event Bus/ Custom Event Bus
 
@@ -20,6 +20,8 @@ Archive events and replay archive events
 event schema registry and versioned to understand the schema of events
 
 Resource based policy to allow diff accounts publish to event bus
+
+support run schedule based on rule: Rules that run at a regular rate/run at specific times
 
 # X-Ray:
 
