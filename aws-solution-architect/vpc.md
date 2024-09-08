@@ -146,6 +146,13 @@ Provided virtual Interface:
 - Private: access VPC using private IP
 - Transit: access one or more transit Gateway.
 
+Connect with vpc in different region:
+
+1. provision a direct connect gateway.
+2. use priavte VIF connect to dX gateway,
+3. provision vitrual private gateway in vpc of each regions.
+4. use DX gateway connect to the virtual private gateways above.
+
 Solution to build Site to Site VPN on DX:
 
 1. Build virtual private gateway in VPC
