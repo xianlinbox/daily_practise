@@ -10,6 +10,20 @@ Dynamo Stream: sending changes to stream trigger other services (lambda)
 Global Tables: Cross Region replication. must with streams
 DAX: DynamoDB accelator, cache layer
 
+## Auto Scaling
+
+1.  increase read capacity or write capacity as often as necessary
+2.  DynamoDB quotas remain in effect,
+3.  doesn't prevent you from manually modifying provisioned throughput settings
+4.  delete a table, scaling polices are not automatically deleted with it.
+
+steps to enable:
+
+1. choose table/global secondary index
+2. choose capacity (read or write)
+3. The upper and lower boundaries for the provisioned throughput settings
+4. target utilization
+
 # Open Search
 
 ELK on AWS

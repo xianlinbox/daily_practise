@@ -156,6 +156,11 @@ Web Socket API:stateful/bi-direction, use case:chat
 Private API gateway: only accessiable from VPC interface endpoint
 For an API Gateway, a "504 Gateway Timeout" error implies an "Endpoint Request Timed-out Exception".
 
+## REST API vs HTTP API
+
+1. both RESTful API products. REST APIs support more features than HTTP APIs,
+2. HTTP API is cheaper. REST API can provide a direct AWS Service integration, like Dynamo Tables
+
 # App Sync
 
 AWS version GraphQL, can integrated with AWS cognito
