@@ -85,6 +85,13 @@ ACLs enabled:
 - Bucket owner preferred – The bucket owner owns and has full control over new objects that other accounts write to the bucket with the bucket-owner-full-control canned ACL.\
 - Object writer – The AWS account that uploads an object owns the object, has full control over it, and can grant other users access to it through ACLs.
 
+Public Access:
+
+- IgnorePublicAcls option to TRUE: ignore all public ACLs on a bucket and any objects that it contains
+- BlockPublicAcls: PUT bucket ACL and PUT objects requests are blocked if granting public access.
+- BlockPublicPolicy: reject put request if public access policy attached
+- RestrictPublicBuckets: Restricts access to principles in the bucket owners’ AWS account
+
 ## S3 Achitecture
 
 S3 can as the host of static content, combine with EC2 or Cloud front to provide the content, we also can provide pre-signed URL to client to direct talk to S3.
