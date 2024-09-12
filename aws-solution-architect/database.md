@@ -56,7 +56,7 @@ Transparent transport Encryption supported
 
 RDS for Lambda:
 
-RDS proxy to avoid too many connections issue
+RDS proxy to avoid too many connections issue, RDS Proxy is fully compatible with the engine versions that it supports. You can enable RDS Proxy for most applications with no code changes.
 
 ## Backups
 

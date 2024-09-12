@@ -18,6 +18,7 @@ Subnets:
 Routing Table: control where the network traffic direct to
 
 Internet Gateway: Help VPC talk to the Internet.act as NAT instance for public ip instance
+An egress-only internet gatewayis a horizontally scaled, redundant, and highly available VPC component that allows outbound communication over IPv6 from instances in your VPC to the internet, and prevents the internet from initiating an IPv6 connection with your instances.
 
 Public Subnets: the instance has a public ip address
 Private subnets: access internet throgh NAT instance or NAT gateway.
@@ -27,7 +28,7 @@ NAT instance: an instance created in public subnets and attached public ip. all 
 NAT Gateway: AWS managed NAT services. resilient in singe AZ, multi-zone need to create multiple NAT gateway
 
 NACL(Network access control): stateless firewall rules apply to all the instances in the subnet; support allow/deny rules.
-Security Group: apply at instance level and only allow rule, no deny rule; can reference each other
+Security Group: apply at instance level and only allow rule, no deny rule; can reference each other, ALB & Cloud Front are all insaynces and can use security group.
 
 - the defaut security group are assign to instance if you didn't assign one, this default allow inbound traffic from the same group.
 - The user create security group by default allow no inbound traffic and ll outbound traffic.
