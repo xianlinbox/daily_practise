@@ -6,7 +6,7 @@ Volume Types (size/IO/thoughtput):
 
 - gp2/gp3: general purpose SSD
 - io: low latenct SSD
-- st/sc : low cost HDD (can't used as the boot volume)
+- st/sc : low cost HDD (can't used as the boot volume), maxium 500 IOPS
 
 With gp2 you get a baseline of 100 IOPS and then 3 IOPS per GiB after the first 33.33GiB, with a max of 16,000 IOPS. Pricing is based on volume size.
 
@@ -72,6 +72,7 @@ A dashboard:
   Free and Paid advanced metrics
 
   By default, you can create up to 100 buckets in each of your AWS accounts
+  NL
 
 ## settings
 

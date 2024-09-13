@@ -9,6 +9,8 @@ R for Ram/C for cpu/I for io/M for medium/G for gpu
 cluster/spread/partition
 we can move instance between groups
 
+An Elastic Fabric Adapter (EFA) is a network device that you can attach to your Amazon EC2 instance to accelerate High Performance Computing (HPC) and machine learning applications. EFA enables you to achieve the application performance of an on-premises HPC cluster, with the scalability, flexibility, and elasticity provided by the AWS Cloud.
+
 ## Launch Types
 
 On-Demand: short, predicatable pricing,reliable
@@ -118,6 +120,8 @@ ALB can't assign IP, if you need an IP, you need to put a NLB before it and assi
 
 Target types: instance ID/IP/ALB
 
+least outstanding requests when the requests for your application vary in complexity or your targets vary in processing capability. Round robin is a good choice when the requests and targets are similar, or if you need to distribute requests equally among targets.
+
 ALB vs NLB
 
 | item              | ALB                           | NLB                        |
@@ -134,7 +138,7 @@ ALB vs NLB
 | Authentication    | yes                           | no                         |
 | Sticky Session    | yes                           | no                         |
 
-Global Accelerator can do similar thing as NLB. But more expensive
+Global Accelerator can do similar thing as NLB. But more expensive.
 
 Connection Draining: To ensure that an ELB stops sending requests to instances that are de-registering or unhealthy while keeping the existing connections open, use connection draining. This enables the load balancer to complete in-flight requests made to instances that are de-registering or unhealthy.
 
