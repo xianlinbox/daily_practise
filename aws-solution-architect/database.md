@@ -101,7 +101,7 @@ Read Replica:
 
 Host+port
 
-1. Cluster Endpoint: write
+1. Cluster Endpoint: write, one is down, a read replica will select as cluster endpoint
 2. Reader Endpoint: LB for read
 3. Custom Endpoint: to specific set of instance
 4. Instance Encpoint: to specific db instance
@@ -110,5 +110,5 @@ Host+port
 
 error log/query/general/audit, can integrate with Cloudwatch
 
-Aurora Golobal Database: support write forwarding
+Aurora Global Database: support write forwarding, it has multi regions for read but only one write.
 Covert RDS to Aurora: snapshot/aurora-replica

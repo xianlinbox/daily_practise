@@ -185,3 +185,12 @@ we trusted a company, it can use AssumeRole to get the pemission to access AWS r
 1. Including the external ID condition in the role’s trust policy.
 2. Company in charge of generate unique external ID to different client
 3. config external ID in the trust policy.
+
+# Policy evaluation logic
+
+1. Check policy if have explicit deny
+2. check if SCP allow it
+3. If it has a resource based policy and the policy allow it.
+4. If has a identity based policy and policy allow it.
+5. if has a permission boundary, and allow it
+6. if there is a session policy and allow it.
