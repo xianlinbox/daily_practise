@@ -74,3 +74,19 @@ Resoucer discovery service
 # Server Migration Service
 
 automates the migration of your on-premises VMware vSphere, Microsoft Hyper-V/SCVMM, and Azure virtual machines to the AWS Cloud
+
+# Blue/Green Deployment
+
+Blue/Green deployment:uses two identical environments, one running the current version and the other running the new version. Traffic is switched between the environments, allowing for quick rollbacks if issues arise.
+
+Canary Deployment: gradually rolls out updates to a small subset of users, allowing for early issue detection without affecting all users.
+
+Support service:
+
+1. Route53: direct traffic by simply updating DNS records in the hosted zone
+2. ELB: distributes incoming application traffic across designated EC2
+3. EC2 ASG : attach different versions of launch configurations to an auto scaling group to enable blue/green deployment. auto scaling's termination policies and Standby state allow for blue/green deployment easier rollback.
+4. OpsWorks: OpsWorks simplifies cloning entire stacks when you’re preparing blue/green environments.
+5. CloudFormation: provides very powerful automation capabilities for provisioning blue/green environments and facilitating updates to switch traffic, whether through Route 53 DNS, ELB, or similar tools
+6. CodeDeploy: Blue/Green deployment is a feature of CodeDeploy. CodeDeploy can also roll back deployment in case of failure. You can also use CloudWatch alarms to monitor the state of deployment and utilize CloudWatch Events to process the deployment or instance state change events.
+7. Beanstalk: Beanstalk helps you run multiple versions of your application and provides capabilities to swap the environment URLs, facilitating blue/green deployment.
