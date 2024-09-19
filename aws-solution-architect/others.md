@@ -11,6 +11,8 @@ Managed secure desktop, replace on-prem vdi
 Has workspace application manager to update the application
 IP access Control Group
 
+enabling MFA via an on-premises Active Directory is achieved by way of a RADIUS server rather than through enabling it directly in the AWS Management Console. RADIUS stands for Remote Authentication Dial-In User Service
+
 # App Stream
 
 stream an application in web browser

@@ -118,7 +118,7 @@ Use this approach if you have multiple branch offices and existing internet conn
 
 # Direct Connect
 
-Build a dedicated connection between AWS direct connection location and on-prem data center.
+Build a dedicated connection between AWS direct connection location and on-prem data center. this is a seprate connection which will not be limited by existing internet bandwidth.
 
 1. dedicated connection
 2. more expensive

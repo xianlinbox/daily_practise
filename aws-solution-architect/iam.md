@@ -62,6 +62,7 @@ Each organization consists of:
 - SCPs affect all users and roles in attached accounts, including the root user. The only exceptions are those described in Tasks and entities not restricted by SCPs. It has no effect on service-link Role
 - The following elements aren't supported in SCPs: Principal/NotPrincipal/NotResource
 - SCPs don't affect users or roles in the management account. They affect only the member accounts in your organization.
+- SCP evaluation from top to down, for Deny strategy, we need to allow all at root level, then apply deny scp to the ou need to be limited, for execeptions, we need to create a seperate OU and apply specific SCP for it.
 
 ### AWS Config
 

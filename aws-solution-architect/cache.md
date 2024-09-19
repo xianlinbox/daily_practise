@@ -30,6 +30,8 @@ Cloud front signed URL for special security requirement.
 
 Support Custom error response.
 
+By default, it redirects request to default origin, but it support multi origin and can config redirect to different origin.
+
 ### Typical solution for Online video
 
 1.  Amazon S3 for storage,

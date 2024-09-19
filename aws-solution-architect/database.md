@@ -10,7 +10,7 @@ Dynamo Stream: sending changes to stream trigger other services (lambda)
 Global Tables: Cross Region replication. must with streams
 DAX: DynamoDB accelator, cache layer
 
-## Auto Scaling
+## Provisioned with Auto Scaling
 
 1.  increase read capacity or write capacity as often as necessary
 2.  DynamoDB quotas remain in effect,
@@ -23,6 +23,10 @@ steps to enable:
 2. choose capacity (read or write)
 3. The upper and lower boundaries for the provisioned throughput settings
 4. target utilization
+
+## On-demand scaling
+
+you don't need to think about provisioning throughput. Instead, your table will scale all behind the scenes automatically. Extreme spikes in load can occur and be handled seamlessly by AWS. This also brings a change in the cost structure for DynamoDB. With On-Demand Scaling, instead of paying for provisioned throughput, you pay per read or write request.
 
 # Open Search
 
