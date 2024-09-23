@@ -111,6 +111,12 @@ S3 don't need to pay for the following scenario:
 2. data transfer out to cloudfront
 3. data transfer out to EC2 in the same region
 
+## deny uncrypted object upload
+
+1. For object encryption at rest, you can set the default encryption behavior on an Amazon S3
+2. To deny unencrypted objects, "s3:x-amz-server-side-encryption" can be added which allows only encrypted object upload and can restrict to a specific KMS key as well.
+3. Amazon CloudFront can use 301 response code to redirect HTTP requests to HTTPS and allows only secured traffic.
+
 # FSx
 
 lauch 3rd party service (windows file server/Lusture) as a full managed service in AWS

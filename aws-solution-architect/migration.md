@@ -48,3 +48,7 @@ Application Migration Service
 
 Elastic Disaster Recovery
 Migration Evaluator
+
+# Migration VM to AWS
+
+VM Import/Export to import virtual machine (VM) images from your virtualization environment to Amazon EC2 as Amazon Machine Images (AMI),

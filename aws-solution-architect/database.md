@@ -66,6 +66,7 @@ RDS proxy to avoid too many connections issue, RDS Proxy is fully compatible wit
 
 1. support multi region
 2. Manual snapshots can share to up 20 aws accounts. automated snapshots can't share to other account.
+3. The only way to unencrypt an encrypted database is to export the data and import the data into another DB instance.
 
 ## DMS(data migration service)
 
