@@ -44,6 +44,14 @@ pros:
 
 - Multi-AZ
 
+### Quorum Authentication
+
+The first time setup for M of N authentication involves creating and registering a key for signing and setting the minimum value on the HSM. This involves the following high-level steps:
+
+• To use quorum authentication, each CO must create an asymmetric key for signing (a signing key). This is done outside of the HSM. Keys can be personal keys or public keys.
+
+• A CO must log in to the HSM and then set the quorum minimum value, also known as the m value. This is the minimum number of CO approvals that are required to perform HSM user management operations. Any CO on the HSM can set the quorum minimum value, including COs that have not registered a key for signing.
+
 ## Parameter Store
 
 ## Database Security
