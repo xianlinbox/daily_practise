@@ -38,6 +38,8 @@ Cross Region Replication
 
 EFS can attach to both on-prem server and EC2 instance.
 
+EFS doesn't support cross region replication
+
 # S3
 
 Save for objects.

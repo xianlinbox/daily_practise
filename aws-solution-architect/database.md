@@ -117,3 +117,10 @@ error log/query/general/audit, can integrate with Cloudwatch
 
 Aurora Global Database: support write forwarding, it has multi regions for read but only one write.
 Covert RDS to Aurora: snapshot/aurora-replica
+
+## Aurora global database vs Cross-Region replica
+
+1. need high availability of your Aurora cluster, use Aurora Replicas.
+2. looking for cross-Region disaster recovery (DR), use Aurora global databases
+3. cross-Region copy of your Aurora database, use Aurora Replicas
+4. migrate RDS, use Aurora Replicas
