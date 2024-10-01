@@ -79,7 +79,7 @@ automates the migration of your on-premises VMware vSphere, Microsoft Hyper-V/SC
 
 Blue/Green deployment:uses two identical environments, one running the current version and the other running the new version. Traffic is switched between the environments, allowing for quick rollbacks if issues arise.
 
-Canary Deployment: gradually rolls out updates to a small subset of users, allowing for early issue detection without affecting all users.
+Canary Deployment: gradually rolls out updates to a small subset of users, allowing for early issue detection without affecting all users. Opswork doesn't support it.
 
 Support service:
 

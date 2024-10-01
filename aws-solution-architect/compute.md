@@ -119,6 +119,7 @@ Don't support cross region load balancing
 ALB can't assign IP, if you need an IP, you need to put a NLB before it and assign IP to the NLB.
 
 Target types: instance ID/IP/ALB
+ALB node which is a dynamically defined high number port between 1024 and 65535.
 
 least outstanding requests when the requests for your application vary in complexity or your targets vary in processing capability. Round robin is a good choice when the requests and targets are similar, or if you need to distribute requests equally among targets.
 
@@ -267,3 +268,7 @@ use an ACM certificate with an API Gateway edge-optimized custom domain name, yo
 an AWS service that you can use to view and control your infrastructure on AWS.AWS Systems Manager Agent (SSM Agent) is Amazon software that can be installed and configured on an EC2 instance, an on-premises server, or a virtual machine (VM). SSM Agent makes it possible for Systems Manager to update, manage, and configure these resources.
 
 System Manager supports an SSM document for Patch Manager. AWS-RunPatchBaseline, which performs patching operations on instances for both security-related and other types of updates. AWS-ApplyPatchBaseline SSM document supports patching on Windows instances only
+
+# AWS Compute Optimizer
+
+Using machine learning to analyze historical utilization metrics. Compute Optimizer provides a set of APIs and a console experience to help you reduce costs and increase workload performance by recommending the optimal AWS resources for your AWS workloads.
