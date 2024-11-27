@@ -108,7 +108,7 @@ Anatomy: json document with effect, action, resource, condition, policy variable
 Deny has precedence over Allow
 Service control policies (SCPs) are a type of organization policy that you can use to manage permissions in your organization.
 
-Organisation level/Acoount -> SCP; IAM User/Role -> Permission boundary;
+Organisation level/Acoount -> SCP; IAM User/Role -> Permission boundary;s
 
 ### STS: Security Token Service
 

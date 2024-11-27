@@ -7,6 +7,25 @@ visualize serveless workflow for orchestrate lambdas; it can parrel, sequence, t
 - Task type: lambda/activity/service/wait
 - Workflow types: Express (at least once, 5 minutes)/Standard( Exact once, 1 year)
 
+## Execution Guarantee
+
+1. Standard Workflows:
+
+- ideal for long-running (up to one year), durable, and auditable workflows,
+- exact-once running.
+- suited to orchestrating non-idempotent actions
+
+2. Express Workflows
+
+- ideal for high-volume, event-processing workloads such as IoT data ingestion, streaming data processing and transformation, and mobile application backends.
+- Can run multiple in parallel
+- run for up to five minutes,
+- at-least-once runnong
+- orchestrating idempotent actions
+- Synchronous (wait for result) vs Asynchronous(don't wait for result)
+
+##
+
 # SQS
 
 - max size for a message is 256k, the large file can use S3 link instead
