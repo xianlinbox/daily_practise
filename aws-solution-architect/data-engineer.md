@@ -116,6 +116,12 @@ AWS managed Mongo DB
 
 AWS managed time series Database
 
+- built-in time series analytics that support time series functions
+- can help identify consumer behavior trends.
+- can store hundreds of terabytes of data.
+- simplifies data-lifecycle management with a memory store for recent data and a magnetic store for historical data.
+- can periodically and automatically schedule queries to perform real-time analytics on incoming data.
+
 # Athena
 
 Serverless query service to analyze data stored in S3. It can work directly with data stored in any S3 storage class
