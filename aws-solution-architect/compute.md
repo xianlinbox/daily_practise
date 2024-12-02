@@ -45,6 +45,10 @@ LC(default/null) + VPC(default) => shared
 
 It's not possible to move an existing instance to another subnet, Availability Zone, or VPC. Instead, you can create a new Amazon Machine Image (AMI) from the source instance to manually migrate the instance.
 
+## Data Lifecycle Manager:
+
+Amazon Data Lifecycle Manager provides an automated, policy-based lifecycle management solution for Amazon Elastic Block Store (EBS) Snapshots and EBS-backed Amazon Machine Images (AMIs)
+
 # High Performance Computing
 
 Services to help HPC:
