@@ -36,3 +36,11 @@ automate the creation of EC2 AMI
 # AWS Media Services
 
 Deliver live content to a global audience
+
+# AWS Local Zone
+
+Local Zones are a type of infrastructure deployment that places compute, storage, database, and other select AWS services close to large population and industry centers.
+
+# AWS Wavelength
+
+AWS Wavelength deploys standard AWS compute and storage servers to the edge of telecommunication carriers' 5G networks
