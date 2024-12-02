@@ -205,3 +205,13 @@ VPC Endpoint not allow cross region connection
 
 1. NAT Gateway or Instance connect to internet gateway
 2. Endpoint gateway (only S3 & Dynamo)/interface to internal services.
+
+## Traffic Mirror
+
+Traffic Mirroring is an Amazon VPC feature that you can use to copy network traffic from an elastic network interface of type interface. You can then send the traffic to out-of-band security and monitoring appliances for:
+
+- Content inspection
+
+- Threat monitoring
+
+- Troubleshooting
