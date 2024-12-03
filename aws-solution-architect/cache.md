@@ -32,6 +32,8 @@ Support Custom error response.
 
 By default, it redirects request to default origin, but it support multi origin and can config redirect to different origin.
 
+Price Class 100 is a cost-effective option that uses only the least expensive edge locations to serve content
+
 ### Typical solution for Online video
 
 1.  Amazon S3 for storage,
