@@ -74,6 +74,7 @@ RDS proxy to avoid too many connections issue, RDS Proxy is fully compatible wit
 2. Has Table metrics to get stastics data.
 3. pre-migration assessment: evaluates specified components of a database migration task to help identify any problems.
 4. when create endpoints, in DMS console it will create IAM role automatically, CLI/API will not
+5. Can activate change data capture mode to capture the data change during migration.
 
 ### Redshift as the destination of DMS
 

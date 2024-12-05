@@ -16,7 +16,12 @@ DR
 Understanding AWS component replication capability
 
 DB
+
+- Database management service vs DataSync
+
 EC2
+
+- quotas
 
 correct routing after DR
 
