@@ -1,5 +1,7 @@
 IAM
 
+Permission Boundary is applied to IAM entities (users or roles), using a managed policy to set the maximum permissions that an identity-based policy can grant to an IAM entity
+
 - IAM access Analyzer
 - IAM credential report
 
