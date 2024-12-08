@@ -5,6 +5,9 @@ Permission Boundary is applied to IAM entities (users or roles), using a managed
 - IAM access Analyzer
 - IAM credential report
 
+Guard Duty
+Inspector
+
 Infra
 
 - patch

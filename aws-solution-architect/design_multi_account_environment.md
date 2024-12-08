@@ -39,8 +39,12 @@ Service Control Policy are policies that specify the maximum permissions for an 
 SCP applied to OU or Account, it limites all the accounts or Role under that umbrella.
 
 AWS Config can be used to centrally track resource configurations and compliance across multiple accounts.
+
 AWS License Manager can help you manage and track software licenses across multiple accounts.
-AWS CloudTrail can be used to track activity and API calls across accounts. You can create a central trail that aggregates logs from multiple accounts for better visibility and auditing.
+
+AWS CloudTrail can be used to track activity and API calls across accounts. You can create a central trail that
+aggregates logs from multiple accounts for better visibility and auditing.
+
 AWS Security Hub aggregates security findings across accounts within your organization, allowing you to centrally manage and respond to threats.
 
 ## Cross-Account Resource Sharing and Management
@@ -73,6 +77,7 @@ Based all the info above, the steps to design a multi-account environment will b
 2. Create management account, using this account to create the organisation and OU hierarchy base above design
 3. Create new member account or invite existing account into corresponding OU.
 4. Delegate organisation management responsbility to corresponding account. (Security, Billing, OU management etc)
-5. Add SCP and apply it to corresponding OU/Account through delegated account
-6. if needed, Integrate with Budget, AWS Config, License Manager, Cloudtrail, Security Hub etc for organisation level goverance, report, audit etc.
-7. All of the above can be created in Controle Tower with Account Factory, to make a consistent and automatic pipeline of account provisioning.
+5. Add SCPs/RCPs and apply it to corresponding OU/Account through delegated account
+6. Define the resources will sharing cross accounts in AWS resource manager.
+7. if needed, Integrate with Budget, AWS Config, License Manager, Cloudtrail, Security Hub etc for organisation level goverance, report, audit etc.
+8. All of the above can be created in Controle Tower with Account Factory, to make a consistent and automatic pipeline of account provisioning.
