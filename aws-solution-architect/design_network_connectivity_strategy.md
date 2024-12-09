@@ -44,16 +44,42 @@ As described above, VPC hold a lot of resouces and controlled the network connec
 3. Resources in VPC
 4. Resources in another VPC (another region/another account)
 5. Resource in on-prem data center
+6. Resource in the public network
 
 Let's check how does they connect with each other:
 
-- End user
-  - AWS Managed service: As AWS managed service are open to public, end user can connect to it directly
-  - Resources in VPC/Resources in another VPC(they are same to end user):
-    - Option 1: ClientVPN/site-to-site VPN build connection between end user location with VPC.
-    - option 2: VPC provide public access through an internet gateway
-    - option 3: End user connect through AWS manged service like API gateway
-  - Resource in on-prem data center: ClientVPN build connection between end user location with data center.
+## For the end users/Resource in the public network (init request from internet)
+
+- **AWS Managed service/Resource in the public network**: As these services are open to public, end user with network can access them directly
+- **Resources in VPC/Resources in another VPC**: There are 2 kinds of resources in VPC
+
+  - Public resources, resources are located in public subnets(Web Apps, APIs, Load Balancer etc.): user can access them through IGW(Internet Gateway) with correct IP/DNS/Security setting.
+  - Private resources, resources are located in private subnets RDS databases, internal APIs etc: user need to setup VPN(Client VPN/site to site VPN/ Direct Connect) with correct route table/security setting
+
+  AWS Transit Gateway can be used to interconnect VPCs and customer networks.
+
+- **Resource in on-prem data center**: user can user vpn to connect to data center.
+
+## For AWS managed service
+
+- **Resources in VPC/Resources in another VPC**:
+  - Public resources: AWS managed service has capability to access public resources directly same as end user.
+  - Private resources: This one can be access through VPC Endpoint (Gateway Endpoint for S3/DynamoDB, Interface Endpoint for other AWS services).
+- **Resource in on-prem data center**: Use VPN/Direct Connect build connection between on-prem and AWS cloud.
+- **Resource in the public network**: AWS managed service has capability to fetch data from internet.
+
+## For Resource in VPC
+
+- **Resource in the public network**: VPC can connect internet through NAT Gateway, or Egress-Internet-Gateway
+- **AWS Managed Service**: VPC Gateway/Interface Endpoint can use to connect to aws managed services.
+- **Resources in another VPC**: VPC peering/ Transit Gateway/PrivateLink/VPN between instances through IGW/VPN between intsance and virtual private gateway.
+- **Resource in on-prem data center**:
+
+## For resource in on-prem data center
+
+- **Resource in the public network**
+- **AWS Managed Service**
+- **Resources in VPCs**: Direct Connect Gateway can be used for multi-VPC connectivity. Transit Gateway can be used to interconnect VPCs and customer networks.
 
 # Monitoring
 
@@ -70,20 +96,6 @@ AWS provided serveral services to monitor the network traffic, As a solution arc
   - Troubleshooting connectivity issues
   - Monitoring for unusual traffic patterns
   - Compiance an auditing
-- Data store: S3/Cloudwatch log
-
-## VPC Flow Logs:
-
-- Purpose: Capture information about the IP traffic flowing to and from network interfaces in your VPC.
-- Key Data Points:
-  - Source and destination IP addresses.
-  - Protocols and port numbers.
-  - Traffic acceptance or rejection status.
-- Use case:
-  - Troubleshooting connectivity issues
-  - Monitoring for unusual traffic patterns
-  - Compiance an auditing
-- Data store: S3/Cloudwatch log
 
 ## Traffic Mirroring
 
