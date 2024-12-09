@@ -26,7 +26,7 @@ Based on the gobal infra, AWS provided a bunch of services to reduce network lat
 
 BTW: VPC can only be created in one region, but it can cross multi AZ. subnet can only land in one AZ.
 
-Several AWS services need to host within a VPC for functionality, security, or compliance. These services typically interact with your resources privately.:
+Several AWS services need to host within a VPC for functionality, security, or compliance. These services typically interact with your resources privately:
 
 1. Compute Services: EC2/ECS/EKS
 2. Storage Services: RDS/Aurora/ElastiCache/FSx
@@ -34,6 +34,66 @@ Several AWS services need to host within a VPC for functionality, security, or c
 4. Analytics and Search Services: EMR/OpenSearch/Redshift
 5. Security and Identity Services: Directory Service/WorkSpaces
 6. Integration and Message Queueing: MQ
+
+# The AWS resources that supports network connection
+
+## Direct Connection
+
+Establish a dedicated connection from an on-premises network to one or more VPCs.
+
+- uses industry-standard 802.1Q VLANs to connect to Amazon VPC using private IP addresses. configure three different types of VIFs:Public/Transit/Private.
+- The installation of a Direct Connect Dedicated Connection can take from several weeks to a few months.
+- Direct Connect Gateway can be used for multi-VPC connectivity, connect to mulri vpc's virtuak private gateway
+
+## Site-to-Site VPN
+
+AWS managed VPN endpoint, creating an IPsec VPN connection between your remote networks and Amazon VPC over the internet.
+
+- it connected to virtual private gateway in VPC. virtual private gateway support multiple user gateway connections.which means we can implement redundancy and failover
+- support using AWS Global Accelerator accelerated VPN connection
+- public accessable service.
+
+## Client VPN
+
+an AWS managed high availability and scalability service enabling secure software remote access
+
+## Software VPN
+
+creating a VPN connection between your remote network and a software VPN appliance running in your Amazon VPC network
+
+- customer connect vpn software running in ec2 instance through Internet Gateway.
+- recommended if you must manage both ends of the VPN connection
+
+## Transit Gateway
+
+an AWS managed high availability and scalability regional network transit hub used to interconnect VPCs and customer networks.
+
+- can work together with VPN, Direct connect to connect multi VPCs with local network.
+- supports and encourages multiple user gateway connections so that you can implement redundancy and failover
+
+## VPN CloudHub
+
+uses an Amazon VPC virtual private gateway with multiple customer gateways, each using unique BGP autonomous system numbers (ASNs). The remote sites must not have overlapping IP ranges.
+
+- operates on a simple hub-and-spoke model that you can use with or without a VPC.
+
+## VPC peering
+
+a networking connection between two VPCs that enables routing using each VPC’s private IP addresses
+
+- Support cross-account, cross-region peering
+- Do not support transitive peering
+- Both IPv4 and IPv6 traffic is supported
+
+## Internet Gateway
+
+## Egress-only Gateway
+
+NAT Gateway/Instance
+
+Interface/Gateway Endpoint
+
+Private Link
 
 # The types of connectivity
 
