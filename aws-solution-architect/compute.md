@@ -144,6 +144,7 @@ ALB vs NLB
 | Sticky Session    | yes                           | no                         |
 
 Global Accelerator can do similar thing as NLB. But more expensive.
+NLB pass connections straight to EC2 instances with the source IP of the client preserved
 
 Connection Draining: To ensure that an ELB stops sending requests to instances that are de-registering or unhealthy while keeping the existing connections open, use connection draining. This enables the load balancer to complete in-flight requests made to instances that are de-registering or unhealthy.
 

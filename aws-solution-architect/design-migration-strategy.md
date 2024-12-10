@@ -17,3 +17,4 @@ Data Migration:
 - Data sync
 - Transfer family
 - Database migration service
+- Storage Gateway

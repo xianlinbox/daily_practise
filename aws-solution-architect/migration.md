@@ -16,6 +16,15 @@ Gateway support refresh cache
 SnowCone and Snowball Edge: hardware device for move large data. there is S3 adapter can improve the file write speeds.
 
 SnowMobile: for data 10PB+, Snowball for data <10PB
+Snow Edge only support SFP, QSFP, and RJ45 connections for Ethernet networking, no USB interface.
+
+way to improve performance:
+
+1. Use the latest Mac or Linux Snowball client
+2. Batch small files together
+3. Perform multiple copy operations at one time
+4. Copy from multiple workstations
+5. Transfer directories, not files
 
 # Database Migration Service
 

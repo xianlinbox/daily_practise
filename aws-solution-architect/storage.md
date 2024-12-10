@@ -152,7 +152,7 @@ Tips:
 
 # Storage Gateway
 
-Hybrid cloud storage service that gives you on-premises access to virtually unlimited cloud storage
+Hybrid cloud storage service that gives you on-premises access to virtually unlimited cloud storage. make cloud acess by on-prem, FSx make on-prem access by Cloud
 
 ## 3 Types:
 
