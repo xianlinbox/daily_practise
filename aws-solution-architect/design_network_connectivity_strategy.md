@@ -82,64 +82,93 @@ uses an Amazon VPC virtual private gateway with multiple customer gateways, each
 a networking connection between two VPCs that enables routing using each VPC’s private IP addresses
 
 - Support cross-account, cross-region peering
-- Do not support transitive peering
+- Do not support transitive peering, A peering with B and C, doesn't mean B peering with C
 - Both IPv4 and IPv6 traffic is supported
 
 ## Internet Gateway
 
+a horizontally scaled, redundant, and highly available VPC component that allows communication between your VPC and the internet.
+
+- provides a target in your VPC route tables for internet-routable traffic
+- supports IPv4 and IPv6 traffic
+- enables resources in your public subnets (such as EC2 instances) to connect to the internet if the resource has a public IPv4 address or an IPv6 address
+
 ## Egress-only Gateway
 
-NAT Gateway/Instance
+a horizontally scaled, redundant, and highly available VPC component that allows outbound communication over IPv6 from instances in your VPC to the internet,
 
-Interface/Gateway Endpoint
+- only outbound, no inbound
+- support ip v6 only, use NAT Gateway for IP v4
 
-Private Link
+## NAT Gateway
+
+a Network Address Translation (NAT) service that support instances in a private subnet connect to services outside VPC but external services cannot initiate a connection with those instances.
+
+- only outbound, no inbound
+- support Ip v4 only
+- has public(for internet through IGW) /private (for on-pre or other vpc through VPG or transit gateway) types
+
+## NAT Instance
+
+use an instance to run network address translation (NAT) service. Not recommend, suggest migrate to NAT gateway.
+
+## Interface/Gateway Endpoint
+
+Both of them are using to connect to AWS services from within your Virtual Private Cloud (VPC) without using the public internet. they have a little difference:
+
+- Interface Endpoint:
+  - implementde by add ENI in your VPC. so it has a private Ip
+  - support most of AWS services: S3, DynamoDB, Lambda, and more.
+- Gateway Endpoint:
+  - Routes traffic to services through private IPs via route tables.
+  - only support S3 and DynamoDB.
+
+## Private Link
+
+a highly available, scalable technology that you can use to privately connect your VPC to services and resources as if they were in your VPC.
+
+- can use to connect another VPC service, AWS managed service, Market Parter service.
+- powered by Interface VPC Endpoints
+- only supported in the AWS region where the VPCs reside, if need to cross region, need to additional setup, like VPC peering.
 
 # The types of connectivity
 
-As described above, VPC hold a lot of resouces and controlled the network connection between these resources. For a complicated system There are a bunch of role involed:
+For a complicated system There are serval parts will be involved:
 
-1. End user (In Office/home)
-2. AWS managed services(S3/API Gateway/CloudFront etc)
-3. Resources in VPC
-4. Resources in another VPC (another region/another account)
-5. Resource in on-prem data center
-6. Resource in the public network
+1. Internet (Public services, End users)
+2. AWS managed services(S3/API Gateway/CloudFront, Market service providersetc)
+3. Resources in VPCs
+4. On-prem data center
 
-Let's check how does they connect with each other:
+As an AWS Solution Architect, when we talk about network connectivity, it is more related how to make sure these parts can connect with each other via the aws services described above.
 
-## For the end users/Resource in the public network (init request from internet)
+## Connecting remote networks with your Amazon VPC environment
 
-- **AWS Managed service/Resource in the public network**: As these services are open to public, end user with network can access them directly
-- **Resources in VPC/Resources in another VPC**: There are 2 kinds of resources in VPC
+- Client VPN can be used for singe point connect to VPC
+- Site-to-Site VPN can be user for a location (office) connect to VPC
+- CloudHub can be used for multiple user connect to VPC in hub-and-spoke model
+- Direct connect can be used for a location (office/on-prem) connect to VPC via a private dedicated network
+- Transit Gateway/Direct Connect Gateway can be used to connect multiple VPCs.
 
-  - Public resources, resources are located in public subnets(Web Apps, APIs, Load Balancer etc.): user can access them through IGW(Internet Gateway) with correct IP/DNS/Security setting.
-  - Private resources, resources are located in private subnets RDS databases, internal APIs etc: user need to setup VPN(Client VPN/site to site VPN/ Direct Connect) with correct route table/security setting
+## Connecting VPC with Internet
 
-  AWS Transit Gateway can be used to interconnect VPCs and customer networks.
+- Internet Gateway can help connection between VPC public subnet resources and internet
+- Resources in private subnets need to use NAT gateway or Egress-Only Internet Gateway to reach internet resources.
+- Resources in private subnets can use other AWS services (ELB/API Gateway etc) for internet connectivity, this is powered by Internet Gateway.
 
-- **Resource in on-prem data center**: user can user vpn to connect to data center.
+## Integrate multiple Amazon VPCs into a larger virtual network
 
-## For AWS managed service
+- Two VPCs can use VPC peering connect with each other
+- VPC can use PrivateLink to expose resources to another VPC
+- VPCs can use Transit Gateway to connect with each other.
+- VPC resources can build software site-to-site VPN for connection
+- For simplify architecture, you can build a transit VPC for reducing customer side connections.
 
-- **Resources in VPC/Resources in another VPC**:
-  - Public resources: AWS managed service has capability to access public resources directly same as end user.
-  - Private resources: This one can be access through VPC Endpoint (Gateway Endpoint for S3/DynamoDB, Interface Endpoint for other AWS services).
-- **Resource in on-prem data center**: Use VPN/Direct Connect build connection between on-prem and AWS cloud.
-- **Resource in the public network**: AWS managed service has capability to fetch data from internet.
+## Connecting VPC with AWS managed Services
 
-## For Resource in VPC
-
-- **Resource in the public network**: VPC can connect internet through NAT Gateway, or Egress-Internet-Gateway
-- **AWS Managed Service**: VPC Gateway/Interface Endpoint can use to connect to aws managed services.
-- **Resources in another VPC**: VPC peering/ Transit Gateway/PrivateLink/VPN between instances through IGW/VPN between intsance and virtual private gateway.
-- **Resource in on-prem data center**:
-
-## For resource in on-prem data center
-
-- **Resource in the public network**
-- **AWS Managed Service**
-- **Resources in VPCs**: Direct Connect Gateway can be used for multi-VPC connectivity. Transit Gateway can be used to interconnect VPCs and customer networks.
+- VPC can use interface/Gateway endpoint connect to AWS managed services.
+- AWS managed services can access VPC public subnet resources same as what internet service do.
+- For private resources, some AWS managed services like Lambda/ELB can access by attach to vpc. other services need to use these service as middle layer. or you can create a private Link for the service in the private subnet.
 
 # Monitoring
 
