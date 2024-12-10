@@ -237,4 +237,20 @@ AWS provided serveral services to monitor the network traffic, As a solution arc
 
 # Conclusion
 
-keep one genenral principle in mind: **Try to use prvate network as much as possible**
+Based all the info above, the steps to build your network environment will be:
+
+1. Understand what parts are involed in your system
+
+- where is your user(Regions, global infra)?
+- do you need connect to on-prem data center?
+- any public internet services used?
+- any AWS managed service involed?
+- how many vpc will be used? cross account, cross region?
+- ...
+
+2. Choose the network services to build network topology
+
+- Try to limit the network inside AWS network as much as you can
+- Make the network topology as simple as you can
+
+3. Config monitoring for the network traffic for debugging and tracing
