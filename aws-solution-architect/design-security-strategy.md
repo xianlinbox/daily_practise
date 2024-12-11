@@ -112,6 +112,14 @@ Attach inline policies to resources,grant permissions to the principal that is s
 - support resources: S3/KMS/SQS/SNS/Lambda/EventBridge/IoT/SecretsManager
 - eg:S3 bucket policies and IAM role trust policies
 
+#### Access control lists
+
+control which principals in other accounts can access the resource to which the ACL is attached. similiar to resource based policy
+
+- only policy type that does not use the JSON policy document structure
+- cannot grant permissions to entities within the same account
+- support service: S3/VPC/EFS/SQS/Directory Service/CloudFront
+
 #### Policy Evaluation
 
 1. By default, all requests are implicitly denied
