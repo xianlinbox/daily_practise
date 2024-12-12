@@ -127,14 +127,62 @@ control which principals in other accounts can access the resource to which the 
 3. If a permissions boundary, Organizations SCP or session policy is present, it might override the allow with an implicit deny.
 4. An explicit deny in any policy overrides any allows.
 
+### secuity features in VPC
+
+- Security Group: allow specific inbound and outbound traffic at the resource level (such as an EC2 instance).
+- Network ACL: allow or deny specific inbound and outbound traffic at the subnet level
+- BPA(Block Public Access): centralized security feature that enables you to authoritatively prevent public internet access to VPC resources
+
+### security features in S3
+
+- BPA(Block Public Access):controls across an entire AWS Account or at the individual S3 bucket level to ensure that objects never have public access, now and in the future.
+
+  - BlockPublicAcls: any put with public acl are blocked
+  - IgnorePublicAcls: ignore all public ACLs on a bucket and any objects that it contains
+  - BlockPublicPolicy: reject calls to PUT Bucket policy if the specified bucket policy allows public access
+  - RestrictPublicBuckets: allow public policy to only AWS service principals and authorized users within the bucket owner's account and access point owner's account.
+
+- Object Lock: blocks permanent object deletion during a customer-defined retention period.
+
 ## Data Security
 
-Data
+With the above access control, we can make sure the resources are accessed by the correct principal. Another part for security is keep data safe. For Data security, there are 2 parts need to consider:
 
-- encrypt at rest
-  - which kms use
-  - conig rule
-  - cloud trail for auditing
+### encrypt Data at rest
+
+For data encyption at rest, we have 2 options: server-side encryption and client-side encryption:
+
+- server-side encryption.
+
+  - encrypted data in cloud
+  - easier to ensure encryption implemented correctly and applied consistently
+
+- client-side encryption.
+  - encrypted data in client application
+  - ensure a consistent security posture as data traverses within our service architecture, whether in AWS, on-premises, or in a hybrid model.
+
+Both of them can use AWS KMS to mange the encrytion key, and through the access policy in KMS to control who can decrypt the data. AWS KMS has 3 kinds of keys:
+
+- Customer managed keys: The KMS keys that you create.
+- AWS managed keys: KMS keys that AWS services create in your AWS account, can't modify. auto rotate each 1 year
+- AWS owned keys: KMS keys that AWS services create in a service account
+
+KMS doesn't support annonymous requests, so public access S3 object can't use it for encryption.
+KMS support multi region keys. it's a primary-replica logic not a global one. process for encrypt and decrypt:
+
+- encrypt: GenerateDataKey from KMS-> use data key to encrypt data -> Store the encrypted data key alongside the encrypted data
+- decrypt: request KMS to decrypt the encrypted data key -> Use the decrypted data key to decrypt the data
+
+#### CloudHSM
+
+- A decdicated AWS provisioned encryption hardware
+- Client manage their keys entirely
+- Must use with HSM client software.
+
+### encrypt Data in tansit
+
+To protect data in transit, AWS encourages customers to leverage a multi-level approach. All network traffic between AWS data centers is transparently encrypted at the physical layer. All traffic within a VPC and between peered VPCs across regions is transparently encrypted at the network layer when using supported Amazon EC2 instance types. At the application layer, customers have a choice about whether and how to use encryption using a protocol like Transport Layer Security (TLS). All AWS service endpoints support TLS to create a secure HTTPS connection to make API requests.
+
 - encypt at transit
   - vpn
   - inter-network
@@ -142,16 +190,20 @@ Data
 
 ## Infra Security
 
+Most the infra part are maintained by AWS. except
+
 Infra
 
 - patch
 
 ## Tools
 
+- Amazon Macie
 - An Amazon Cognito
 - IAM access Analyzer
 - IAM credential report
-
-# Incident Response
+- AWS Security Hub
+- AWS Network Firewall
+- AWS Shield
 
 # Conclusion
