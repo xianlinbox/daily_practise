@@ -214,30 +214,99 @@ AWS provide a secure repository(ECR) to store container images.
 
 # Tools
 
-## Control
+## Application and Network Security
 
-AWS Security Hub:
+### AWS Firewall Manager
 
-Aggregates and monitors security findings, including container image vulnerabilities.
-AWS CloudTrail:
+- Centralizes management of WAF, Shield Advanced
+- Provides aggregated reports on firewall rule compliance
 
-Tracks API activity for container-related actions in ECR or other AWS services.
-Amazon GuardDuty:
+### WAF(Web Application Firewall)
 
-Detects potential threats or anomalous activity affecting container workloads.
+- Protects against application-layer (Layer 7) threats like SQL injection, XSS, and bot attacks.
+- Users define rules
+- Works with CloudFront, ALB, API Gateway, AppSync, etc
+- Provides logs and metrics for HTTP traffic.
 
-- Amazon Macie
-- An Amazon Cognito
-- IAM access Analyzer
-- IAM credential report
-- AWS Security Hub
-- AWS Network Firewall
-- AWS Shield
+### AWS Shield
 
-## Monitoring
+- Protects against Distributed Denial of Service (DDoS) attacks, primarily at Layer 3 (network) and Layer 4 (transport).
+- No custom rules; automatically detects and mitigates DDoS patterns.
+- Works with CloudFront, ALB, Route 53, Global Accelerator, etc.
+- Offers attack diagnostics and metrics via CloudWatch (Shield Advanced).
 
-Monitor function execution and usage with CloudWatch and AWS X-Ray.
+## Threat Detection & Monitoring
 
-## Audit
+### AWS CloudTrail
+
+- Provides detailed logs of API calls and account activity.
+- Useful for forensic analysis and incident response.
+- used for security and compliance
+
+### Amazon CloudWatch:
+
+- Monitors resource metrics and application logs for anomalous patterns.
+- Triggers alarms and automated responses.
+- used for monitoring and managing system performance
+
+### AWS X-Ray
+
+Collects data about application requests, including calls to AWS resources, databases, and HTTP Web APIs. X-Ray uses this data to generate a trace map that shows how requests are processed and persisted.
+
+### Amazon GuardDuty
+
+monitors for malicious activity and unauthorized behavior. It uses machine learning, anomaly detection, and threat intelligence to identify and prioritize potential threats.
+
+- Uses AI, machine learning, and other techniques for detect
+- used data from multi resources( VPC Flow, DNS lookup, cloudtrail logs)
+
+### Amazon Detective:
+
+investigate potential security issues across AWS accounts and workloads
+
+- analyzes trillions of events from multiple data sources, including Amazon VPC Flow Logs, AWS CloudTrail logs, and Amazon EKS audit logs.
+- Visualizes relationships between resources, activity, and events.
+
+## Access Monitoring
+
+### IAM Access Analyzer
+
+- Identifies overly permissive policies and access configurations for IAM roles, S3 buckets, KMS keys, and more.
+- Provides findings for cross-account or public access risks.
+
+### Amazon Macie:
+
+- Identifies and protects sensitive data in S3 buckets.
+- Generates reports on sensitive data discovery and misconfigured bucket permissions.
+
+## Vulnerability Management
+
+### AWS Inspector:
+
+- Scans EC2 instances, container images and Lambda functions for vulnerabilities.
+- Provides detailed findings and recommendations for remediation.
+
+### Amazon ECR Image Scanning:
+
+- Automatically scans container images for vulnerabilities in dependencies.
+
+## Compliance Reporting
+
+### AWS Config:
+
+- Tracks configuration changes and evaluates resource compliance against managed or custom rules.
+- Generates compliance reports for auditing and governance.
+
+### AWS Audit Manager:
+
+- Automates evidence collection for audits based on compliance frameworks (e.g., SOC 2, ISO 27001).
+- Creates custom reports to demonstrate compliance.
+
+## Integration Dashboard
+
+### AWS Security Hub:
+
+- Aggregates and prioritizes security findings from multiple AWS services (e.g., GuardDuty, Inspector, IAM Access Analyzer).
+- Provides compliance checks against frameworks like CIS, NIST, PCI DSS, and GDPR.
 
 # Conclusion
