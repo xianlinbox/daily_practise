@@ -310,3 +310,19 @@ investigate potential security issues across AWS accounts and workloads
 - Provides compliance checks against frameworks like CIS, NIST, PCI DSS, and GDPR.
 
 # Conclusion
+
+Based on all the information, after we created the organisation structure and designed the network topology. the steps to apply security strategy will be:
+
+1. Based on the network toplogy, apply security groups, ACLs to the related component.
+
+2. Design the IAM structure:
+
+- The long-term users and user groups need to be created
+- The role and policy need to be created
+- attach the correct role to user/user groups
+- design federation strategy if needed
+
+3. Apply aws provided security tools to the corresponding services. (AWS WAF, Shield etc)
+4. Add monitoring/detect tool to services
+5. Build indcident response action plan based on the monitoring tool findings
+6. Build dashboard in security hub to see whold picture of your system security.
