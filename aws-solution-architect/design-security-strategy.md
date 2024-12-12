@@ -188,11 +188,43 @@ To protect data in transit, AWS encourages customers to leverage a multi-level a
 
 # Infra Security
 
-Most the infra part are already maintained by AWS. As user we just need to cover guest operating system (including updates and security patches)
+As AWS is responsible for physical security of the underlying infrastructure (data centers). we just need to secure the OS (AMI), image, software we used in the system.
+
+## Patch and update the operating system (OS) and installed software
+
+using AWS Systems Manager Patch Manager, a tool designed to automate the process of patching operating systems and applications on your managed instances (EC2, on-premises, or hybrid environments)
+
+- Patch Baselines/Patch Groups to define which patch to apply and apply to who.
+- support Linux/Windows/On-Premises and Hybrid Systems installed SSM agent.
+
+using AWS Systems Manager (SSM) to simplify and automate operational tasks across your AWS resources and hybrid environments:
+
+- Tracks details of your AWS and on-premises systems, such as OS versions, installed applications, and configurations.
+- Ensures compliance using Compliance Manager, which evaluates resources against configured policies, patch baselines, and custom rules.
+
+## Secure container images
+
+AWS provide a secure repository(ECR) to store container images.
+
+- Supports image scanning to identify vulnerabilities in container images
+- encrypts images at rest using AWS Key Management Service (KMS).
+- Images are encrypted in transit using HTTPS
+- supports image signing and verification using DCT
+- Use immutable tags or digest-based references for containers to avoid unexpected changes.
 
 # Tools
 
 ## Control
+
+AWS Security Hub:
+
+Aggregates and monitors security findings, including container image vulnerabilities.
+AWS CloudTrail:
+
+Tracks API activity for container-related actions in ECR or other AWS services.
+Amazon GuardDuty:
+
+Detects potential threats or anomalous activity affecting container workloads.
 
 - Amazon Macie
 - An Amazon Cognito
@@ -203,6 +235,8 @@ Most the infra part are already maintained by AWS. As user we just need to cover
 - AWS Shield
 
 ## Monitoring
+
+Monitor function execution and usage with CloudWatch and AWS X-Ray.
 
 ## Audit
 
