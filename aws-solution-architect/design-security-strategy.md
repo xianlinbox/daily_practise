@@ -3,17 +3,13 @@ In last episode, we have make all the components in the system connected with ea
 when talking about security in AWS, The shared responsibility model are always mentioned:
 ![Shared Resposibility Model](https://d1.awsstatic.com/security-center/Shared_Responsibility_Model_V2.59d1eccec334b366627e9295b304202faf7b899b.jpg)
 
-As a solution archiect, your job will be using security mechanism in AWS to cover the customer parts.
+AWS provides a comprehensive suite of security mechanisms designed to protect infrastructure, data, and applications. As a solution archiect, we need to understand them and know how to use them cover the customer parts.
 
-# The Security Mechanism in AWS
-
-AWS provides a comprehensive suite of security mechanisms designed to protect infrastructure, data, and applications. we need to understand them and know how to apply them based on business requirement.
-
-## Identity
+# Identity
 
 In the multi-account strategy episode, we have talked about the organisation, OU and account. also about apply SCP at the OU/Account level to limit permission. Inside each account, AWS provide IAM to group and manage identity. An IAM identity represents a human user or programmatic workload that can be authenticated and then authorized to perform actions in AWS accounts.
 
-### account root user
+## account root user
 
 When you first create an Amazon Web Services (AWS) account, the email address and password you provide are the credentials for your root user, which
 
@@ -21,7 +17,7 @@ When you first create an Amazon Web Services (AWS) account, the email address an
 - suggest to working with organisation for better management
 - play tasks that require root user credentials
 
-### users
+## users
 
 An IAM user is an entity that you create in your AWS account. The IAM user represents the human user or workload who uses the IAM user to interact with AWS resources. An IAM user consists of a name and credentials.
 
@@ -29,7 +25,7 @@ An IAM user is an entity that you create in your AWS account. The IAM user repre
 - defined within AWS account, only associated with one AWS account
 - when IAM user are present as a service account, use its credentials to make AWS requests. remembee to store access key in a safe place(eg: secret manageer).
 
-### user group
+## user group
 
 a collection of IAM users.
 
@@ -37,7 +33,7 @@ a collection of IAM users.
 - can't be nested
 - no default user group include all users
 
-### role
+## role
 
 an IAM identity that you can create in your account that has specific permissions
 
@@ -45,13 +41,13 @@ an IAM identity that you can create in your account that has specific permission
 - no standard long-term credentials,just a temporary security credentials for your role session
 - use to delegate access to users, applications, or services with assume role.
 
-### identity providers and federation
+## identity providers and federation
 
 manage your user identities outside of AWS and give these external user identities permissions to use AWS resources in your account. eg: Microsoft AD etc
 
 - support OIDC and SAML protocol, OIDC is commonly used when an application that does not run on AWS needs access to AWS resources.
 
-### Temporary Security Credentials
+## Temporary Security Credentials
 
 use AWS Security Token Service (AWS STS) to create and provide trusted users with temporary security credentials that can control access to your AWS resources
 
@@ -70,29 +66,29 @@ Common scenarios:
 - Use GetSessionToken to do MFA validation
 - Use GetFederationToken to build a proxy-authorizaion
 
-## Access Management
+# Access Management
 
 Identity just give you an unique principal let system know who you are, what you can do (permissions) are defined in the attached policy.
 
-### Policy
+## Policy
 
 A policy is an object in AWS(mostly a json document), associated with an identity or resource, defines their permissions. AWS evaluates these policies when an IAM principal (user or role) makes a request. Permissions in the policies determine whether the request is allowed or denied. There are different kinds of policies AWS support:
 
-#### Organizations SCPs
+### Organizations SCPs
 
 define the maximum permissions for IAM users and IAM roles within accounts in your organization or organizational unit (OU)
 
 - apply at Organisation/OU/Account level
 - only limit permissions, does not grant permission
 
-#### Organizations RCPs
+### Organizations RCPs
 
 define the maximum permissions for resources within accounts in your organization or organizational unit (OU)
 
 - apply at Organisation/OU/Account level
 - same as SCPs, only limit permissions, does not grant permission
 
-#### Permission Boundary
+### Permission Boundary
 
 Using a managed policy to set the maximum permissions that an identity-based policy can grant to an IAM entity
 
@@ -100,11 +96,11 @@ Using a managed policy to set the maximum permissions that an identity-based pol
 - only limit permissions, does not grant permission
 - only limit identity-based policy, not impact resource-based policy.
 
-#### Identity-based Policies
+### Identity-based Policies
 
 grant permissions to an identity (user group, user or role)
 
-#### Resource-based Policies
+### Resource-based Policies
 
 Attach inline policies to resources,grant permissions to the principal that is specified in the policy
 
@@ -112,7 +108,7 @@ Attach inline policies to resources,grant permissions to the principal that is s
 - support resources: S3/KMS/SQS/SNS/Lambda/EventBridge/IoT/SecretsManager
 - eg:S3 bucket policies and IAM role trust policies
 
-#### Access control lists
+### Access control lists
 
 control which principals in other accounts can access the resource to which the ACL is attached. similiar to resource based policy
 
@@ -120,20 +116,20 @@ control which principals in other accounts can access the resource to which the 
 - cannot grant permissions to entities within the same account
 - support service: S3/VPC/EFS/SQS/Directory Service/CloudFront
 
-#### Policy Evaluation
+### Policy Evaluation
 
 1. By default, all requests are implicitly denied
 2. An explicit allow in an identity-based or resource-based policy overrides this default.
 3. If a permissions boundary, Organizations SCP or session policy is present, it might override the allow with an implicit deny.
 4. An explicit deny in any policy overrides any allows.
 
-### secuity features in VPC
+## secuity features in VPC
 
 - Security Group: allow specific inbound and outbound traffic at the resource level (such as an EC2 instance).
 - Network ACL: allow or deny specific inbound and outbound traffic at the subnet level
 - BPA(Block Public Access): centralized security feature that enables you to authoritatively prevent public internet access to VPC resources
 
-### security features in S3
+## security features in S3
 
 - BPA(Block Public Access):controls across an entire AWS Account or at the individual S3 bucket level to ensure that objects never have public access, now and in the future.
 
@@ -144,11 +140,11 @@ control which principals in other accounts can access the resource to which the 
 
 - Object Lock: blocks permanent object deletion during a customer-defined retention period.
 
-## Data Security
+# Data Security
 
 With the above access control, we can make sure the resources are accessed by the correct principal. Another part for security is keep data safe. For Data security, there are 2 parts need to consider:
 
-### encrypt Data at rest
+## encrypt Data at rest
 
 For data encyption at rest, we have 2 options: server-side encryption and client-side encryption:
 
@@ -173,30 +169,30 @@ KMS support multi region keys. it's a primary-replica logic not a global one. pr
 - encrypt: GenerateDataKey from KMS-> use data key to encrypt data -> Store the encrypted data key alongside the encrypted data
 - decrypt: request KMS to decrypt the encrypted data key -> Use the decrypted data key to decrypt the data
 
-#### CloudHSM
+### CloudHSM
 
 - A decdicated AWS provisioned encryption hardware
 - Client manage their keys entirely
 - Must use with HSM client software.
 
-### encrypt Data in tansit
+## encrypt Data in tansit
 
-To protect data in transit, AWS encourages customers to leverage a multi-level approach. All network traffic between AWS data centers is transparently encrypted at the physical layer. All traffic within a VPC and between peered VPCs across regions is transparently encrypted at the network layer when using supported Amazon EC2 instance types. At the application layer, customers have a choice about whether and how to use encryption using a protocol like Transport Layer Security (TLS). All AWS service endpoints support TLS to create a secure HTTPS connection to make API requests.
+To protect data in transit, AWS encourages customers to leverage a multi-level approach.
 
-- encypt at transit
-  - vpn
-  - inter-network
-  - https and certificate
+- All network traffic between AWS data centers is transparently encrypted at the physical layer.
+- All traffic within a VPC and between peered VPCs across regions is transparently encrypted at the network layer when using supported Amazon EC2 instance types.
+- At the application layer, customers have a choice about whether and how to use encryption using a protocol like Transport Layer Security (TLS).
+- All AWS service endpoints support TLS to create a secure HTTPS connection to make API requests.
+- To support TLS, AWS allow to upload our own certificates, or use ACM to generating, distributing, and rotating certificates.
+- if need to terminate TLS, ELB/ALB/API Gateway/Amazon CloudFront can help on that.
 
-## Infra Security
+# Infra Security
 
-Most the infra part are maintained by AWS. except
+Most the infra part are already maintained by AWS. As user we just need to cover guest operating system (including updates and security patches)
 
-Infra
+# Tools
 
-- patch
-
-## Tools
+## Control
 
 - Amazon Macie
 - An Amazon Cognito
@@ -205,5 +201,9 @@ Infra
 - AWS Security Hub
 - AWS Network Firewall
 - AWS Shield
+
+## Monitoring
+
+## Audit
 
 # Conclusion
