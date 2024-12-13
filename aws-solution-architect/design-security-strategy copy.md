@@ -115,6 +115,8 @@ control which principals in other accounts can access the resource to which the 
 - only policy type that does not use the JSON policy document structure
 - cannot grant permissions to entities within the same account
 - support service: S3/VPC/EFS/SQS/Directory Service/CloudFront
+- support rate-based rule to track the number of web requests that are allowed by each client IP.
+- OAI is a special CloundFront user, design for prevent access to S3. not for API Gateway.
 
 ### Policy Evaluation
 
@@ -223,10 +225,11 @@ AWS provide a secure repository(ECR) to store container images.
 
 ### WAF(Web Application Firewall)
 
-- Protects against application-layer (Layer 7) threats like SQL injection, XSS, and bot attacks.
-- Users define rules
+- Protects against application-layer (Layer 7) threats
+- Web ACLs/rules/rule group.
 - Works with CloudFront, ALB, API Gateway, AppSync, etc
-- Provides logs and metrics for HTTP traffic.
+- can use AWS Managed Rules provides protection against application vulnerabilities or other unwanted traffic. subscribe to the AWS Managed Rules to get results log
+- Run CAPTCHA or challenge checks/block,count request/geo/ip/rate/xss/sql injection
 
 ### AWS Shield
 

@@ -27,6 +27,7 @@ Based above, Management account should not be used on daily jobs:
 - Use the management account solely for managing the organization.
 - Do not deploy workloads or applications in the management account.
 - Set up strong security controls, such as enabling MFA and monitoring activity via AWS CloudTrail.
+- The one worklod should stay in management account is enable AWS CloudTrail and keep relevant CloudTrail trails and logs in the management account.
 
 ## Goverance & Compliance
 
