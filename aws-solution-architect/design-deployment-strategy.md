@@ -2,21 +2,17 @@ After setup the environment, Next step we need to take is deploy the resources w
 
 So in this episode, let's just quickly go throug what kind of deployment services AWS provided, and what kind of deployment strategy it support.
 
-## Infra
+## Infra(Cloud Formation)
 
-For deployment resources into AWS, AWS provide CloudFormation, a powerful tool for infrastructure as code (IaC), allowing you to define and manage AWS resources in a declarative way.
+For deployment resources into AWS, AWS provide CloudFormation, a powerful tool for infrastructure as code (IaC), allowing you to define and manage AWS resources in a declarative way. It lets you model, provision, and manage AWS infrastructure using templates. These templates describe the desired state of your infrastructure and CloudFormation ensures resources match that state.
 
-### Cloud Formation
-
-CloudFormation lets you model, provision, and manage AWS infrastructure using templates. These templates describe the desired state of your infrastructure and CloudFormation ensures resources match that state.
-
-Components:
+### Components:
 
 - template in json/yaml: Define AWS resources and their configurations
 - stacks: A collection of resources defined by a template and managed together
 - stacksets: Create and manage stacks across multiple AWS accounts and regions. StackSets work best with AWS Organizations for automatic account management, managed in managed account.
 
-Best practices:
+### Best practices:
 
 - Use drift detection to identify manual changes and keep consistency
 - Use Changsets to preview changes before applying them to a stack.
@@ -40,18 +36,34 @@ The process to use SAM:
 3. Use `sam local invoke` or `sam local start-api` to test Lambda functions or APIs.
 4. Package and deploy with `sam deploy`.
 
-## Application
+## Standard Application
 
-Deploying App
+AWS provided a bunch of tools to support industry CI/CD pipeline to build/deploy your application:
 
-- CI/CD pipeline in AWS
-  - CodeCommit
-  - CodeBuild
-  - CodeDeploy
-- ML in CI/CD
-  - SageMaker
+### AWS CodeCommit:
 
-Updating App
+- Managed Git-based repository for storing source code.
+- Supports version control and integration with other AWS services.
+
+### AWS CodeBuild:
+
+- Fully managed build service to compile code, run tests, and produce build artifacts.
+
+### AWS CodeArtifact:
+
+- Manages software packages and dependencies for builds. can use ECR/S3 to save artifact
+
+### AWS CodeDeploy:
+
+- Automates deployments to services like EC2, Lambda, or on-prem servers.
+
+### AWS CodePipeline:
+
+- Orchestrates the CI/CD process, integrating all stages like source, build, and deploy.
+
+## SageMaket
+
+- CI/CD pipelines to streamline the process of building, training, and deploying machine learning (ML) models.
 
 ## Deployment Strategy
 
@@ -61,4 +73,4 @@ Updating App
 - Canary
 - All at once
 
-Conclusion
+## Conclusion
