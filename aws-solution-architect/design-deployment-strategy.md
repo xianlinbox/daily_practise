@@ -1,6 +1,6 @@
-After setup the environment, Next step we need to take is deploy the resources we needed to AWS cloud. AWS also provide a bunch of services to support apply industry best practices into deployment strategy. But to be honest, in this field, there is already a very mature ecosystem/community exists, like terraform, Github actions etc. They already build some kind of industry standard, most user will intgerate AWS cloud deployment with them, rather than choose AWS provided services.
+After setup the environment, Next step we need to take is deploy the resources we needed to AWS cloud. AWS also provide a bunch of services to support apply industry best practices into deployment strategy. But, to be honest, in this field, there is a very mature ecosystem/community exists already, like terraform, Github actions etc. They kinf of build some kind of industry standard, most user will intgerate AWS cloud deployment with them, rather than choose AWS provided services.
 
-So in this episode, let's just quickly go throug what kind of deployment services AWS provided, and what kind of deployment strategy it support.
+So in this episode, let's just quickly go through what kind of deployment services AWS provided, and what kind of deployment strategy it support.
 
 ## Infra(Cloud Formation)
 
@@ -109,5 +109,7 @@ all traffic is shifted from the original environment to the replacement environm
 
 Based all the info above, the steps to build your deployment pipeline will be:
 
-1. Collecting all the respurces need to deploy
-2. Have a clear idea about location
+1. Collecting all the resources need to deploy and the accounts use to deploy them.
+2. Assess your organisation toolchains. which part is aleady binding with other tools like Terraform, github actions or jenkins etc.
+3. Choose the right tools and integrate them into your pipeline.
+4. Based on business requirements, choose the right deployment strategy, apply it to the pipeline through configuration.
