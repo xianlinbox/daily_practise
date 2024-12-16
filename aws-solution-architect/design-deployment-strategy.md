@@ -91,7 +91,7 @@ releasing applications by shifting traffic between two identical environments ru
 
 - minimize downtime during application updates
 - Reducing risk by validating the new version before making it live.
-- supports: Elastic Beanstalk, AWS CodeDeploy with EC2 instances, Lambda, and ECS.
+- supports: Elastic Beanstalk, Opswork, AWS CodeDeploy with EC2 instances, Lambda and ECS.
 
 ### Canary
 
