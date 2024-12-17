@@ -57,9 +57,82 @@ Modify the application to make it cloud-native, often by adopting microservices,
 - Fully leverages the cloud’s benefits (scalability, flexibility, cost optimization).
 - Improves maintainability and modernizes the application architecture.
 
+# Migration Assessment and Planning
+
+Before start migration, we need to plan how to the migration, for each resources, which strategy we want to use, and the priority. AWS provide several tools to help customer do this work:
+
+## Application Discovery Service
+
+help enterprises assess their on-premises environments in preparation for migration to AWS. It automatically collects detailed information about an organization’s data center, including server configurations, resource utilization, running applications, and their dependencies.
+
+- Agent based discovery: install a agent on each server to collect details info.
+- Agentless discovery: use Vmware Vcenter to gather info.
+- Data collected is displayed in MigrationHub
+- can export data into csv file or use third party tool to do deep analysis, like use AWS Migration Evaluator to estimate cost and provide suggestion.
+
+## Migration Hub
+
+Provides a central location to track the progress of application migrations across AWS and partner solutions.
+
+- unified tracking dashboard
+- integrated with other tools,like application discovery service/server migration service/application migration service.
+- provide insights for migration priority
+
+## Migration Evaluator
+
+Provides insights into cost estimates and recommendations for migrating to AWS.
+
+- Analyzes existing infrastructure.
+- Provides a business case for migration with TCO (Total Cost of Ownership) analysis
+
 # Application Migration
 
+## AWS Elastic Beanstalk
+
+Simplifies migration and deployment of web applications and services.
+
+- Support for various platforms (Java, .NET, Python, Node.js)
+
+## AWS App2Container
+
+Migrates existing applications to containers running in Amazon ECS, EKS, or Fargate.
+
+## AWS Mainframe Modernization
+
+Migrates and modernizes mainframe applications to AWS.
+
+- Provides re-platforming or refactoring options
+- Includes tools to analyze and plan migrationss
+
+## AWS Application Migration Service(MGN)
+
+Simplifies lift-and-shift migrations of on-premises servers (physical or virtual) to AWS.
+
+- Continuous replication of source servers to AWS.
+- Automated testing and cutover.
+- Supports various operating systems.
+
+## AWS Server Migration Service (SMS)
+
+Migrates on-premises VMware, Hyper-V, or Azure VMs to AWS as AMIs (Amazon Machine Images).
+
+- Designed for VM-based migrations.
+
 # Data Migration
+
+Except the application, we also need to move the data to cloud.
+
+## AWS Database Migration Service (DMS)
+
+## AWS Schema Convert Tool
+
+## AWS Data sync
+
+## AWS Snowball Family
+
+## AWS Transfer Family
+
+## AWS Storage Gateway
 
 # Conclusion
 
