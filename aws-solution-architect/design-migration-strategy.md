@@ -136,25 +136,7 @@ Except the application, we also need to move the data to cloud.
 
 # Conclusion
 
+In AWS official site, it provide a diagram about the full migration process.
 ![Migration process](https://d2908q01vomqb2.cloudfront.net/cb7a1d775e800fd1ee4049f7dca9e041eb9ba083/2021/11/24/7-R-1024x516.png)
 
-1.
-
-Migration Hub
-
-Application Discovery Service
-Application Migration Service
-Server Migration Service
-
-Application Migration
-
-1. understand different compute options
-
-- serverless lambda
-
-Data Migration:
-
-- Data sync
-- Transfer family
-- Database migration service
-- Storage Gateway
+we just need to follow it and choose the right tools in each steps.
