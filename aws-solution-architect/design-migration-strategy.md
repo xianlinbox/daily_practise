@@ -124,15 +124,52 @@ Except the application, we also need to move the data to cloud.
 
 ## AWS Database Migration Service (DMS)
 
+Migrates databases to AWS with minimal downtime.
+
+- support both homogeneous(same db engine) and heterogeneous (cross db engine) migration
+- Supports continuous data replication.
+
 ## AWS Schema Convert Tool
+
+Assists in schema conversions for heterogeneous database migrations.
+
+- Converts database schema and SQL code.
+- Identifies conversion challenges and offers solutions.
 
 ## AWS Data sync
 
+Automates and accelerates data movement between on-premises storage and AWS
+
+- Supports NFS, SMB, and object storage.
+- Ideal for recurring or incremental data transfer tasks.
+- support transfer data between aws services, like S3 to EFS
+- pay-as-you-go solution, automatically encryt and integrity validation
+
+## AWS Storage Gateway
+
+Bridges on-premises storage with AWS for hybrid environments.
+
+- Types: File Gateway/Tape Gateway/Volume Gateway
+- move/read data to cloud
+- have local cache ensures low-latency access to frequently used data.
+
 ## AWS Snowball Family
+
+Physical devices for transferring large-scale datasets to AWS.
+
+- Snowball: Petabyte-scale data migration using portable devices
+- Snowmobile: Exabyte-scale data migration using a secure shipping container
+- support offline transfer due to limit connectivity
+- lead time is approximately 1 week.
+- support NFSv3, NFSv4, NFSv4.1 protocol, no USB support
+- use Snowball Edge to support local data processing before upload to Cloud
 
 ## AWS Transfer Family
 
-## AWS Storage Gateway
+Migrates SFTP, FTPS, and FTP-based workflows to AWS.
+
+- Fully managed file transfer service.
+- Integrates with S3 and EFS.
 
 # Conclusion
 
