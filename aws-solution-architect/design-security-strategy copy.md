@@ -127,7 +127,18 @@ control which principals in other accounts can access the resource to which the 
 
 ## secuity features in VPC
 
-- Security Group: allow specific inbound and outbound traffic at the resource level (such as an EC2 instance).
+### Security Group
+
+act as virtual firewalls that control inbound and outbound traffic to and from resources within a VPC. It use inbound rule to control the source and outbound rule to control destination.
+
+A rule is constructre by three parts:
+
+- protocol: TCP/UDP/ICMP
+- port: 22/80...
+- source/destination: another security group/CIDR IP/AWS Prefix List
+
+By default, All inboud traffic is denied; All outbound traffic is allowed.
+
 - Network ACL: allow or deny specific inbound and outbound traffic at the subnet level
 - BPA(Block Public Access): centralized security feature that enables you to authoritatively prevent public internet access to VPC resources
 
