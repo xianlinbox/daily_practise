@@ -1,14 +1,22 @@
+In the last eposide, we have talked about how to migrated worloads to AWS, it have talked about the migration part of data. In this eposide, we gonna talk more about data engineering in AWS.
+
 # Data Ingestion
 
-## Kinesis
+First part, how does user upload data into AWS. Except the migration part we already discussed in the migration strategy eposide. There are a few others channels user can use.
+
+## Kinesis data stream
+
+## AWS Iot
+
+## AWS
 
 # Data Storage
 
-# S3
+## S3
 
 no cross-Region snapshots, but have cross-Region replication
 
-# Dynamo DB
+## Dynamo DB
 
 Scaling policy:
 Auto-scaling
@@ -23,4 +31,8 @@ On demanding
 - pay per read or write request.
 - best for vary work load
 
-## Data Analytics
+## RDS
+
+## Aurora
+
+# Data Analytics

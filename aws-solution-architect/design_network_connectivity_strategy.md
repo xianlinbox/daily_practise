@@ -37,6 +37,64 @@ Several AWS services need to host within a VPC for functionality, security, or c
 
 # The AWS resources that supports network connection
 
+## Route 53
+
+scalable and highly available Domain Name System (DNS) web service. It mainly support 3 features:
+
+### Domain registration
+
+Acts as a domain registrer, enabling you to register and manage domain names.
+
+- Register new domains directly through Route 53.
+- Manage domain transfers and renewals.
+- Automates DNS configuration for newly registered domains.
+
+### DNS Services
+
+Routes traffic for your domains to AWS resources or other web applications using DNS records.
+
+Support Record Type:
+
+- A (Address): Maps a domain to an IPv4 address.
+- AAAA (IPv6 Address): Maps a domain to an IPv6 address.
+- CNAME (Canonical Name): Maps an alias domain to another domain.
+- MX (Mail Exchange): Directs emails to the appropriate mail server.
+- NS (Name Server): Specifies the authoritative name servers for a domain.
+- TXT (Text): Adds text-based information, commonly used for verification.
+- SRV (Service): Specifies the location of a service.
+- Alias: A Route 53-specific record type that points to AWS resources like CloudFront distributions, ELBs, or S3 buckets.
+
+Route 53 can config routing policy to decide return which record:
+
+- Simple
+- latency
+- failover
+- geo
+- weights
+
+Route 53 provide 2 kinds of hoste zone to host the records:
+
+- public hosted zone: domains accessible over the internet.
+- private hosted zone: DNS resolution within one or more VPCs
+
+Route53 support health check:
+
+- Monitors the health of endpoints (e.g., web servers, AWS resources).
+- Configurable for HTTP, HTTPS, or TCP checks.
+- DNS Failover: Automatically routes traffic away from unhealthy endpoints to healthy ones.
+- Calculated Health Checks: Aggregates results from other health checks.
+- ntegrates with CloudWatch Alarms for proactive monitoring.
+
+### Health check and monitoring:
+
+## Route 53 Resolver
+
+designed for DNS query resolution between AWS and hybrid environments. It enables communication between on-premises data centers and AWS VPCs or across multiple VPCs.
+
+- Inbound DNS queries: resolve from on-prem to aws resources.
+- Outbound DBS queries: resolve from aws VPC to on-prem
+- support forward queries to another DNS servers
+
 ## Direct Connection
 
 Establish a dedicated connection from an on-premises network to one or more VPCs.
