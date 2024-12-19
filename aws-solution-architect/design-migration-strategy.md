@@ -171,6 +171,15 @@ Migrates SFTP, FTPS, and FTP-based workflows to AWS.
 - Fully managed file transfer service.
 - Integrates with S3 and EFS.
 
+## Amazon Data Lifecycle Manager(DLM)
+
+automate the lifecycle management of your Amazon Elastic Block Store (EBS) snapshots and Amazon Elastic File System (EFS) file systems.
+
+- Automated Backups
+- Retention policy
+- Cross region copy
+- Can config by event driven
+
 # Conclusion
 
 In AWS official site, it provide a diagram about the full migration process.

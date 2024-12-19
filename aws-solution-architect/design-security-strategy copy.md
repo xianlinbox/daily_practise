@@ -172,7 +172,7 @@ For data encyption at rest, we have 2 options: server-side encryption and client
 
 Both of them can use AWS KMS to mange the encrytion key, and through the access policy in KMS to control who can decrypt the data. AWS KMS has 3 kinds of keys:
 
-- Customer managed keys: The KMS keys that you create.
+- Customer managed keys: The KMS keys that you create, but controlled by AWS
 - AWS managed keys: KMS keys that AWS services create in your AWS account, can't modify. auto rotate each 1 year
 - AWS owned keys: KMS keys that AWS services create in a service account
 

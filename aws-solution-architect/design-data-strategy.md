@@ -33,6 +33,8 @@ On demanding
 
 ## RDS
 
+- cross-Region read replica
+
 ## Aurora
 
 # Data Analytics
