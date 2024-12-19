@@ -143,6 +143,13 @@ a networking connection between two VPCs that enables routing using each VPC’s
 - Do not support transitive peering, A peering with B and C, doesn't mean B peering with C
 - Both IPv4 and IPv6 traffic is supported
 
+## Elastic IP
+
+use to assign a public ip to AWS services, make it can be accessible from internet. support:
+
+- EC2/ECS/AppRunner/RDS/NAT Gateway/ELB/Lambda/Workspaces/Global Accelerator
+- not support API Gateway nor Cloud Front
+
 ## Internet Gateway
 
 a horizontally scaled, redundant, and highly available VPC component that allows communication between your VPC and the internet.
