@@ -77,15 +77,13 @@ Route 53 provide 2 kinds of hoste zone to host the records:
 - public hosted zone: domains accessible over the internet.
 - private hosted zone: DNS resolution within one or more VPCs
 
-Route53 support health check:
+### Health check and monitoring:
 
 - Monitors the health of endpoints (e.g., web servers, AWS resources).
 - Configurable for HTTP, HTTPS, or TCP checks.
 - DNS Failover: Automatically routes traffic away from unhealthy endpoints to healthy ones.
 - Calculated Health Checks: Aggregates results from other health checks.
 - ntegrates with CloudWatch Alarms for proactive monitoring.
-
-### Health check and monitoring:
 
 ## Route 53 Resolver
 
@@ -94,6 +92,17 @@ designed for DNS query resolution between AWS and hybrid environments. It enable
 - Inbound DNS queries: resolve from on-prem to aws resources.
 - Outbound DBS queries: resolve from aws VPC to on-prem
 - support forward queries to another DNS servers
+
+## CloudFront
+
+Fast CDN provide by AWS. it can:
+
+- Globald distribution through edge locations worldwide to deliver content closer to users.
+- Cache: store content in local edge to reduce load to origin server
+- the orgin can be : S3/EC2/API Gateway/ELB/other non AWS http service
+- Access control: use Signed URl/Signed cookie to control who can access the content
+- CloundFront functions or lambda@edge custom routing
+- work with WAF/Shield/IAM/OAI for security
 
 ## Direct Connection
 
