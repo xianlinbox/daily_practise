@@ -18,10 +18,20 @@ real-time data streaming platform for custom processing and analytics
 - Retention: data can retented in streams 1-7 days. default is 24 hours.
 - Limitations: 2000 read/2 MB per second per shard, 1000 write/1MB per second per shard. This only apply to shard, we
   can provision more shard to get higher throughput.
+- Typical case: website clickstream analysis,Fraud detection and log monitoring.
+
+## Kinesis data firehose
+
+Fully managed, serverless service for delivering real-time data to destinations.
+
+- Source: AWS SDK/Kinesis data streams/kinesis agent or other opensource agent/AWS services(cloudwatch logs/vpc flow
+  logs)
+- Desntination: S3/Redshift/Splunk/OpenSearch
+- support to call lambda for data transformation
+- support buffer or batch to reduce processing overhead, but no retention
+- uses at-least-once semantics, may cause duplicate records
 
 ## AWS IoT Core
-
-## AWS
 
 # Data Storage
 
@@ -56,3 +66,15 @@ On demanding
 ## Elastic Cache
 
 # Data Analytics
+
+## Kinesis Data Analytics
+
+process and analyze streaming data in real-time using standard SQL queries, essentially enabling the creation of
+applications that transform and provide insights from data as it arrives, without the need to manage complex
+infrastructure or coding frameworks; it leverages the Apache Flink open-source engine for stream processing under the
+hood.
+
+- input: A Kinesis data stream/A Firehose delivery stream
+- ouput: a Kinesis data stream/a Firehose delivery stream/a Lambda function
+
+## AWS Glue
