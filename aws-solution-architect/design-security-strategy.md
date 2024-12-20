@@ -1,17 +1,23 @@
-In last episode, we have make all the components in the system connected with each other, the next step we need to make sure the resources are accessed securely. In this episode, we gonna talk about the security strategy.
+In last episode, we have make all the components in the system connected with each other, the next step we need to make
+sure the resources are accessed securely. In this episode, we gonna talk about the security strategy.
 
 when talking about security in AWS, The shared responsibility model are always mentioned:
 ![Shared Resposibility Model](https://d1.awsstatic.com/security-center/Shared_Responsibility_Model_V2.59d1eccec334b366627e9295b304202faf7b899b.jpg)
 
-AWS provides a comprehensive suite of security mechanisms designed to protect infrastructure, data, and applications. As a solution archiect, we need to understand them and know how to use them cover the customer parts.
+AWS provides a comprehensive suite of security mechanisms designed to protect infrastructure, data, and applications. As
+a solution archiect, we need to understand them and know how to use them cover the customer parts.
 
 # Identity
 
-In the multi-account strategy episode, we have talked about the organisation, OU and account. also about apply SCP at the OU/Account level to limit permission. Inside each account, AWS provide IAM to group and manage identity. An IAM identity represents a human user or programmatic workload that can be authenticated and then authorized to perform actions in AWS accounts.
+In the multi-account strategy episode, we have talked about the organisation, OU and account. also about apply SCP at
+the OU/Account level to limit permission. Inside each account, AWS provide IAM to group and manage identity. An IAM
+identity represents a human user or programmatic workload that can be authenticated and then authorized to perform
+actions in AWS accounts.
 
 ## account root user
 
-When you first create an Amazon Web Services (AWS) account, the email address and password you provide are the credentials for your root user, which
+When you first create an Amazon Web Services (AWS) account, the email address and password you provide are the
+credentials for your root user, which
 
 - has access to all AWS services and resources in the account.
 - suggest to working with organisation for better management
@@ -19,11 +25,13 @@ When you first create an Amazon Web Services (AWS) account, the email address an
 
 ## users
 
-An IAM user is an entity that you create in your AWS account. The IAM user represents the human user or workload who uses the IAM user to interact with AWS resources. An IAM user consists of a name and credentials.
+An IAM user is an entity that you create in your AWS account. The IAM user represents the human user or workload who
+uses the IAM user to interact with AWS resources. An IAM user consists of a name and credentials.
 
 - an user with admin priviledge is not same as root user
 - defined within AWS account, only associated with one AWS account
-- when IAM user are present as a service account, use its credentials to make AWS requests. remembee to store access key in a safe place(eg: secret manageer).
+- when IAM user are present as a service account, use its credentials to make AWS requests. remembee to store access key
+  in a safe place(eg: secret manageer).
 
 ## user group
 
@@ -43,13 +51,16 @@ an IAM identity that you can create in your account that has specific permission
 
 ## identity providers and federation
 
-manage your user identities outside of AWS and give these external user identities permissions to use AWS resources in your account. eg: Microsoft AD etc
+manage your user identities outside of AWS and give these external user identities permissions to use AWS resources in
+your account. eg: Microsoft AD etc
 
-- support OIDC and SAML protocol, OIDC is commonly used when an application that does not run on AWS needs access to AWS resources.
+- support OIDC and SAML protocol, OIDC is commonly used when an application that does not run on AWS needs access to AWS
+  resources.
 
 ## Temporary Security Credentials
 
-use AWS Security Token Service (AWS STS) to create and provide trusted users with temporary security credentials that can control access to your AWS resources
+use AWS Security Token Service (AWS STS) to create and provide trusted users with temporary security credentials that
+can control access to your AWS resources
 
 - short-term, not stored, retrieve dynamically when need one.
 - STS is global service, but support regional endpoint.
@@ -58,25 +69,32 @@ use AWS Security Token Service (AWS STS) to create and provide trusted users wit
 Common scenarios:
 
 - Identity federation
-  - OpenID Connect (OIDC) federation supports Login with Amazon, Facebook, Google, and any OpenID Connect (OIDC)-compatible identity provider.
+  - OpenID Connect (OIDC) federation supports Login with Amazon, Facebook, Google, and any OpenID Connect
+    (OIDC)-compatible identity provider.
   - SAML federation, support SSO with Microsoft AD
-- Access delegation: using AssumeRole and trust policy to grant principal in another account to access your account's resources.
+- Access delegation: using AssumeRole and trust policy to grant principal in another account to access your account's
+  resources.
   - when delegate access cross account ,use trust policy with external ID to avoid confused deputy problem
-  - when delegate access cross service ,use trust policy with aws:SourceArn, aws:SourceAccount, aws:SourceOrgID. or aws:SourceOrgPaths global condition context keys to avoid confused deputy problem
+  - when delegate access cross service ,use trust policy with aws:SourceArn, aws:SourceAccount, aws:SourceOrgID. or
+    aws:SourceOrgPaths global condition context keys to avoid confused deputy problem
 - Use GetSessionToken to do MFA validation
 - Use GetFederationToken to build a proxy-authorizaion
 
 # Access Management
 
-Identity just give you an unique principal let system know who you are, what you can do (permissions) are defined in the attached policy.
+Identity just give you an unique principal let system know who you are, what you can do (permissions) are defined in the
+attached policy.
 
 ## Policy
 
-A policy is an object in AWS(mostly a json document), associated with an identity or resource, defines their permissions. AWS evaluates these policies when an IAM principal (user or role) makes a request. Permissions in the policies determine whether the request is allowed or denied. There are different kinds of policies AWS support:
+A policy is an object in AWS(mostly a json document), associated with an identity or resource, defines their
+permissions. AWS evaluates these policies when an IAM principal (user or role) makes a request. Permissions in the
+policies determine whether the request is allowed or denied. There are different kinds of policies AWS support:
 
 ### Organizations SCPs
 
-define the maximum permissions for IAM users and IAM roles within accounts in your organization or organizational unit (OU)
+define the maximum permissions for IAM users and IAM roles within accounts in your organization or organizational unit
+(OU)
 
 - apply at Organisation/OU/Account level
 - only limit permissions, does not grant permission
@@ -110,7 +128,8 @@ Attach inline policies to resources,grant permissions to the principal that is s
 
 ### Access control lists
 
-control which principals in other accounts can access the resource to which the ACL is attached. similiar to resource based policy
+control which principals in other accounts can access the resource to which the ACL is attached. similiar to resource
+based policy
 
 - only policy type that does not use the JSON policy document structure
 - cannot grant permissions to entities within the same account
@@ -122,14 +141,16 @@ control which principals in other accounts can access the resource to which the 
 
 1. By default, all requests are implicitly denied
 2. An explicit allow in an identity-based or resource-based policy overrides this default.
-3. If a permissions boundary, Organizations SCP or session policy is present, it might override the allow with an implicit deny.
+3. If a permissions boundary, Organizations SCP or session policy is present, it might override the allow with an
+   implicit deny.
 4. An explicit deny in any policy overrides any allows.
 
 ## secuity features in VPC
 
 ### Security Group
 
-act as virtual firewalls that control inbound and outbound traffic to and from resources within a VPC. It use inbound rule to control the source and outbound rule to control destination.
+act as virtual firewalls that control inbound and outbound traffic to and from resources within a VPC. It use inbound
+rule to control the source and outbound rule to control destination.
 
 A rule is constructre by three parts:
 
@@ -140,22 +161,26 @@ A rule is constructre by three parts:
 By default, All inboud traffic is denied; All outbound traffic is allowed.
 
 - Network ACL: allow or deny specific inbound and outbound traffic at the subnet level
-- BPA(Block Public Access): centralized security feature that enables you to authoritatively prevent public internet access to VPC resources
+- BPA(Block Public Access): centralized security feature that enables you to authoritatively prevent public internet
+  access to VPC resources
 
 ## security features in S3
 
-- BPA(Block Public Access):controls across an entire AWS Account or at the individual S3 bucket level to ensure that objects never have public access, now and in the future.
+- BPA(Block Public Access):controls across an entire AWS Account or at the individual S3 bucket level to ensure that
+  objects never have public access, now and in the future.
 
   - BlockPublicAcls: any put with public acl are blocked
   - IgnorePublicAcls: ignore all public ACLs on a bucket and any objects that it contains
   - BlockPublicPolicy: reject calls to PUT Bucket policy if the specified bucket policy allows public access
-  - RestrictPublicBuckets: allow public policy to only AWS service principals and authorized users within the bucket owner's account and access point owner's account.
+  - RestrictPublicBuckets: allow public policy to only AWS service principals and authorized users within the bucket
+    owner's account and access point owner's account.
 
 - Object Lock: blocks permanent object deletion during a customer-defined retention period.
 
 # Data Security
 
-With the above access control, we can make sure the resources are accessed by the correct principal. Another part for security is keep data safe. For Data security, there are 2 parts need to consider:
+With the above access control, we can make sure the resources are accessed by the correct principal. Another part for
+security is keep data safe. For Data security, there are 2 parts need to consider:
 
 ## encrypt Data at rest
 
@@ -168,18 +193,21 @@ For data encyption at rest, we have 2 options: server-side encryption and client
 
 - client-side encryption.
   - encrypted data in client application
-  - ensure a consistent security posture as data traverses within our service architecture, whether in AWS, on-premises, or in a hybrid model.
+  - ensure a consistent security posture as data traverses within our service architecture, whether in AWS, on-premises,
+    or in a hybrid model.
 
-Both of them can use AWS KMS to mange the encrytion key, and through the access policy in KMS to control who can decrypt the data. AWS KMS has 3 kinds of keys:
+Both of them can use AWS KMS to mange the encrytion key, and through the access policy in KMS to control who can decrypt
+the data. AWS KMS has 3 kinds of keys:
 
 - Customer managed keys: The KMS keys that you create, but controlled by AWS
 - AWS managed keys: KMS keys that AWS services create in your AWS account, can't modify. auto rotate each 1 year
 - AWS owned keys: KMS keys that AWS services create in a service account
 
-KMS doesn't support annonymous requests, so public access S3 object can't use it for encryption.
-KMS support multi region keys. it's a primary-replica logic not a global one. process for encrypt and decrypt:
+KMS doesn't support annonymous requests, so public access S3 object can't use it for encryption. KMS support multi
+region keys. it's a primary-replica logic not a global one. process for encrypt and decrypt:
 
-- encrypt: GenerateDataKey from KMS-> use data key to encrypt data -> Store the encrypted data key alongside the encrypted data
+- encrypt: GenerateDataKey from KMS-> use data key to encrypt data -> Store the encrypted data key alongside the
+  encrypted data
 - decrypt: request KMS to decrypt the encrypted data key -> Use the decrypted data key to decrypt the data
 
 ### CloudHSM
@@ -193,27 +221,34 @@ KMS support multi region keys. it's a primary-replica logic not a global one. pr
 To protect data in transit, AWS encourages customers to leverage a multi-level approach.
 
 - All network traffic between AWS data centers is transparently encrypted at the physical layer.
-- All traffic within a VPC and between peered VPCs across regions is transparently encrypted at the network layer when using supported Amazon EC2 instance types.
-- At the application layer, customers have a choice about whether and how to use encryption using a protocol like Transport Layer Security (TLS).
+- All traffic within a VPC and between peered VPCs across regions is transparently encrypted at the network layer when
+  using supported Amazon EC2 instance types.
+- At the application layer, customers have a choice about whether and how to use encryption using a protocol like
+  Transport Layer Security (TLS).
 - All AWS service endpoints support TLS to create a secure HTTPS connection to make API requests.
-- To support TLS, AWS allow to upload our own certificates, or use ACM to generating, distributing, and rotating certificates.
+- To support TLS, AWS allow to upload our own certificates, or use ACM to generating, distributing, and rotating
+  certificates.
 - if need to terminate TLS, ELB/ALB/API Gateway/Amazon CloudFront can help on that.
 
 # Infra Security
 
-As AWS is responsible for physical security of the underlying infrastructure (data centers). we just need to secure the OS (AMI), image, software we used in the system.
+As AWS is responsible for physical security of the underlying infrastructure (data centers). we just need to secure the
+OS (AMI), image, software we used in the system.
 
 ## Patch and update the operating system (OS) and installed software
 
-using AWS Systems Manager Patch Manager, a tool designed to automate the process of patching operating systems and applications on your managed instances (EC2, on-premises, or hybrid environments)
+using AWS Systems Manager Patch Manager, a tool designed to automate the process of patching operating systems and
+applications on your managed instances (EC2, on-premises, or hybrid environments)
 
 - Patch Baselines/Patch Groups to define which patch to apply and apply to who.
 - support Linux/Windows/On-Premises and Hybrid Systems installed SSM agent.
 
-using AWS Systems Manager (SSM) to simplify and automate operational tasks across your AWS resources and hybrid environments:
+using AWS Systems Manager (SSM) to simplify and automate operational tasks across your AWS resources and hybrid
+environments:
 
 - Tracks details of your AWS and on-premises systems, such as OS versions, installed applications, and configurations.
-- Ensures compliance using Compliance Manager, which evaluates resources against configured policies, patch baselines, and custom rules.
+- Ensures compliance using Compliance Manager, which evaluates resources against configured policies, patch baselines,
+  and custom rules.
 
 ## Secure container images
 
@@ -239,7 +274,8 @@ AWS provide a secure repository(ECR) to store container images.
 - Protects against application-layer (Layer 7) threats
 - Web ACLs/rules/rule group.
 - Works with CloudFront, ALB, API Gateway, AppSync, etc
-- can use AWS Managed Rules provides protection against application vulnerabilities or other unwanted traffic. subscribe to the AWS Managed Rules to get results log
+- can use AWS Managed Rules provides protection against application vulnerabilities or other unwanted traffic. subscribe
+  to the AWS Managed Rules to get results log
 - Run CAPTCHA or challenge checks/block,count request/geo/ip/rate/xss/sql injection
 
 ### AWS Shield
@@ -265,11 +301,13 @@ AWS provide a secure repository(ECR) to store container images.
 
 ### AWS X-Ray
 
-Collects data about application requests, including calls to AWS resources, databases, and HTTP Web APIs. X-Ray uses this data to generate a trace map that shows how requests are processed and persisted.
+Collects data about application requests, including calls to AWS resources, databases, and HTTP Web APIs. X-Ray uses
+this data to generate a trace map that shows how requests are processed and persisted.
 
 ### Amazon GuardDuty
 
-monitors for malicious activity and unauthorized behavior. It uses machine learning, anomaly detection, and threat intelligence to identify and prioritize potential threats.
+monitors for malicious activity and unauthorized behavior. It uses machine learning, anomaly detection, and threat
+intelligence to identify and prioritize potential threats.
 
 - Uses AI, machine learning, and other techniques for detect
 - used data from multi resources( VPC Flow, DNS lookup, cloudtrail logs)
@@ -278,7 +316,8 @@ monitors for malicious activity and unauthorized behavior. It uses machine learn
 
 investigate potential security issues across AWS accounts and workloads
 
-- analyzes trillions of events from multiple data sources, including Amazon VPC Flow Logs, AWS CloudTrail logs, and Amazon EKS audit logs.
+- analyzes trillions of events from multiple data sources, including Amazon VPC Flow Logs, AWS CloudTrail logs, and
+  Amazon EKS audit logs.
 - Visualizes relationships between resources, activity, and events.
 
 ## Access Monitoring
@@ -320,12 +359,14 @@ investigate potential security issues across AWS accounts and workloads
 
 ### AWS Security Hub:
 
-- Aggregates and prioritizes security findings from multiple AWS services (e.g., GuardDuty, Inspector, IAM Access Analyzer).
+- Aggregates and prioritizes security findings from multiple AWS services (e.g., GuardDuty, Inspector, IAM Access
+  Analyzer).
 - Provides compliance checks against frameworks like CIS, NIST, PCI DSS, and GDPR.
 
 # Conclusion
 
-Based on all the information, after we created the organisation structure and designed the network topology. the steps to apply security strategy will be:
+Based on all the information, after we created the organisation structure and designed the network topology. the steps
+to apply security strategy will be:
 
 1. Based on the network toplogy, apply security groups, ACLs to the related component.
 

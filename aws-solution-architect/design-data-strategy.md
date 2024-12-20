@@ -55,9 +55,34 @@ Most of them we have talked enough in data migration strategy, here just want to
 
 # Data Storage
 
+After data ingested, we need a place to store these data. AWS provided a
+
 ## S3
 
-no cross-Region snapshots, but have cross-Region replication
+an object storage service. the data stored organised with Buckets and Objects:
+
+- Buckets: globally unique, containers to store object
+- Objects: files uploaded, with optional metadata
+
+Object can choose the Storage Class based on access pattern and cost needs:
+
+- Standard
+- Intelligent Tier
+- Standard IA
+- One-Zone IA
+- Glacier
+- Glacier Deep Archive
+
+Security:
+
+- data encryption: SSE-S3, SSE-KMS, or SSE-C or customer encryption before upload
+- Access control: Bucket policies/IAM policies/Access Control Lists
+- Block Public Access: IgnorePublicAcl/BlockPublicAcl/RestrictedPublicBucket/BlockPublicPolicy
+- Object Lock: Prevents deletion or modification during a specified retention period.
+
+Replication: no cross-Region snapshots, but have cross-Region replication or Same region replication
+
+Lifecycle policies: Automatically transition objects to different storage classes or delete them.
 
 ## Dynamo DB
 
@@ -97,10 +122,16 @@ hood.
 - input: A Kinesis data stream/A Firehose delivery stream
 - ouput: a Kinesis data stream/a Firehose delivery stream/a Lambda function
 
+## S3 Select
+
+## Athena
+
 ## AWS Glue
 
 ## EMR
 
 ## Redshift
+
+- Spectrum
 
 ## Open Search
