@@ -33,6 +33,26 @@ Fully managed, serverless service for delivering real-time data to destinations.
 
 ## AWS IoT Core
 
+full managed service, real-time data ingestion and management for IoT devices.
+
+- Specifically tailored for IoT devices and protocols (MQTT, HTTPS, WebSocket).
+- No explicit retention, processes in real time
+
+## Others
+
+There is a bunch of other services can helo user pass data into cloud like:
+
+- S3 upload
+- API call on custom service in EC2/ECS...
+- The data migration part like Data sync/DMS etc
+
+Most of them we have talked enough in data migration strategy, here just want to highlight some points of S3 upload:
+
+### S3 upload
+
+- support Transfer Accelerationc, which Speeds up transfers over long distances using AWS global edge locations.
+- support multi-upload: which breaks large files into smaller parts, uploads them concurrently,
+
 # Data Storage
 
 ## S3
@@ -78,3 +98,9 @@ hood.
 - ouput: a Kinesis data stream/a Firehose delivery stream/a Lambda function
 
 ## AWS Glue
+
+## EMR
+
+## Redshift
+
+## Open Search
