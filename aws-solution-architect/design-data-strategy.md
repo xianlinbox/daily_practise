@@ -86,21 +86,29 @@ Lifecycle policies: Automatically transition objects to different storage classe
 
 ## Dynamo DB
 
-## global table
+a fully managed NoSQL database. the core concepts:
 
-## Scaling policy:
+- Table/Item/Attributes
+- Primary Key/Composite Key/Secondary Indexes(global, local) for search performance
 
-Auto-scaling
+Capacity: Provision DynamoDB with RCU/WCU
 
-- upper and low limits of the scaling
-- paying for provisioned throughput
-- best for predictable load
+Scaling policy:
 
-On demanding
+- Auto-scaling: upper and low limits of the scaling/paying for provisioned throughput/best for predictable load
+- On demanding: scale all behind the scenes automatically/ pay per read or write request/best for vary work load
 
-- scale all behind the scenes automatically.
-- pay per read or write request.
-- best for vary work load
+Security: enrypt at rest by default, can config on Table-level and item-level access policies.
+
+DynamoDB Streams: Captures table modification events in real time (insert, update, delete). it can user for event driven
+following operations.
+
+Global Tables: a fully managed, multi-region, multi-active DynamoDB
+
+- cross-region replication
+- Multi-Active Writes with conflict resolution
+- Low-Latency Access
+- Disaster Recovery
 
 ## RDS
 
