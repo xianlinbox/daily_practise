@@ -14,6 +14,17 @@ Based on the gobal infra, AWS provided a bunch of services to reduce network lat
 - Edge Network services: Global Accelerator, CloudFront, Route 53, lambda@Edge etc
 - DX locations: Create a dedicated network connection to AWS
 
+## Global Accelerator
+
+network service that improves the availability and performance of your applications by routing traffic through the AWS global network. It provides static IP addresses for your applications and routes traffic to optimal endpoints based on latency, health, and policies.
+
+- static ip
+- regional failover
+- performance optimization
+- support ALB/NLB/EC2/IP
+- flexiable traffic control.
+- Accelerator/Listener/Endpoint/Endpoint Group/health check
+
 # The core concept: VPC
 
 **VPC**: A logically isolated network within AWS, allowing you to define IP ranges, subnets, routing tables, and security settings.The key features in VPC are:
@@ -75,7 +86,7 @@ Route 53 can config routing policy to decide return which record:
 Route 53 provide 2 kinds of hoste zone to host the records:
 
 - public hosted zone: domains accessible over the internet.
-- private hosted zone: DNS resolution within one or more VPCs
+- private hosted zone: DNS resolution within one or more VPCs, best to associate to all the VPCs which need it.
 
 ### Health check and monitoring:
 
