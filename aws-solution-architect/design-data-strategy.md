@@ -100,8 +100,13 @@ Scaling policy:
 
 Security: enrypt at rest by default, can config on Table-level and item-level access policies.
 
-DynamoDB Streams: Captures table modification events in real time (insert, update, delete). it can user for event driven
-following operations.
+Special Features:
+
+- DynamoDB Streams: Captures table modification events in real time (insert, update, delete). it can user for event
+  driven following operations.
+- DAX: In-memory caching for faster read operations.
+- TTL: automatic delete item after a period
+- Transaction: cross table ACID operation
 
 Global Tables: a fully managed, multi-region, multi-active DynamoDB
 
@@ -112,9 +117,51 @@ Global Tables: a fully managed, multi-region, multi-active DynamoDB
 
 ## RDS
 
-- cross-Region read replica
+An AWS managed SQL database service.
+
+Supported engine: Oracle/SQL server/MariaDB/MySQL/PostgreSQL
+
+Storage Types:
+
+- General Purpose SSD (gp2 or gp3): Cost-effective for most workloads.
+- Provisioned IOPS SSD (io1 or io2): High-performance storage for I/O-intensive applications.
+
+Features:
+
+- Multi-AZ Deployments.
+- Read Replicas: Improves read performance by replicating data to read-only instances, support cross-Region read
+  replica.
+- Automated backups to support point-in-time recovery
+- Performance Insights helps identify slow queries and resource bottleneck.
 
 ## Aurora
+
+a fully managed only MySQL and PostgreSQL compatible relational database. has a lot of advanced features, so has a
+higher price compare to RDS.
+
+Advanced features:
+
+- faster: 5x for MySql, 3x for PostgreSql
+- bigger: autoscale to 128 TB
+- read replica cross 3 AZ
+- Global Database: span aurora to multiple AWS regions.one primary AWS Region for write, and up to five read-only
+  secondary AWS Regions.
+- Continuous backup to S3; supports backtracking for time travel.
+- support serveless version
+
+Aurora Serverless:
+
+- Automatically scales compute based on demand.
+- Ideal for unpredictable or intermittent workloads.
+- Pay for capacity in Aurora Capacity Units (ACUs).
+- no cross-region replicas and not support Global database
+
+## Neptune
+
+a fully managed graph database
+
+- model: Property Graph/RDF Graph
+- query: Gremlin, SPARQL, openCypher
 
 ## Elastic Cache
 
@@ -143,3 +190,5 @@ hood.
 - Spectrum
 
 ## Open Search
+
+# Conclusion
