@@ -84,6 +84,8 @@ Replication: no cross-Region snapshots, but have cross-Region replication or Sam
 
 Lifecycle policies: Automatically transition objects to different storage classes or delete them.
 
+S3 select: retrieve specific data from an S3 object using SQL queries, rather than downloading the entire object
+
 ## Dynamo DB
 
 a fully managed NoSQL database. the core concepts:
@@ -156,14 +158,41 @@ Aurora Serverless:
 - Pay for capacity in Aurora Capacity Units (ACUs).
 - no cross-region replicas and not support Global database
 
+## Elastic Cache
+
+a fully managed in-memory data store and caching service
+
+- support engine: redis/memcache
+- Offers multi-AZ with automatic failover (Redis).
+
+## EBS
+
+block storage for use with Amazon EC2 instances.
+
+- Volume types: general purpose/provisioned iops/throughput optimized/cold HDD
+- Volumes can only attach to EC2 in same AZ
+- Requires snapshot to move volume cross region
+
+## EFS
+
+a fully managed, scalable file storage service designed for use with AWS services and on-premises resources
+
+- Mode: General purpose/Max I/O
+- Storage Class: Standard/Infrequent access
+- only support NFS protocol
+
+## FSx
+
+a fully managed service that provides specialized file systems optimized for different workloads
+
+- support: windows file server/openZFS/Lustre(High-performanc, compute intensive)/NetAPP ONTAP
+
 ## Neptune
 
 a fully managed graph database
 
 - model: Property Graph/RDF Graph
 - query: Gremlin, SPARQL, openCypher
-
-## Elastic Cache
 
 # Data Analytics
 
@@ -177,17 +206,17 @@ hood.
 - input: A Kinesis data stream/A Firehose delivery stream
 - ouput: a Kinesis data stream/a Firehose delivery stream/a Lambda function
 
-## S3 Select
-
 ## Athena
+
+## Redshift
+
+a fully managed, petabyte-scale cloud data warehouse service designed for fast and efficient analytics.
+
+- Spectrum
 
 ## AWS Glue
 
 ## EMR
-
-## Redshift
-
-- Spectrum
 
 ## Open Search
 
