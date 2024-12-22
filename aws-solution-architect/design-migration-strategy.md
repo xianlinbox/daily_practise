@@ -191,6 +191,13 @@ automate the lifecycle management of your Amazon Elastic Block Store (EBS) snaps
 - Cross region copy
 - Can config by event driven
 
+### Resource Access Manager
+
+securely share AWS resources with other AWS accounts, organizational units (OUs), or the entire AWS Organization
+
+- support VPC Subnet/Transit Gateway/license manager/Route53 resolver rules/Ec2 reserve capacity/Aurora DB cluster
+- no data movement, reduce duplication
+
 # Conclusion
 
 In AWS official site, it provide a diagram about the full migration process.
