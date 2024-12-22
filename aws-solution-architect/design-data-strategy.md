@@ -212,7 +212,18 @@ hood.
 
 a fully managed, petabyte-scale cloud data warehouse service designed for fast and efficient analytics.
 
-- Spectrum
+Features:
+
+- Massive parallel processing through multiple nodes
+- Columnar Storage: store data in column for high I/O
+- Spectrum：Query data directly from S3 without loading it into the redshift, good for combine redshift data with S3
+  data
+
+Limitations:
+
+- require ETL to prepare data
+- need scaling for high user load
+- not for transaction data
 
 ## AWS Glue
 
