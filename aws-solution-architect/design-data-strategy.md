@@ -208,6 +208,40 @@ hood.
 
 ## Athena
 
+a serverless, interactive query service that allows you to analyze data stored in Amazon S3 using SQL
+
+- can work with different data format: csv, parquet, json, orc or avro
+- good for ad-hoc queries, data exploration, and analytics without requiring a database setup or infrastructure
+  management.
+
+Working process:
+
+1. data in S3
+2. use AWS Glue Data catalog to define schema of the data
+3. run SQL query on the s3 data directly
+4. pay based the data voluem scaned
+
+## AWS Glue
+
+a fully managed extract, transform, and load (ETL) service
+
+- support all data sources: structured, unstructured in DB, data in S3 or data in on-premise systems
+- automate ETL workflows with triggers, job scheduling, and event-driven actions.
+- support python/scala for scripting
+
+Component:
+
+- Glue Data catalog to create metadata through data discovering
+- Glue ETL Jobs: the script to do the transform
+- Glue Crawlers: scan data store to infer schema and inject to catalog
+- Glue DataBrew: visual data cleaning and normalization
+- Glue triggers: autimate the job by scheduling or event
+
+Limitations:
+
+- some job may need a latency for cold start
+- not for real-time job
+
 ## Redshift
 
 a fully managed, petabyte-scale cloud data warehouse service designed for fast and efficient analytics.
@@ -224,8 +258,6 @@ Limitations:
 - require ETL to prepare data
 - need scaling for high user load
 - not for transaction data
-
-## AWS Glue
 
 ## EMR
 
