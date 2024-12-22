@@ -261,6 +261,19 @@ Limitations:
 
 ## EMR
 
-## Open Search
+a managed big data platform for processing and analyzing vast amounts of data using open-source tools like Apache Spark,
+Hadoop, Hive, and Presto. It simplifies running and scaling these frameworks on AWS.
+
+- Supports Apache Spark, Hadoop, Hive, HBase, Presto, Flink, and more
+- can process data from S3, HDFS, DynamoDB, and relational databases
+- use spot instances for non-critical workload to save cost
+
+Limitations:
+
+- requires some expertise in big data frameworks
+- Cluster startup times can impact short, ad-hoc jobs.
+- Running long-lived clusters may lead to higher costs compared to serverless solutions
+
+## OpenSearch
 
 # Conclusion
