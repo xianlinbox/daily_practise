@@ -276,4 +276,23 @@ Limitations:
 
 ## OpenSearch
 
+a fully managed service that makes it easy to deploy, secure, and scale OpenSearch and Elasticsearch clusters
+
+## CloudWatch Logs Insights
+
+an advanced, interactive, and fully managed service designed to query and analyze log data stored in CloudWatch Logs.
+
+## CloudTrail Insights
+
+Analyze and detect unusual activity in AWS account management events
+
 # Conclusion
+
+Based on the info above and the info we have got in the migration part episode. The steps to design the data strategy:
+
+1. Know your data: the data type, the data location, the data volume.
+2. Determine how to move data in to cloud: real-time/batch, which protocol you want to use.
+3. Determine where to store your data: which storage you want to choose, how is the data lifecycle management.
+4. Define the flow about how to use your data: provide third party, BI, support another application
+
+In each of the steps, choose the right tool based on the data characteristics, your business requirment and the cost.
