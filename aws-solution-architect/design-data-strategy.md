@@ -149,6 +149,7 @@ Advanced features:
 - Global Database: span aurora to multiple AWS regions.one primary AWS Region for write, and up to five read-only
   secondary AWS Regions.
 - Continuous backup to S3; supports backtracking for time travel.
+- generate error logs by default, can config to generate slow query log also.
 - support serveless version
 
 Aurora Serverless:
@@ -211,6 +212,7 @@ hood.
 a serverless, interactive query service that allows you to analyze data stored in Amazon S3 using SQL
 
 - can work with different data format: csv, parquet, json, orc or avro
+- support JDBC/ODBC connections
 - good for ad-hoc queries, data exploration, and analytics without requiring a database setup or infrastructure
   management.
 

@@ -1,8 +1,10 @@
-In last episode, we have created accounts to hold the aws resources. In this episode we gonna talk about the network connectivity. network connectivity is essential for designing secure, efficient, and cost-effective cloud environments.
+In last episode, we have created accounts to hold the aws resources. In this episode we gonna talk about the network
+connectivity. network connectivity is essential for designing secure, efficient, and cost-effective cloud environments.
 
 # AWS global infrastructure
 
-Before dive into network connectivity, we should have a big picture about AWS cloud infra. The Global infra is built around AWS Regions and Availability Zones:
+Before dive into network connectivity, we should have a big picture about AWS cloud infra. The Global infra is built
+around AWS Regions and Availability Zones:
 
 - **Region**: a physical location in the world where have multiple Availability Zones
 - **Availabity Zone**: Availability Zones consist of one or more discrete data centers
@@ -16,7 +18,9 @@ Based on the gobal infra, AWS provided a bunch of services to reduce network lat
 
 ## Global Accelerator
 
-network service that improves the availability and performance of your applications by routing traffic through the AWS global network. It provides static IP addresses for your applications and routes traffic to optimal endpoints based on latency, health, and policies.
+network service that improves the availability and performance of your applications by routing traffic through the AWS
+global network. It provides static IP addresses for your applications and routes traffic to optimal endpoints based on
+latency, health, and policies.
 
 - static ip
 - regional failover
@@ -27,7 +31,8 @@ network service that improves the availability and performance of your applicati
 
 # The core concept: VPC
 
-**VPC**: A logically isolated network within AWS, allowing you to define IP ranges, subnets, routing tables, and security settings.The key features in VPC are:
+**VPC**: A logically isolated network within AWS, allowing you to define IP ranges, subnets, routing tables, and
+security settings.The key features in VPC are:
 
 - **Subnets**:
   - Public subnets for resources with internet access.
@@ -37,7 +42,8 @@ network service that improves the availability and performance of your applicati
 
 BTW: VPC can only be created in one region, but it can cross multi AZ. subnet can only land in one AZ.
 
-Several AWS services need to host within a VPC for functionality, security, or compliance. These services typically interact with your resources privately:
+Several AWS services need to host within a VPC for functionality, security, or compliance. These services typically
+interact with your resources privately:
 
 1. Compute Services: EC2/ECS/EKS
 2. Storage Services: RDS/Aurora/ElastiCache/FSx
@@ -73,7 +79,8 @@ Support Record Type:
 - NS (Name Server): Specifies the authoritative name servers for a domain.
 - TXT (Text): Adds text-based information, commonly used for verification.
 - SRV (Service): Specifies the location of a service.
-- Alias: A Route 53-specific record type that points to AWS resources like CloudFront distributions, ELBs, or S3 buckets.
+- Alias: A Route 53-specific record type that points to AWS resources like CloudFront distributions, ELBs, or S3
+  buckets.
 
 Route 53 can config routing policy to decide return which record:
 
@@ -98,7 +105,8 @@ Route 53 provide 2 kinds of hoste zone to host the records:
 
 ## Route 53 Resolver
 
-designed for DNS query resolution between AWS and hybrid environments. It enables communication between on-premises data centers and AWS VPCs or across multiple VPCs.
+designed for DNS query resolution between AWS and hybrid environments. It enables communication between on-premises data
+centers and AWS VPCs or across multiple VPCs.
 
 - Inbound DNS queries: resolve from on-prem to aws resources.
 - Outbound DBS queries: resolve from aws VPC to on-prem
@@ -119,15 +127,18 @@ Fast CDN provide by AWS. it can:
 
 Establish a dedicated connection from an on-premises network to one or more VPCs.
 
-- uses industry-standard 802.1Q VLANs to connect to Amazon VPC using private IP addresses. configure three different types of VIFs:Public/Transit/Private.
+- uses industry-standard 802.1Q VLANs to connect to Amazon VPC using private IP addresses. configure three different
+  types of VIFs:Public/Transit/Private.
 - The installation of a Direct Connect Dedicated Connection can take from several weeks to a few months.
 - Direct Connect Gateway can be used for multi-VPC connectivity, connect to mulri vpc's virtuak private gateway
 
 ## Site-to-Site VPN
 
-AWS managed VPN endpoint, creating an IPsec VPN connection between your remote networks and Amazon VPC over the internet.
+AWS managed VPN endpoint, creating an IPsec VPN connection between your remote networks and Amazon VPC over the
+internet.
 
-- it connected to virtual private gateway in VPC. virtual private gateway support multiple user gateway connections.which means we can implement redundancy and failover
+- it connected to virtual private gateway in VPC. virtual private gateway support multiple user gateway
+  connections.which means we can implement redundancy and failover
 - support using AWS Global Accelerator accelerated VPN connection
 - public accessable service.
 
@@ -144,14 +155,16 @@ creating a VPN connection between your remote network and a software VPN applian
 
 ## Transit Gateway
 
-an AWS managed high availability and scalability regional network transit hub used to interconnect VPCs and customer networks.
+an AWS managed high availability and scalability regional network transit hub used to interconnect VPCs and customer
+networks.
 
 - can work together with VPN, Direct connect to connect multi VPCs with local network.
 - supports and encourages multiple user gateway connections so that you can implement redundancy and failover
 
 ## VPN CloudHub
 
-uses an Amazon VPC virtual private gateway with multiple customer gateways, each using unique BGP autonomous system numbers (ASNs). The remote sites must not have overlapping IP ranges.
+uses an Amazon VPC virtual private gateway with multiple customer gateways, each using unique BGP autonomous system
+numbers (ASNs). The remote sites must not have overlapping IP ranges.
 
 - operates on a simple hub-and-spoke model that you can use with or without a VPC.
 
@@ -172,22 +185,26 @@ use to assign a public ip to AWS services, make it can be accessible from intern
 
 ## Internet Gateway
 
-a horizontally scaled, redundant, and highly available VPC component that allows communication between your VPC and the internet.
+a horizontally scaled, redundant, and highly available VPC component that allows communication between your VPC and the
+internet.
 
 - provides a target in your VPC route tables for internet-routable traffic
 - supports IPv4 and IPv6 traffic
-- enables resources in your public subnets (such as EC2 instances) to connect to the internet if the resource has a public IPv4 address or an IPv6 address
+- enables resources in your public subnets (such as EC2 instances) to connect to the internet if the resource has a
+  public IPv4 address or an IPv6 address
 
 ## Egress-only Gateway
 
-a horizontally scaled, redundant, and highly available VPC component that allows outbound communication over IPv6 from instances in your VPC to the internet,
+a horizontally scaled, redundant, and highly available VPC component that allows outbound communication over IPv6 from
+instances in your VPC to the internet,
 
 - only outbound, no inbound
 - support ip v6 only, use NAT Gateway for IP v4
 
 ## NAT Gateway
 
-a Network Address Translation (NAT) service that support instances in a private subnet connect to services outside VPC but external services cannot initiate a connection with those instances.
+a Network Address Translation (NAT) service that support instances in a private subnet connect to services outside VPC
+but external services cannot initiate a connection with those instances.
 
 - only outbound, no inbound
 - support Ip v4 only
@@ -199,7 +216,8 @@ use an instance to run network address translation (NAT) service. Not recommend,
 
 ## Interface/Gateway Endpoint
 
-Both of them are using to connect to AWS services from within your Virtual Private Cloud (VPC) without using the public internet. they have a little difference:
+Both of them are using to connect to AWS services from within your Virtual Private Cloud (VPC) without using the public
+internet. This service no need to update routable as it get a private ip in the subnet. they have a little difference:
 
 - Interface Endpoint:
   - implementde by add ENI in your VPC. so it has a private Ip
@@ -210,11 +228,13 @@ Both of them are using to connect to AWS services from within your Virtual Priva
 
 ## Private Link
 
-a highly available, scalable technology that you can use to privately connect your VPC to services and resources as if they were in your VPC.
+a highly available, scalable technology that you can use to privately connect your VPC to services and resources as if
+they were in your VPC.
 
 - can use to connect another VPC service, AWS managed service, Market Parter service.
 - powered by Interface VPC Endpoints
-- only supported in the AWS region where the VPCs reside, if need to cross region, need to additional setup, like VPC peering.
+- only supported in the AWS region where the VPCs reside, if need to cross region, need to additional setup, like VPC
+  peering.
 
 # The types of connectivity
 
@@ -225,7 +245,8 @@ For a complicated system There are serval parts will be involved:
 3. Resources in VPCs
 4. On-prem data center
 
-As an AWS Solution Architect, when we talk about network connectivity, it is more related how to make sure these parts can connect with each other via the aws services described above.
+As an AWS Solution Architect, when we talk about network connectivity, it is more related how to make sure these parts
+can connect with each other via the aws services described above.
 
 ## Connecting remote networks with your Amazon VPC environment
 
@@ -239,7 +260,8 @@ As an AWS Solution Architect, when we talk about network connectivity, it is mor
 
 - Internet Gateway can help connection between VPC public subnet resources and internet
 - Resources in private subnets need to use NAT gateway or Egress-Only Internet Gateway to reach internet resources.
-- Resources in private subnets can use other AWS services (ELB/API Gateway etc) for internet connectivity, this is powered by Internet Gateway.
+- Resources in private subnets can use other AWS services (ELB/API Gateway etc) for internet connectivity, this is
+  powered by Internet Gateway.
 
 ## Integrate multiple Amazon VPCs into a larger virtual network
 
@@ -253,11 +275,13 @@ As an AWS Solution Architect, when we talk about network connectivity, it is mor
 
 - VPC can use interface/Gateway endpoint connect to AWS managed services.
 - AWS managed services can access VPC public subnet resources same as what internet service do.
-- For private resources, some AWS managed services like Lambda/ELB can access by attach to vpc. other services need to use these service as middle layer. or you can create a private Link for the service in the private subnet.
+- For private resources, some AWS managed services like Lambda/ELB can access by attach to vpc. other services need to
+  use these service as middle layer. or you can create a private Link for the service in the private subnet.
 
 # Monitoring
 
-AWS provided serveral services to monitor the network traffic, As a solution architect you need to know how to choose the right tool based on business requirement.
+AWS provided serveral services to monitor the network traffic, As a solution architect you need to know how to choose
+the right tool based on business requirement.
 
 ## VPC Flow Logs:
 
@@ -283,6 +307,7 @@ AWS provided serveral services to monitor the network traffic, As a solution arc
 ## CloudTrail logs
 
 - Purpose: Monitor network-related API calls and changes to network configurations.
+- Management Events (config, security) and Data Events (access to the data)
 - Use Cases:
   - Auditing changes to VPCs, security groups, and routing tables.
   - Tracking unauthorized or unusual changes to network configurations.
@@ -296,7 +321,8 @@ AWS provided serveral services to monitor the network traffic, As a solution arc
 
 ## Amazon CloudWatch Internet Monitor
 
-- Purpose: visibility into how internet issues impact the performance and availability between your applications hosted on AWS and your end users.
+- Purpose: visibility into how internet issues impact the performance and availability between your applications hosted
+  on AWS and your end users.
 
 ## Amazon VPC IP Address Manager (IPAM)
 
@@ -308,7 +334,8 @@ AWS provided serveral services to monitor the network traffic, As a solution arc
 
 ## Network Access Analyzer
 
-- Purpose: understand network access to your resources, identify improvements to your network security posture and demonstrate that your network meets specific compliance requirements.
+- Purpose: understand network access to your resources, identify improvements to your network security posture and
+  demonstrate that your network meets specific compliance requirements.
 
 ## AWS Network Manager
 

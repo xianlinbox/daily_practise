@@ -150,7 +150,7 @@ based policy
 ### Security Group
 
 act as virtual firewalls that control inbound and outbound traffic to and from resources within a VPC. It use inbound
-rule to control the source and outbound rule to control destination.
+rule to control the source and outbound rule to control destination. it applies to instances.
 
 A rule is constructre by three parts:
 
@@ -160,9 +160,21 @@ A rule is constructre by three parts:
 
 By default, All inboud traffic is denied; All outbound traffic is allowed.
 
-- Network ACL: allow or deny specific inbound and outbound traffic at the subnet level
 - BPA(Block Public Access): centralized security feature that enables you to authoritatively prevent public internet
   access to VPC resources
+
+### Network ACL
+
+allow or deny specific inbound and outbound traffic at the subnet level. applied on subnet.
+
+- Default NACL, all traffic allowed; Custom NACL, all traffic denied.
+- stateless, both inbound and outbound traffic rules must be explicitly
+
+a rule in ACL:
+
+- Protocol (e.g., TCP, UDP, ICMP).
+- Port range (e.g., HTTP: port 80, HTTPS: port 443).
+- Source/Destination IP addresses.
 
 ## security features in S3
 
