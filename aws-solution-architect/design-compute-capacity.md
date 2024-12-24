@@ -154,4 +154,18 @@ The workflow can be synchronous (wait for result) or asynchronous(don't wait for
 
 ## Fargate
 
+a serverless compute engine for containers that allows you to run and manage containers without managing the underlying
+infrastructure.
+
+- intgrated with ECS/EKS seamlessly
+- Task-Level Isolation, each task runs in its own environment.
+- Integrated with IAM for access control, the role can assign at task level
+- pay by seconds based on vCPU and memory resources allocated to the containers.
+
+Limitations:
+
+- more expensive for consistent, high workloads
+- less config compare manage EC2 directly
+- No GPU support
+
 # Conclusion
