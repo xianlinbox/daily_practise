@@ -72,6 +72,67 @@ Advanced Features:
 - Enhanced Networking (ENA, EFA): Improved bandwidth and lower latency for HPC.
 - Burst Performance: temporarily provide higher CPU performance than their baseline.
 
+## Beanstalk
+
+a fully managed Platform-as-a-Service (PaaS) that simplifies the deployment, scaling, and management of applications
+Compare to ECS, Beanstalk is easier to use but may result in higher costs due to resource overprovisioning.
+
+- support: Node.js, Python, Java, .NET, PHP, Ruby, Go, and Docker
+
+Process:
+
+1. Code Deployment: upload code or image, then beanstalk will config all the infra needed, lik EC2, Load balancer
+2. Configuration: config environment variables, instance types, scaling parameters etc through beanstalk management
+   console
+3. Manage environments: sets up the operating system, middleware, and runtime for your application.
+
+Features:
+
+- Environment Management: provide staging, and production env, and allow one click to deloy to different env. support
+  blue/green deployment.
+- Auto scaling and integrated with ELB
+- health monitoring
+- Automatic Patching
+
+## Lightsail
+
+a simplified platform for deploying and managing virtual private servers (VPS) and applications
+
+- Pre-configured Instances
+- simplified ec2 with less config and predictable cost
+- less scability, small application
+
+## Outposts
+
+A fully managed service that extends AWS infrastructure, services, APIs, and tools to on-premises environments, allowing
+you to run applications with low latency or data residency requirements seamlessly.
+
+Components:
+
+- Outpost Racks: hardware rack with compute and storage resources.
+- Local Gateway: Provides local network connectivity to on-premises infrastructure.
+- AWS Region Connectivity: Requires a connection to an AWS Region for control plane operations, updates, and management.
+
+# orchestration
+
+## AWS StepFunction
+
+a fully managed serverless orchestration service that lets you coordinate and manage distributed applications or
+workflows using visual workflows.
+
+Components:
+
+- State Machine: A JSON-based definition of the workflow.
+- State: Task/Choice/Parallel/Map/Pass,Fail,Wait
+- Input/Output: Passes JSON data between states.
+
+Type:
+
+- Standard: for long-run work, running time up to 1 year.
+- Express: for short-live work, running time up to 5 minutes
+
+The workflow can be synchronous (wait for result) or asynchronous(don't wait for result)
+
 ## ECS
 
 a fully managed container orchestration service that enables you to run and scale containerized applications on AWS.ECS
@@ -101,56 +162,6 @@ IAM roles can be assigned to tasks, allowing them to interact with AWS services
 
 a fully managed service that makes it easy to run Kubernetes on AWS without needing to install and operate your own
 Kubernetes control plane.
-
-## Beanstalk
-
-a fully managed Platform-as-a-Service (PaaS) that simplifies the deployment, scaling, and management of applications
-Compare to ECS, Beanstalk is easier to use but may result in higher costs due to resource overprovisioning.
-
-- support: Node.js, Python, Java, .NET, PHP, Ruby, Go, and Docker
-
-Process:
-
-1. Code Deployment: upload code or image, then beanstalk will config all the infra needed, lik EC2, Load balancer
-2. Configuration: config environment variables, instance types, scaling parameters etc through beanstalk management
-   console
-3. Manage environments: sets up the operating system, middleware, and runtime for your application.
-
-Features:
-
-- Environment Management: provide staging, and production env, and allow one click to deloy to different env. support
-  blue/green deployment.
-- Auto scaling and integrated with ELB
-- health monitoring
-- Automatic Patching
-
-## Lightsail
-
-a simplified platform for deploying and managing virtual private servers (VPS) and applications
-
-- Pre-configured Instances -simplified ec2 with less config and predictable cost -less scability, small application
-
-## Outposts
-
-# orchestration
-
-## AWS StepFunction
-
-a fully managed serverless orchestration service that lets you coordinate and manage distributed applications or
-workflows using visual workflows.
-
-Components:
-
-- State Machine: A JSON-based definition of the workflow.
-- State: Task/Choice/Parallel/Map/Pass,Fail,Wait
-- Input/Output: Passes JSON data between states.
-
-Type:
-
-- Standard: for long-run work, running time up to 1 year.
-- Express: for short-live work, running time up to 5 minutes
-
-The workflow can be synchronous (wait for result) or asynchronous(don't wait for result)
 
 ## Fargate
 
