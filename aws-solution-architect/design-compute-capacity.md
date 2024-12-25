@@ -163,6 +163,20 @@ IAM roles can be assigned to tasks, allowing them to interact with AWS services
 a fully managed service that makes it easy to run Kubernetes on AWS without needing to install and operate your own
 Kubernetes control plane.
 
+- Supports Hybrid/Multi-Region Deployments:
+- Fully Compatible with Kubernetes
+
+Worker Node Options:
+
+- AWS managed
+- self managed
+- Fargate
+
+Networking Modes:
+
+- VPC ENI pugin
+- Third party like calico
+
 ## Fargate
 
 a serverless compute engine for containers that allows you to run and manage containers without managing the underlying
