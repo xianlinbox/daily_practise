@@ -45,7 +45,7 @@ Components:
 - Compute environment: AWS infrastructure resources used to run your jobs, automatically scale to meet the job
   requirement.
 
-# EC2 based Services
+# EC2 based part
 
 ## EC2
 
@@ -194,3 +194,21 @@ Limitations:
 - No GPU support
 
 # Conclusion
+
+Based on the information above, when we choose the compute components, you need to:
+
+1. Figure out your task characteristic:
+
+- Just a simple api, or need to load a lot of data.
+- How long it will run?
+- It meed more CPU, I/O or memory
+- Any limitations? like must run in local
+
+2. Figure out your team's capability
+
+- Does your team have infra capbilities to manage instance by yourself
+- Does You team have knowledge about docker, K8s.
+- ...
+
+The first one will narrow down the compute node and its type we can choose, the second one will decide how we manage the
+compute notes.
