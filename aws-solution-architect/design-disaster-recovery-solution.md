@@ -69,6 +69,19 @@ Support Services:
 
 Storage Tier: Warm Storage (expensive but fast)/ Cold Storage (cheap and slow, hours)
 
+## Amazon Data Lifecycle Manager(DLM)
+
+automate the lifecycle management of your Amazon Elastic Block Store (EBS) snapshots and Amazon Elastic File System
+(EFS) file systems backups.
+
+- Automated Backups
+- Retention policy
+- Cross region copy
+- Cross-Account Sharing
+- Can config by event driven
+
+## service-specific
+
 Amazon EC2 instances with minimal capacity. Amazon RDS for database replication. Auto Scaling to quickly scale
 infrastructure.
 
