@@ -16,42 +16,74 @@ There are two objectives for a rescovery:
 
 AWS provides several approaches to achieve different objectives.
 
-# The Approaches of Disaster Recovery
+# The Approaches of Disaster Recovery in AWS
 
 ## Backup and Restore
 
-Description: Data is backed up to AWS storage services (e.g., S3, Glacier) and restored during a disaster. RTO/RPO: High
-RTO (hours to days), flexible RPO (depends on backup frequency). Key Services: AWS Backup for automated backups. Amazon
-S3 and S3 Glacier for cost-effective storage. AWS Storage Gateway for hybrid environments. Use Case: Suitable for
-non-critical workloads or cost-sensitive environments.
+- Description: Data is backed up to AWS storage services (e.g., S3, Glacier) and restored during a disaster.
+- RTO/RPO: High, RTO (hours to days), flexible RPO (depends on backup frequency).
+- Use Case: Suitable for non-critical workloads or cost-sensitive environments.
 
 ## Pilot Light
 
-Description: A minimal, always-on environment is maintained in AWS with essential components. Full production is scaled
-up during a disaster. RTO/RPO: Moderate RTO (minutes to hours), low RPO (seconds to minutes). Key Services: Amazon EC2
-instances with minimal capacity. Amazon RDS for database replication. Auto Scaling to quickly scale infrastructure. Use
-Case: Useful for workloads requiring quick recovery but not full-scale standby.
+- Description: A minimal, always-on environment is maintained in AWS with essential components. Full production is
+  scaled up during a disaster.
+- RTO/RPO: Moderate RTO (minutes to hours), low RPO (seconds to minutes).
+- Use Case: Useful for workloads requiring quick recovery but not full-scale standby.
 
 ## Warm Standby
 
-Description: A scaled-down but functional version of the production environment runs in AWS and can be scaled up during
-a disaster. RTO/RPO: Low RTO (minutes), low RPO (seconds to minutes). Key Services: AWS Elastic Load Balancer (ELB) for
-traffic routing. Amazon Route 53 for DNS failover. AWS Systems Manager for automation. Use Case: Ideal for critical
-workloads where recovery time must be minimal.
+- Description: A scaled-down but functional version of the production environment runs in AWS and can be scaled up
+  during a disaster.
+- RTO/RPO: Low RTO (minutes), low RPO (seconds to minutes).
+- Use Case: Ideal for critical workloads where recovery time must be minimal.
 
 ## Multi-Site (Active-Active)
 
-Description: Fully redundant, active environments run in multiple AWS Regions, sharing the workload. RTO/RPO: Near-zero
-RTO and RPO. Key Services: AWS Global Accelerator for routing. Multi-Region Amazon RDS or DynamoDB Global Tables. Amazon
-S3 with cross-region replication. Use Case: Best for mission-critical workloads with no tolerance for downtime. 2. AWS
-DR Best Practices Data Replication: Use S3 Cross-Region Replication (CRR) for objects. Use RDS Multi-AZ or read replicas
-across regions. Use DynamoDB Global Tables for globally distributed databases. Networking: Configure Amazon Route 53 for
-DNS failover. Use Transit Gateway for network connectivity. Automation: Automate recovery processes with AWS Lambda and
-AWS Systems Manager. Use AWS CloudFormation for infrastructure as code to quickly rebuild environments. Monitoring and
-Testing: Use Amazon CloudWatch for monitoring. Regularly test DR plans with simulated outages using AWS Fault Injection
-Simulator. Understanding RTO & RPO
+- Description: Fully redundant, active environments run in multiple AWS Regions, sharing the workload.
+- RTO/RPO: Near-zero RTO and RPO.
+- Use Case: Best for mission-critical workloads with no tolerance for downtime.
 
-## The DR supports in AWS services
+# The DR support in AWS services
+
+To implemented the above approaches, AWS provided servcies to help us do it easily.
+
+## AWS Backup
+
+a fully managed service designed to centralize and automate data protection across AWS services.
+
+Features:
+
+- Single interface to manage and monitor all backup activities.
+- Define schedule, retention and lifecycle rules for backup
+- support Cross-account, cross-region backup
+- recover data to specific point of time
+- Audit Manager provide audit and track backup activities
+- AWS Backup Vault can provide an isolation storage for the backup
+
+Support Services:
+
+- Compute: EC2(instance and volume)
+- Storage: S3,EFS, EBS, EFS, FSx, RDS, Aurora, DynamoDB
+- Others: EKS persistent Volume, Storage Gateway(volume)
+
+Storage Tier: Warm Storage (expensive but fast)/ Cold Storage (cheap and slow, hours)
+
+Amazon EC2 instances with minimal capacity. Amazon RDS for database replication. Auto Scaling to quickly scale
+infrastructure.
+
+AWS Elastic Load Balancer (ELB) for traffic routing. Amazon Route 53 for DNS failover. AWS Systems Manager for
+automation.
+
+AWS Backup for automated backups. Amazon S3 and S3 Glacier for cost-effective storage. AWS Storage Gateway for hybrid
+environments.
+
+AWS Global Accelerator for routing. Multi-Region Amazon RDS or DynamoDB Global Tables. Amazon S3 with cross-region
+replication. Use S3 Cross-Region Replication (CRR) for objects. Use RDS Multi-AZ or read replicas across regions. Use
+DynamoDB Global Tables for globally distributed databases. Networking: Configure Amazon Route 53 for DNS failover. Use
+Transit Gateway for network connectivity. Automation: Automate recovery processes with AWS Lambda and AWS Systems
+Manager. Use AWS CloudFormation for infrastructure as code to quickly rebuild environments. Monitoring and Testing: Use
+Amazon CloudWatch for monitoring. Regularly test DR plans with simulated outages using AWS Fault Injection Simulator.
 
 AWS elastic disaster recovery
 
