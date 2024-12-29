@@ -97,15 +97,30 @@ Create AMI from instance:
 
 - backup of the entire EC2 instance, including the operating system, configurations, and all attached EBS volumes.
 - To restore an EC2 instance, you launch a new instance from the AMI
-- also support Cross-Region and Cross-Account copy
-- modify permissions to allow other accounts to access the AMI.
+- Also support Cross-Region and Cross-Account copy
+- Need to modify permissions to allow other accounts to access the AMI.
 
-- EBS EFS FSx S3 RDS Aurora DynamoDB
+### FSx
+
+provides automated backups that are enabled by default when you create a new FSx file system. These backups are taken
+daily and stored in Amazon S3.
+
+- takes incremental snapshots
+- retained for 7 days by default but can be extended up to 90 days
+- performed during a configurable maintenance window.
+- restore from automated backups to recover from accidental deletion or corruption.
+- Backups are within the same region as the FSx file system. cross-region and cross-account backup strategies need AWS
+  Backup or AWS DataSync.
+
+S3 RDS Aurora DynamoDB
 
 ## Routing, Scaling for the routing
 
+AWS Elastic Load Balancer (ELB) for traffic routing.
+
 ## Monitor, Triggering for failover
 
+- AWS elastic disaster recovery
 - cloudwatch alarm
 - Route53 health check
 
