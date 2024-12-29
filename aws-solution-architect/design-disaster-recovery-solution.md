@@ -80,7 +80,34 @@ automate the lifecycle management of your Amazon Elastic Block Store (EBS) snaps
 - Cross-Account Sharing
 - Can config by event driven
 
-## service-specific
+## service-specific backups
+
+### EC2
+
+For EC2 instance DR, There are 2 services can help on it:
+
+Snapshot:
+
+- a point-in-time copy of EBS volume, save it to S3, only for EBS volume, no configuration, OS, and data
+- To restore a snapshot, you create a new EBS volume from the snapshot and attach it to an EC2 instance.
+- for cross-account, cross-region copy, need to do it manually
+- the destination account must have permission to launch EC2 instances using the snapshot.
+
+Create AMI from instance:
+
+- backup of the entire EC2 instance, including the operating system, configurations, and all attached EBS volumes.
+- To restore an EC2 instance, you launch a new instance from the AMI
+- also support Cross-Region and Cross-Account copy
+- modify permissions to allow other accounts to access the AMI.
+
+- EBS EFS FSx S3 RDS Aurora DynamoDB
+
+## Routing, Scaling for the routing
+
+## Monitor, Triggering for failover
+
+- cloudwatch alarm
+- Route53 health check
 
 Amazon EC2 instances with minimal capacity. Amazon RDS for database replication. Auto Scaling to quickly scale
 infrastructure.
