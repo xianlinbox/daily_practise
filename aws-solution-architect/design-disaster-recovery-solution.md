@@ -112,17 +112,37 @@ daily and stored in Amazon S3.
 - Backups are within the same region as the FSx file system. cross-region and cross-account backup strategies need AWS
   Backup or AWS DataSync.
 
-S3 RDS Aurora DynamoDB
+### S3
+
+- Replication: enables you to automatically replicate objects between buckets, it natively support Cross-Region
+  Replication/Same-Region Replication RDS Aurora DynamoDB/ Cross-Account Replication
+- lifecycle policies can be used to manage backups and data retention
+
+### RDS
+
+To support Disaster Recovery, RDS provide the following features:
+
+- Automated Backups: Daily backups with point-in-time recovery (PITR) within a retention window.
+- Multi-AZ Deployments: Synchronous replication to a standby instance in another AZ. failover to standby insatnce
+  automatically, extra cost on the standby instance.
+- Read Replicas: Asynchronous replication, manually promoted to primary in case of failure. This support cross-region
+  replica.
+
+### Aurora
+
+### DynamoDB
 
 ## Routing, Scaling for the routing
 
-AWS Elastic Load Balancer (ELB) for traffic routing.
+Amazon Route 53 for DNS failover AWS Elastic Load Balancer (ELB) for traffic routing. AWS Global Accelerator for
+routing.
 
 ## Monitor, Triggering for failover
 
 - AWS elastic disaster recovery
 - cloudwatch alarm
 - Route53 health check
+- AWS Fault Injection Simulator
 
 Amazon EC2 instances with minimal capacity. Amazon RDS for database replication. Auto Scaling to quickly scale
 infrastructure.
