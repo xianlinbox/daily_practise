@@ -100,6 +100,12 @@ Create AMI from instance:
 - Also support Cross-Region and Cross-Account copy
 - Need to modify permissions to allow other accounts to access the AMI.
 
+### ECS/EKS
+
+- Multi-AZ Deployment: In case of a failure in one AZ, ECS automatically launches new tasks in healthy AZs to maintain
+  the desired task count. EKS will attempt to reschedule any failed pods to healthy nodes in the same region.
+  Cross-Region
+
 ### FSx
 
 provides automated backups that are enabled by default when you create a new FSx file system. These backups are taken
@@ -130,9 +136,33 @@ To support Disaster Recovery, RDS provide the following features:
 
 ### Aurora
 
+Aurora has Global Databases to provide low-latency global replication across multiple AWS regions.
+
+- In case of a failure in the primary region, you can promote a replica in another region to become the new primary.
+- Allows for cross-region disaster recovery with minimal downtime.
+
 ### DynamoDB
 
+Global Tables: replicate data across multiple AWS regions, providing automatic disaster recovery at the regional level.
+
+- Writes to DynamoDB tables are automatically propagated to all other regions that are part of the Global Table.
+- If one region becomes unavailable, fail over to a different region with minimal downtime, ensuring business
+  continuity.
+
+Point-in-Time Recovery (PITR): restore your DynamoDB table to any point in time within the last 35 days,
+
+- helping recover from data corruption, accidental deletions, or unwanted changes.
+- only available for Standard DynamoDB tables and cannot be used for On-Demand tables.
+- Does not provide cross-region disaster recovery by itself
+
+Backups: built-in backup and restore capabilities, which allow you to take on-demand backups of your DynamoDB tables.
+
+- Backups are region-specific and do not natively support cross-region disaster recovery
+- Restoring a table from backup might take some time, depending on the size of the table.
+
 ## Routing, Scaling for the routing
+
+ELB and Cloud Map for traffic routing to healthy instances.
 
 Amazon Route 53 for DNS failover AWS Elastic Load Balancer (ELB) for traffic routing. AWS Global Accelerator for
 routing.
@@ -143,30 +173,6 @@ routing.
 - cloudwatch alarm
 - Route53 health check
 - AWS Fault Injection Simulator
-
-Amazon EC2 instances with minimal capacity. Amazon RDS for database replication. Auto Scaling to quickly scale
-infrastructure.
-
-AWS Elastic Load Balancer (ELB) for traffic routing. Amazon Route 53 for DNS failover. AWS Systems Manager for
-automation.
-
-AWS Backup for automated backups. Amazon S3 and S3 Glacier for cost-effective storage. AWS Storage Gateway for hybrid
-environments.
-
-AWS Global Accelerator for routing. Multi-Region Amazon RDS or DynamoDB Global Tables. Amazon S3 with cross-region
-replication. Use S3 Cross-Region Replication (CRR) for objects. Use RDS Multi-AZ or read replicas across regions. Use
-DynamoDB Global Tables for globally distributed databases. Networking: Configure Amazon Route 53 for DNS failover. Use
-Transit Gateway for network connectivity. Automation: Automate recovery processes with AWS Lambda and AWS Systems
-Manager. Use AWS CloudFormation for infrastructure as code to quickly rebuild environments. Monitoring and Testing: Use
-Amazon CloudWatch for monitoring. Regularly test DR plans with simulated outages using AWS Fault Injection Simulator.
-
-AWS elastic disaster recovery
-
-Understanding AWS component replication capability
-
-DB
-
-- Database management service vs DataSync
 
 EC2
 
