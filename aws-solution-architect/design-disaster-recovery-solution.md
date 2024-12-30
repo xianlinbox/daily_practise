@@ -160,41 +160,24 @@ Backups: built-in backup and restore capabilities, which allow you to take on-de
 - Backups are region-specific and do not natively support cross-region disaster recovery
 - Restoring a table from backup might take some time, depending on the size of the table.
 
-## Routing, Scaling for the routing
+## Monitoring, Routing, Scaling
 
-ELB and Cloud Map for traffic routing to healthy instances.
+The above services will restore the application and storage. As described above, the restored application or storage may
+have a different endpoint. So AWS provided service discovery and loadbalancer to make system automatically found the
 
-Amazon Route 53 for DNS failover AWS Elastic Load Balancer (ELB) for traffic routing. AWS Global Accelerator for
-routing.
+- CloudWatch Alarms: notify you of any performance issues or failures in critical systems that could trigger your
+  disaster recovery plan.
+- Route53 Health Checks & DNS Failover
+- Global Accelerator fails over traffic to healthy endpoints.
+- Cloud Map for ECS/EKS internal service discovery
+- Elastic Load Balancing (ELB) to distribute traffic across containers, even in multiple AZs or regions.
 
-## Monitor, Triggering for failover
+# Conclusion
 
-- AWS elastic disaster recovery
-- cloudwatch alarm
-- Route53 health check
-- AWS Fault Injection Simulator
+From the info above, when design a disaster recovery strategy, we need to:
 
-EC2
-
-- quotas
-
-correct routing after DR
-
-- health checks
-- routing algorithm
-- TTL for DNS records for
-
-Monitoring to triger failover
-
-- cloudwatch alarm
-- Route53 health check
-
-Improve the Reliability
-
-- Multi region/ Multi AZ
-- Decoupling
-- Scale group
-- AWS services support scaling actions
-
-ebs doesn't support cross-region snapshot, you need to create the snapshot in the same Region and then copy it across
-Regions
+1. Defines the objective (RTO&RPO)
+2. The Application and Data storage in the system
+3. Based on the RTO/RPO to choose the DR Approach.
+4. Use AWS services to simplify the DR implementation and Document the DR plan
+5. Review and update the DR plan as applications and infrastructure evolve
