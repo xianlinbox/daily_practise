@@ -21,7 +21,7 @@ then LLM can return the most accurate answer. To achieve this target, a typical 
 ### Step 1: Prepare the raw context data
 
 In RAG, the raw context data user have can be in many formats, like emails, csv, txt etc. but it must be converted to a
-consistent structure for next steps (split into chunks + metadata, embeding). So in this step, we need to choose the
+consistent structure for next steps (break into chunks + metadata, embeding). So in this step, we need to choose the
 right toolchain (e.g., LangChain, LlamaIndex, Haystack) to load the data into system. And conquer the concerns may
 appear in raw data.
 
@@ -34,20 +34,42 @@ appear in raw data.
 | Temporal context     | Include timestamps if it affects answer relevance |
 | Duplicate content    | Hash + deduplication pipeline                     |
 
-### Step 2: Split the data into chunks
+### Step 2: Break the raw data into meaningful chunks
 
-Prepare the raw context data: Split the context data into chunks, Chunk strategy Transform the chunk data to vector
-represntation. Embeding model
+After raw data loaded, it need to break into small chunks. In this step, we need to think what is the best chunk
+strategy for this application:
 
-2. Vector Store
+1. what is the best chunk size? (100 words, 1000 words?)
+2. Semantic Boundaries: sentenced based or paragraphn based?
+3. Use Overlap to preserve context (eg:sliding window)
+4. Attach metadat to each trunk to support filter retrieval
 
-3. Retrieval
+### Step 3: Create vector representation of chunks for embedding
 
-4. Filtering and Reranking
+After the chunks of raw data created, it need to transform to vector format. then it can be used to calculate similarity
+or relevance easily. In this step, the things need to take care are:
 
-5. Prompt Augmentation
+1. Model choice: choose the state-of-the-art embedding models which matches your domain
+2. Keep embedding model versioning for consistency and reprocessing
+3. Avoid embedding sensitive/PII data without encryption or masking.
 
-6. Generatoon
+Reminder: It's best to test several models with your real context + questions before finalizing your choice.
+
+### Step 4: Choose the right vector store for embedding saving and efficient retrieval
+
+The embeding creted, it need to saved into storage for futue use. Vector store is
+
+### Step 5:
+
+5. Vector Store
+
+6. Retrieval
+
+7. Filtering and Reranking
+
+8. Prompt Augmentation
+
+9. Generatoon
 
 ## The tools in Databricks support RAG
 
