@@ -57,15 +57,50 @@ Reminder: It's best to test several models with your real context + questions be
 
 ### Step 4: Choose the right vector store for embedding saving and efficient retrieval
 
-The embeding creted, it need to saved into storage for futue use. Vector store is
+The embeding created, it need to saved into storage for futue use. Vector store is for this scenario. In this step, pick
+the right vector store to balance cost/requirements is key point.
 
-### Step 5:
+- Capabilities:
 
-5. Vector Store
+* Similarity Search
+* Support Hybrid Search
+* Index Updating
+* Meta filtering
+* Toolchain supported
+* Self host or Cloud
+* Multi-tenancy
+* Security
+* Scalability
+* Persistence
+* ...
 
-6. Retrieval
+Some benchmarks can be used for vector store choosing:
 
-7. Filtering and Reranking
+- ingest throghput
+- query latency
+- Precision/Recall of results
+- Metadata filtering performance
+- Query cost and memory use per query
+
+### Step 5: Retrieval the context data based on question
+
+All the embeded context data are landed in the vector store. The next process is find the most relevance chunk based on
+questions, in this step:
+
+1. Use the same embedding model (and version) for both indexing and querying.
+2. Match the distance metric to the embedding model(eg:Cosine similarity, Euclidean/L2, Dot product)
+3. If needed, apply metadata filtering to narrow down the search space and improve relevance.
+4. Adjust top-K result to balance recall, performance and precision
+5. If needed, Combine vector similarity with keyword-based search
+6. Log metrics for adaptive reranking, active learning, and performance tuning
+7. Apply strict namespace, user-level access control, or document filtering to avoid data leakage
+8. If needed, use Post-Retrieval Reranking to improve relevance
+
+### Step 6: Use retrieval context to augment prompt
+
+### Step 7:
+
+### Step 8:
 
 8. Prompt Augmentation
 
