@@ -98,14 +98,39 @@ questions, in this step:
 
 ### Step 6: Use retrieval context to augment prompt
 
-### Step 7:
+The questions and context data is ready, The next move is combie them together and send it to LLM. In this step:
 
-### Step 8:
+1. Design clear, repeatable templates that separate query, instructions, and context.
+2. Embed structured metadata (source, date, type, confidence) to help the LLM with disambiguation or prioritization.
+3. Guide the model’s tone, reasoning, and output formatting.
+4. If your domain is narrow or technical, augment the prompt with a few examples
+5. Use modern frameworks to simply prompt augmentation. eg: LangChain / LlamaIndex: Use PromptTemplate and custom
+   context builders.
 
-8. Prompt Augmentation
+### Step 7: Generation the result
 
-9. Generatoon
+Got the result. User can assess and verify if the RAG application give an accurate answer.
 
-## The tools in Databricks support RAG
+### Step 8: Evaluating RAG Pipeline
+
+To ensure that the system delivers accurate, relevant, and useful responses, The system need to evaluate mechanism to
+check. The following method are provided:
+
+- Ground truth comparison: Use curated test sets with gold answers.
+- Automatic metric (BLEU, BERTScore)
+- Faithfulness checker (RAGAS, GPT judge)
+- Human rating: Capture user feedback and flag low-confidence or failed answers.
+
+The evaluation result will feedback to RAG application to tuning on different stage of the workflow.
+
+## An example RAG application in Databricks platform
 
 ## Summary
+
+Building a robust RAG (Retrieval-Augmented Generation) application requires thoughtful integration of information
+retrieval and generation techniques. From selecting the right embedding model and vector store to structuring context
+chunks, embedding metadata, and designing effective prompt augmentation strategies, each step plays a crucial role in
+delivering accurate, context-aware responses. Evaluation methods—both automated and human-in-the-loop—ensure that the
+system continuously improves in relevance and reliability. Ultimately, a well-designed RAG system not only enhances the
+performance of LLMs but also provides users with trustworthy, up-to-date answers grounded in real data—making it a
+powerful solution for enterprise AI applications.
