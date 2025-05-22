@@ -125,6 +125,8 @@ The evaluation result will feedback to RAG application to tuning on different st
 
 ## An example RAG application in Databricks platform
 
+![alt text](images/rag-pipeline.png)
+
 ## Summary
 
 Building a robust RAG (Retrieval-Augmented Generation) application requires thoughtful integration of information
