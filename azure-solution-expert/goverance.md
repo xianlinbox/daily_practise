@@ -15,14 +15,17 @@ Select region based service availability, geo, price
 
 # Goverance
 
-Root Group
+- Root Group: The top of the Azure hierarchy. Automatically created, contains all other management groups and
+  subscriptions.
 
-Mangment Group
+* Mangment Group: A container to group and manage multiple subscriptions. Policies, RBAC, and Blueprints can be applied
+  at this level.
 
-Subscription
+* Subscription: Logical container for Azure services. Billing boundary. Every service you deploy exists within a
+  subscription.
 
-Account
+* Resource Group: A logical container for Azure resources that share a lifecycle.
 
-Resource Group
+* Resource: The actual Azure service instances (VMs, Storage, Databases, etc.) you create and use
 
-Resource
+* Account: The user identity used to sign in. Tied to Azure Active Directory (AAD).
