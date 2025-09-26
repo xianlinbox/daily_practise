@@ -29,3 +29,9 @@ Select region based service availability, geo, price
 * Resource: The actual Azure service instances (VMs, Storage, Databases, etc.) you create and use
 
 * Account: The user identity used to sign in. Tied to Azure Active Directory (AAD).
+
+# Landing Zones
+
+## Platform Landing Zones
+
+## Application Landing Zone
