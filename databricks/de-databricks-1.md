@@ -113,3 +113,5 @@ The main concepts under Unity Catalog:
   recipients. It acts as the container for the data assets being shared.
 - Provider: The organization or Databricks account that owns and manages the data being shared.
 - Recipent: The organization, Databricks account, or user that consumes the data shared by a provider.
+
+To be continue...
