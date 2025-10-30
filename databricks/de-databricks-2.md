@@ -325,7 +325,7 @@ OFFSET
     number
 
 --Select from file directly
-Select * FROM json.<cloud_storage_path>
+Select * FROM <json|text|csv|binary>.<cloud_storage_path>
 select * from read_files(
   's3://your-bucket/path/to/data.json',
   format => 'JSON',
@@ -334,6 +334,74 @@ select * from read_files(
 ```
 
 ### Tables
+
+Most tables in Databricks should be Delta Lake tables, which provide a wealth of capabilities:
+
+- ACID Transaction
+- Schema enforce/envolvement
+- Time Travel (Data Versioning):
+- Change Data Feed (CDF)
+- Unified Batch and Streaming
+
+#### Operations
+
+```SQL
+CREATE TABLE [EXTERNAL] [IF NOT EXISTS] catalog.schema.table_name (...) [USING DELTA] [LOCATION ...];
+WITH [ RECURSIVE ] common_table_expression [, ...]: Common table expression, Defines a temporary result set that you can reference possibly multiple times within the scope of a SQL statement
+ALTER TABLE ...: Modify schema (add/drop/change columns), set table properties.
+DROP TABLE ...: Delete the table (and data for managed tables).
+TRUNCATE TABLE ...: Delete all data from a table, leaving the schema.
+
+INSERT INTO ... VALUES (...) / INSERT INTO ... SELECT ...: Add new rows.
+UPDATE ... SET ... WHERE ...: Modify existing rows.
+DELETE FROM ... WHERE ...: Remove rows.
+MERGE INTO ... USING ... ON ... WHEN MATCHED ... WHEN NOT MATCHED ...: Perform UPSERT (update or insert) operations efficiently.
+```
+
+#### Security
+
+1. Grant priviledges on tables
+2. Apply Row-Level Security (RLS) and Column-Level Security (CLS) to tables if needed, eg:
+
+```SQL
+-- 1. Create a SQL function for the RLS policy
+CREATE FUNCTION my_catalog.security_policies.filter_by_region(region_column STRING)
+  RETURN IF(
+    IS_ACCOUNT_GROUP_MEMBER('finance_users') OR -- Finance can see all regions
+    region_column = current_user(),             -- Or if region matches current user (assuming user ID is region)
+    TRUE,                                       -- Allow access
+    FALSE                                       -- Deny access
+  );
+
+-- 2. Apply the RLS policy to a table
+ALTER TABLE my_catalog.gold_data.sales_transactions
+  SET ROW FILTER my_catalog.security_policies.filter_by_region ON (region);
+```
+
+#### Performance Optimization for Tables
+
+1. Z-Ordering/Partitioning (legacy): physically collocates related information (based on selected columns) into the same
+   set of files.
+2. Liquid Clustering (recommended): clustering technique that replaces static partitioning and Z-Ordering. It
+   automatically adapts to data changes and query patterns. Define CLUSTERING BY (col1, col2) during CREATE TABLE. Run
+   OPTIMIZE periodically to trigger clustering.
+3. Vaccum: Removes data files that are no longer referenced by the Delta Lake transaction log. VACUUM table_name RETAIN
+   7 HOURS; (Requires a RETAIN clause for safety, default is 7 days). Use with caution!
+4. Photon Engine: Databricks' native vectorized query engine
+5. Caching:
+
+#### Quality & Validation
+
+1. Delta Live Tables (DLT) Expectations: recommended approach for continuous data quality enforcement in your streaming
+   or batch ETL pipelines.
+2. Constraints: supports standard SQL constraints like NOT NULL, CHECK, PRIMARY KEY, and FOREIGN KEY
+
+```SQL
+EXPECT (constraint_name) ON (condition): Simply monitors the quality. Records violating the condition are counted and reported in DLT logs and UI. The pipeline continues.
+EXPECT (constraint_name) ON (condition) EXPECTATIONS AS (FAIL UPDATE): Rows violating the condition are dropped from the target table, but the pipeline continues.
+EXPECT (constraint_name) ON (condition) EXPECTATIONS AS (DROP ROW): Same as FAIL UPDATE, drops rows.
+EXPECT (constraint_name) ON (condition) EXPECTATIONS AS (FAIL BATCH): If any row violates the condition, the entire batch processing fails. This is for critical data quality rules where any bad data is unacceptable.
+```
 
 ### Views
 
@@ -377,8 +445,8 @@ CREATE MATERIALIZED VIEW [IF NOT EXISTS] [catalog_name.]schema_name.view_name
   AS query_definition;
 ```
 
-### User Define Functions(UDF)
-
 ## Move the silver data to gold (aggreation)
 
-### Join
+### Aggreagtion
+
+### User Define Functions(UDF)
