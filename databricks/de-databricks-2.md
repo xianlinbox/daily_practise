@@ -242,8 +242,10 @@ COPY_OPTIONS (
     'mergeSchema' = 'true' -- Allow schema evolution (e.g., if new columns appear)
 );
 
--- After first run, schema will be defined for customers_raw.
--- Subsequent runs will only process new CSV files in 's3://my-raw-data-bucket/customers/'.
+--  merge into command
+Merge into table as target
+Using table_2 as source On target.id = source.id
+When matched AND {condition} Then Update|Delete
 ```
 
 3. Spark Read API (for various sources)
@@ -339,7 +341,7 @@ Most tables in Databricks should be Delta Lake tables, which provide a wealth of
 
 - ACID Transaction
 - Schema enforce/envolvement
-- Time Travel (Data Versioning):
+- Time Travel (Data Versioning): RESTORE TABLE .. TO VERSION AS OF version_number or TIMESTAMP AS OF '',
 - Change Data Feed (CDF)
 - Unified Batch and Streaming
 
@@ -445,8 +447,69 @@ CREATE MATERIALIZED VIEW [IF NOT EXISTS] [catalog_name.]schema_name.view_name
   AS query_definition;
 ```
 
+### Streaming
+
+```SQL
+-- create a streaming table
+CREATE OR REFRESH STREAMING TABLE raw_clickstream
+AS SELECT
+  CAST(value AS STRING) AS raw_json_payload,
+  CAST(timestamp AS TIMESTAMP) AS kafka_ingestion_time
+FROM
+  cloud_files(
+    'kafka_topic', -- Source type, configured via DLT pipeline settings to connect to Kafka
+    'kafka',
+    map(
+      'cloudFiles.format', 'kafka',
+      'kafka.bootstrap.servers', 'my-kafka-brokers.com:9092',
+      'subscribe', 'clickstream_events'
+    )
+  );
+
+-- Read a streaming table
+ SELECT
+  get_json_object(raw_json_payload, '$.user_id') AS user_id,
+  to_timestamp(get_json_object(raw_json_payload, '$.event_timestamp')) AS event_timestamp,
+  kafka_ingestion_time AS ingestion_timestamp
+FROM
+  STREAM(LIVE.raw_clickstream);
+```
+
 ## Move the silver data to gold (aggreation)
+
+### User Define Functions(UDF)
+
+a custom function that you write (typically in Python, Scala, or Java, and in Unity Catalog, also SQL) to perform
+specific operations on data that isn't covered by Spark's native functions. Once defined, you can use this function in
+your Spark SQL queries or DataFrame API operations as if it were a built-in function.
+
+```SQL
+CREATE OR REPLACE FUNCTION calculate_bmi(weight_kg DOUBLE, height_cm DOUBLE)
+RETURNS DOUBLE
+COMMENT 'Calculates Body Mass Index (BMI) from weight in kg and height in cm.'
+RETURN weight_kg / ((height_cm / 100) * (height_cm / 100));
+```
 
 ### Aggreagtion
 
-### User Define Functions(UDF)
+Aggregations are most commonly performed when building the Gold layer of your Lakehouse. Data from the Silver layer
+(cleaned, normalized, validated) is aggregated and denormalized into specific data models, optimized for consumption by
+BI tools, analytics, and machine learning.
+
+Aggregate Functions: Functions that operate on a set of rows and return a single summary value.
+
+- Common: COUNT(), SUM(), AVG(), MIN(), MAX().
+- Statistical: STDDEV(), VAR_SAMP(), CORR().
+- Approximate: APPROX_COUNT_DISTINCT(), APPROX_PERCENTILE().
+- Set-based: COLLECT_LIST(), COLLECT_SET().
+- Window Functions: Allow you to perform calculations across a set of table rows that are related to the current row,
+  without reducing the number of rows.
+
+Performance Optimization for Aggregations
+
+- Efficient Joins: Optimize any joins performed before aggregation
+- Predicate Pushdown: Filter data before aggregation
+- Cardinality of Grouping Keys: Aggregations perform best when the number of distinct values in the GROUP BY columns is
+  not excessively high.
+- Approximate Aggregates:
+- Materialized Views: For frequently queried, complex aggregations, Materialized Views are an excellent choice
