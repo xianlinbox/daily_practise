@@ -148,13 +148,237 @@ CREATE FOREIGN CATALOG IF NOT EXISTS shared_data_from_partner
 SELECT * FROM shared_data_from_partner.sales_schema.partner_transactions LIMIT 10;
 ```
 
-Reminder: All the external reference's metadata are stored in the metastore storage, and Remove/Drop these reference
-will only impact the metadata, the data in the external storage stay there.
+## Move the Raw Data to bronze
 
-## Move the Raw Data to bronze (streaming, history)
+Based above information, we have know where the data stored, how can we access it and how to manage the data. The next
+step is moving raw data into databricks.
 
-For this stage, we
+Databricks provide bunch of ways for customer:
+
+1. Auto Loader (Recommended for Cloud Object Storage)
+
+Efficiently and incrementally processes new data files as they arrive in your cloud object storage (like AWS S3, Azure
+Data Lake Storage Gen2, or Google Cloud Storage). It's designed to simplify and automate the ingestion of large volumes
+of data from external file systems into Delta Lake tables, forming the foundation of many Bronze layer pipelines in a
+Lakehouse architecture.,
+
+Suitable for: continuous, high-volume, low-latency streaming scenarios
+
+An example:
+
+```SQL
+-- SQL to create a managed volume for Auto Loader state (if not already existing)
+USE CATALOG my_catalog;
+USE SCHEMA raw_schema;
+CREATE MANAGED VOLUME IF NOT EXISTS autoloader_state
+  COMMENT 'Managed volume for Auto Loader schema and checkpoint locations.';
+
+-- Create a STREAMING TABLE for raw event data.
+-- DLT automatically manages Auto Loader and Structured Streaming for this.
+
+CREATE OR REFRESH STREAMING TABLE events_raw
+COMMENT 'Raw event data ingested from S3 landing zone via Auto Loader.'
+AS SELECT
+    _metadata.file_path, -- Auto Loader automatically adds metadata columns
+    _metadata.file_name,
+    _metadata.file_size,
+    CAST(_metadata.file_modification_time AS TIMESTAMP) AS file_modified_time,
+    -- Assuming your JSON files have 'id', 'timestamp', 'event_type', 'data' fields
+    CAST(id AS STRING) AS event_id,
+    CAST(timestamp AS TIMESTAMP) AS event_timestamp,
+    CAST(event_type AS STRING) AS event_type,
+    CAST(data AS STRING) AS event_data, -- Storing 'data' as raw string for now
+    current_timestamp() AS ingestion_timestamp -- Add ingestion timestamp
+   FROM cloud_files(
+     's3://my-raw-data-bucket/events/', -- **Source path for raw files**
+     'json',                            -- Specify the file format
+     map(                                -- Auto Loader options
+       'cloudFiles.schemaLocation', '/Volumes/my_catalog/raw_schema/autoloader_state/events_raw_schema_location', -- **UC Managed Volume path for schema state**
+       'cloudFiles.inferColumnTypes', 'true', -- Instruct Auto Loader to infer data types
+       'cloudFiles.includeFileName', 'true',  -- Include the source filename in the output
+       'cloudFiles.maxFilesPerTrigger', '100', -- Optional: Process up to 100 files per micro-batch
+       'cloudFiles.partitionColumns', 'event_type' -- Optional: Specify partition columns for better performance
+     )
+   );
+```
+
+2. COPY INTO Command (Recommended for Idempotent Batch Ingestion from Object Storage)
+
+a SQL command introduced in Databricks that loads data from files in a specified cloud storage location into a Delta
+Lake table.
+
+Suitable for: simpler, idempotent, and scheduled batch ingestion needs where real-time processing isn't a strict
+requirement.
+
+An example:
+
+```SQL
+-- Step 1: Ensure your target table exists in Unity Catalog (you can let COPY INTO infer schema later)
+USE CATALOG my_catalog;
+USE SCHEMA raw_schema;
+
+CREATE TABLE IF NOT EXISTS customers_raw; -- We'll let COPY INTO define schema on first run
+
+-- Step 2: Run COPY INTO to ingest data
+COPY INTO my_catalog.raw_schema.customers_raw
+FROM (
+    SELECT
+        CAST(col0 AS INT) AS customer_id, -- Explicit casting from inferred types if needed
+        CAST(col1 AS STRING) AS first_name,
+        CAST(col2 AS STRING) AS last_name,
+        CAST(col3 AS STRING) AS email,
+        file_name() AS source_file, -- Add file metadata
+        current_timestamp() AS ingestion_timestamp
+    FROM 's3://my-raw-data-bucket/customers/' -- This path must be covered by an External Location
+)
+FILEFORMAT = CSV
+FORMAT_OPTIONS (
+    'header' = 'true',
+    'inferSchema' = 'true',
+    'delimiter' = ',',
+    'recursiveFileLookup' = 'true' -- If CSVs are in subfolders
+)
+COPY_OPTIONS (
+    'mergeSchema' = 'true' -- Allow schema evolution (e.g., if new columns appear)
+);
+
+-- After first run, schema will be defined for customers_raw.
+-- Subsequent runs will only process new CSV files in 's3://my-raw-data-bucket/customers/'.
+```
+
+3. Spark Read API (for various sources)
+
+The Spark Read API is the foundational and most flexible way to ingest raw data into Databricks using Apache Spark.
+While Auto Loader and COPY INTO are specialized, higher-level abstractions built on top of Spark, the Spark Read API
+provides granular control and versatility for connecting to a vast array of data sources.
+
+Spark Read API (exposed through spark.read for batch and spark.readStream for streaming), it supports:
+
+- Specify a data source format: format("csv"), format("json"), format("jdbc"), format("kafka"), etc.
+- Provide options: Set various configurations specific to the format (e.g., option("header", "true") for CSV,
+  option("inferSchema","true"), option("url", "...") for JDBC).
+- Load data: Point to a path (for files) or connection details (for databases, message queues) using .load().
+- Return a DataFrame: The result of a read operation is always a Spark DataFrame, which you can then transform and write
+
+Suitable for:
+
+- autoLoader and copy into doesn't support source
+- custom or complex ingestion logic
+- integrate with niche data sources.
+
+4. Cloud-Native Data Ingestion Services
+
+Using cloud migration tool to move data between cloud storage. like AWS DMS to move data from one S3 bucket to a managed
+location in Datbricks. Excellent for moving data into your cloud landing zone before Databricks picks it up with Auto
+Loader or COPY INTO
+
+5. Upload files to cloud storage manually
 
 ## Move the bronze data to silver (filter, clean, augment)
 
+### Data Discovering
+
+- UI functions:
+
+  - Databricks Data Explorer (UI-based)
+  - Automatic Data Lineage(Visual Graph)
+  - Databricks Search Bar: Search across notebooks, jobs, and critically, Unity Catalog objects (by name, comment, or
+    tag).
+
+- Commands:
+
+```SQL
+-- Show objects
+SHOW Catalog/Schema/TABLES... [IN ...]
+SHOW Grant On ...
+DESCRIBE TABLE/History catalog.schema.table_name;
+
+```
+
+### Extract/Query Data
+
+```SQL
+-- Select Clause
+SELECT
+    [ALL | DISTINCT]
+    expression_1 [AS column_alias_1],
+    expression_2 [AS column_alias_2],
+    ...
+    expression_n [AS column_alias_n]
+FROM
+    [catalog_name.]schema_name.table_name [AS table_alias]
+    [JOIN ...]
+    [LATERAL VIEW ...]
+WHERE
+    condition
+GROUP BY
+    column_or_expression_1, ...
+HAVING
+    group_condition
+WINDOW
+    window_spec_definition
+ORDER BY
+    column_or_expression_1 [ASC | DESC] [NULLS FIRST | NULLS LAST], ...
+LIMIT
+    number
+OFFSET
+    number
+
+--Select from file directly
+Select * FROM json.<cloud_storage_path>
+select * from read_files(
+  's3://your-bucket/path/to/data.json',
+  format => 'JSON',
+  multiline => true -- Example option
+);
+```
+
+### Tables
+
+### Views
+
+View allowing you to present data in a user-friendly and controlled manner without duplicating storage. There are 2
+types of View in Databricks:
+
+1. Standar View: logical. The query is executed every time the view is referenced. this view has standard, temporary,
+   global temporary scopes.
+
+```SQL
+CREATE [OR REPLACE] [TEMPORARY | GLOBAL TEMPORARY] VIEW [IF NOT EXISTS] [catalog_name.]schema_name.view_name
+  [(column_list)]
+  [COMMENT view_comment]
+  [TBLPROPERTIES ( { key = val } [, ...] )]
+  AS query_definition;
+
+```
+
+---
+
+- **Summary of Differences:**
+
+| Feature                 | Normal (Permanent) View in Unity Catalog                                | Temporary View                                      | Global Temporary View                    |
+| :---------------------- | :---------------------------------------------------------------------- | :-------------------------------------------------- | :--------------------------------------- |
+| **Scope of Visibility** | Account-wide (across all UC-enabled workspaces in the metastore region) | Single SparkSession (e.g., one notebook)            | All SparkSessions on a single cluster    |
+| **Persistence**         | Persistent (stored in Unity Catalog)                                    | Session-scoped (disappears with session)            | Cluster-scoped (disappears with cluster) |
+| **Governance**          | **Fully governed by Unity Catalog**                                     | Not governed by Unity Catalog                       | Not governed by Unity Catalog            |
+| **Namespace**           | `catalog.schema.view_name`                                              | `view_name`                                         | `global_temp.view_name`                  |
+| **Deletion**            | `DROP VIEW` command needed                                              | Automatic when session ends                         | Automatic when cluster terminates        |
+| **Best Use Cases**      | Production data models, shared datasets, security views                 | Ad-hoc analysis, intermediate steps in one notebook | Shared intermediate data on one cluster  |
+
+2. Materialized View: The data in an MV is derived from a source query and is automatically refreshed (either
+   incrementally or fully) when the underlying source tables change. offer much better performance for repeated queries
+   as data is pre-computed. However, they incur storage costs and refresh latency. MV doesn't support temporary scopes.
+
+```SQL
+CREATE MATERIALIZED VIEW [IF NOT EXISTS] [catalog_name.]schema_name.view_name
+  [COMMENT view_comment]
+  [TBLPROPERTIES ( { key = val } [, ...] )]
+  [REFRESH { EVERY 'interval' | MANUAL | ON SCHEMA CHANGE }] -- Schedule for automatic refresh
+  AS query_definition;
+```
+
+### User Define Functions(UDF)
+
 ## Move the silver data to gold (aggreation)
+
+### Join
