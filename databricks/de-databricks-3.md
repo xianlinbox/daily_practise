@@ -20,6 +20,10 @@ Once your tests are in a Git repo, your CI/CD pipeline (e.g., GitHub Actions, Az
 Databricks Asset Bundles (DABs): A newer, more streamlined way to manage and deploy entire Databricks projects,
 including tests, through a manifest file and the Databricks CLI.
 
+## Databricks Connect
+
+Connect local dev environment to Databricks cluster. you can run your local code on databricks cluster.
+
 ## Orchestration
 
 In many modern Lakehouse architectures, you'll often see DLT pipelines running as tasks within a larger Databricks Job.
@@ -39,6 +43,8 @@ When to use:
 3. integrated with other DLT
 4. complex batch jobs
 
+we can set Trigger, notification, permissions, Alerts
+
 ### Delta Live Table
 
 DLT is a framework for building highly reliable, maintainable, and testable ETL/ELT pipelines. You declaratively define
@@ -49,7 +55,7 @@ When to use:
 
 1. Just for an ETL pipeline
 
-## Goverance & Monitoring
+## Goverance
 
 ## Profiling
 
@@ -89,7 +95,93 @@ When to use:
   metrics.
 - Value: Helps identify which operations are performing poorly or causing unexpected changes to data.
 
+## Alerts
+
+- Databricks Workflows (Jobs) Alerts
+- Delta Live Tables (DLT) Pipeline Alerts
+- Databricks SQL Alerts
+- System Tables for Advanced Monitoring and Alerts
+
 ## Databricks Asset Bundles (DABs):
 
-A newer, more streamlined way to manage and deploy entire Databricks projects, including tests, through a manifest file
-and the Databricks CLI.
+A relatively new and highly recommended feature for managing, deploying, and running Databricks projects in a
+structured, automated, and repeatable way.
+
+A DAB is a manifest file (YAML) that defines an entire Databricks project, including its:
+
+- Source code: Notebooks, Python/Scala modules in Databricks Repos.
+- Infrastructure: Clusters, jobs, DLT pipelines, Unity Catalog objects (catalogs, schemas, volumes, external locations,
+  storage credentials).
+- Deployments: How to deploy the project to different environments (development, staging, production).
+- Tests: Commands to run unit or integration tests.
+
+```yaml
+# databricks.yml
+bundle:
+  name: my-lakehouse-etl-bundle
+
+resources:
+  jobs:
+    etl_job:
+      name: ${bundle.target}-my-lakehouse-etl-job
+      tasks:
+        - task_key: bronze_ingestion
+          new_cluster:
+            spark_version: 13.3.x-scala2.12
+            node_type_id: Standard_DS3_v2
+            num_workers: 2
+          notebook_task:
+            notebook_path: ../notebooks/bronze_ingestion_notebook.py
+            base_parameters:
+              catalog_name: ${var.catalog}
+              schema_name: ${var.bronze_schema}
+        - task_key: silver_transform
+          depends_on: [bronze_ingestion]
+          pipeline_task:
+            pipeline_id: ${resources.dlt_pipelines.silver_pipeline.id} # Reference DLT pipeline
+  dlt_pipelines:
+    silver_pipeline:
+      name: ${bundle.target}-silver-data-pipeline
+      target: ${var.catalog}.${var.silver_schema}
+      libraries:
+        - notebook:
+            path: ../notebooks/silver_dlt_pipeline.py
+      # ... other DLT settings
+
+  catalog: # Unity Catalog resources defined directly in the bundle
+    schemas:
+      bronze_schema:
+        name: ${var.catalog}.bronze
+        comment: "Raw data landing zone"
+      silver_schema:
+        name: ${var.catalog}.silver
+        comment: "Cleaned and transformed data"
+
+targets:
+  dev:
+    workspace:
+      host: https://adb-xxx.azuredatabricks.net
+    variables:
+      catalog: dev_catalog # Environment-specific catalog
+      bronze_schema: bronze_dev
+      silver_schema: silver_dev
+    # ... more environment specific settings
+
+  prod:
+    workspace:
+      host: https://adb-yyy.azuredatabricks.net
+    variables:
+      catalog: prod_catalog # Environment-specific catalog
+      bronze_schema: bronze
+      silver_schema: silver
+    # ... more environment specific settings
+```
+
+Then we can use DataBricks cli to interact with a databricks workspace
+
+```shell
+databricks bundle validate: Checks the databricks.yml for syntax errors.
+databricks bundle deploy --target <env>: Deploys all defined resources (jobs, pipelines, UC objects) to the specified environment.
+databricks bundle run <job-or-pipeline-key> --target <env>: Triggers a specific job or pipeline defined in the bundle.
+databricks bundle destroy --target <env>: Tears down all resources deployed by the bundle in that environment (use with extreme caution!).
+```
