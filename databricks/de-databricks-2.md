@@ -148,7 +148,7 @@ CREATE FOREIGN CATALOG IF NOT EXISTS shared_data_from_partner
 SELECT * FROM shared_data_from_partner.sales_schema.partner_transactions LIMIT 10;
 ```
 
-## Move the Raw Data to bronze
+## Data Ingestion & Landing (Bronze Layer)
 
 Based above information, we have know where the data stored, how can we access it and how to manage the data. The next
 step is moving raw data into databricks.
@@ -276,7 +276,7 @@ Loader or COPY INTO
 
 5. Upload files to cloud storage manually
 
-## Move the bronze data to silver (filter, clean, augment)
+## Data Transformation & Preparation (Silver Layer)
 
 ### Data Discovering
 
@@ -405,6 +405,8 @@ EXPECT (constraint_name) ON (condition) EXPECTATIONS AS (DROP ROW): Same as FAIL
 EXPECT (constraint_name) ON (condition) EXPECTATIONS AS (FAIL BATCH): If any row violates the condition, the entire batch processing fails. This is for critical data quality rules where any bad data is unacceptable.
 ```
 
+#### Apply Changes to table
+
 ### Views
 
 View allowing you to present data in a user-friendly and controlled manner without duplicating storage. There are 2
@@ -475,7 +477,7 @@ FROM
   STREAM(LIVE.raw_clickstream);
 ```
 
-## Move the silver data to gold (aggreation)
+## Data Curating & Modeling (Gold Layer)
 
 ### User Define Functions(UDF)
 
