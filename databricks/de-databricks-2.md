@@ -407,6 +407,34 @@ EXPECT (constraint_name) ON (condition) EXPECTATIONS AS (FAIL BATCH): If any row
 
 #### Apply Changes to table
 
+There are 2 kind of commands we can use to apply changes
+
+1. MERGE INTO
+
+It is the general Delta Lake command for applying changes
+
+```SQL
+MERGE INTO ... USING ... ON ... WHEN MATCHED ... WHEN NOT MATCHED ...: Perform UPSERT (update or insert) operations efficiently.
+```
+
+2. APPLY Changes To
+
+DLT's simplified and automated approach to this common data engineering pattern.
+
+```SQL
+APPLY CHANGES INTO LIVE.target_table
+FROM LIVE.source_change_stream
+KEYS (key_column_1 [, key_column_2, ...])
+[APPLY AS DELETE WHEN condition_for_delete]
+[SEQUENCE BY sequence_column]
+[COLUMNS { column_1 | column_2 [, ...] } | EXCEPT COLUMNS { column_1 | column_2 [, ...] }]
+[STORED AS SCD TYPE { 1 | 2 }]
+```
+
+- SCD type 1: override the data, no history maintained
+- SCD type 2: Full history maintained
+- SCD type 3: only recent history maintained
+
 ### Views
 
 View allowing you to present data in a user-friendly and controlled manner without duplicating storage. There are 2
