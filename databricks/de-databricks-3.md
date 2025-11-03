@@ -55,6 +55,21 @@ When to use:
 
 1. Just for an ETL pipeline
 
+Pipeline Mode:
+
+- development: the pipeline is intended for testing and debugging, so the job cluster remains active even after the
+  pipeline completes for a period of time (2 hours by default).
+- product: designed to be automated and efficient, shutting down automatically after the pipeline completes.
+
+Execution Mode
+
+- triggered:the system stops processing after successfully refreshing all tables or selected tables, ensuring each table
+  in the update is refreshed based on the data available when the update starts.
+- continuous: the pipeline continuously runs until manually stopped to process new data as it arrives in data sources to
+  keep the target tables up to date throughout the pipeline execution.
+
+### Databricks SQL Warehouse
+
 ## Goverance
 
 ## Profiling

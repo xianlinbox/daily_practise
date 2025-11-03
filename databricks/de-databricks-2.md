@@ -276,6 +276,8 @@ Loader or COPY INTO
 
 5. Upload files to cloud storage manually
 
+### Metadata
+
 ## Data Transformation & Preparation (Silver Layer)
 
 ### Data Discovering
@@ -504,6 +506,8 @@ FROM
 FROM
   STREAM(LIVE.raw_clickstream);
 ```
+
+### Specific Data Handling
 
 ## Data Curating & Modeling (Gold Layer)
 
