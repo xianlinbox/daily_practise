@@ -198,6 +198,7 @@ AS SELECT
        'cloudFiles.includeFileName', 'true',  -- Include the source filename in the output
        'cloudFiles.maxFilesPerTrigger', '100', -- Optional: Process up to 100 files per micro-batch
        'cloudFiles.partitionColumns', 'event_type' -- Optional: Specify partition columns for better performance
+       'pathGlobFilter', "*.jpg". -- Filtering directories or files using glob patterns
      )
    );
 ```
@@ -370,6 +371,10 @@ INSERT OVERWRITE...: can update the schema  when schema.autoMerge.enabled is set
 UPDATE ... SET ... WHERE ...: Modify existing rows.
 DELETE FROM ... WHERE ...: Remove rows.
 MERGE INTO ... USING ... ON ... WHEN MATCHED ... WHEN NOT MATCHED ...: Perform UPSERT (update or insert) operations efficiently.
+
+subquery1 UNION [ ALL | DISTINCT ] subquery2: return the result of subquery1 plus the rows of subquery2
+subquery1 INTERSECT [ALL | DISTINCT] subquery2: return set of rows which are in both subqueries
+subquery1 EXCEPT [ALL | DISTINCT ] subquery2: Returns the rows in subquery1 which are not in subquery2.
 ```
 
 #### Security

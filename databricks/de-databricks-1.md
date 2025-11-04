@@ -77,6 +77,8 @@ Cluster has a bunch of configuration:
 5. VM Type & Size: memory, cpu, Gpu
 6. Policy: set restricts to user/Group
 
+### Liquid Clustering
+
 ## Unity Catalog
 
 In Databricks, Most of the operations executes through Unity Catalog, Unity Catalog is an abstraction layer on cloud
