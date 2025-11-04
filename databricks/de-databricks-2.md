@@ -160,7 +160,7 @@ Databricks provide bunch of ways for customer:
 Efficiently and incrementally processes new data files as they arrive in your cloud object storage (like AWS S3, Azure
 Data Lake Storage Gen2, or Google Cloud Storage). It's designed to simplify and automate the ingestion of large volumes
 of data from external file systems into Delta Lake tables, forming the foundation of many Bronze layer pipelines in a
-Lakehouse architecture.,
+Lakehouse architecture. Support both file listing and file notification
 
 Suitable for: continuous, high-volume, low-latency streaming scenarios
 
@@ -205,7 +205,7 @@ AS SELECT
 2. COPY INTO Command (Recommended for Idempotent Batch Ingestion from Object Storage)
 
 a SQL command introduced in Databricks that loads data from files in a specified cloud storage location into a Delta
-Lake table.
+Lake table. only support directory listing. Q
 
 Suitable for: simpler, idempotent, and scheduled batch ingestion needs where real-time processing isn't a strict
 requirement.
@@ -277,6 +277,14 @@ Loader or COPY INTO
 5. Upload files to cloud storage manually
 
 ### Metadata
+
+- \_metadata.file_path: The full path to the source file.
+- \_metadata.file_name: The name of the source file.
+- \_metadata.file_size: The size of the source file in bytes.
+- \_metadata.file_modification_time: The last modification timestamp of the source file.
+- \_metadata.file_block_start: The start byte offset of the block being read.
+- \_metadata.file_block_length: The length of the file block being read
+- input_file_name() and input_file_block_length()
 
 ## Data Transformation & Preparation (Silver Layer)
 
@@ -355,8 +363,10 @@ WITH [ RECURSIVE ] common_table_expression [, ...]: Common table expression, Def
 ALTER TABLE ...: Modify schema (add/drop/change columns), set table properties.
 DROP TABLE ...: Delete the table (and data for managed tables).
 TRUNCATE TABLE ...: Delete all data from a table, leaving the schema.
+ALTER <object> OWNER TO : change table ownership
 
 INSERT INTO ... VALUES (...) / INSERT INTO ... SELECT ...: Add new rows.
+INSERT OVERWRITE...: can update the schema  when schema.autoMerge.enabled is set true, otherwise it will fail.
 UPDATE ... SET ... WHERE ...: Modify existing rows.
 DELETE FROM ... WHERE ...: Remove rows.
 MERGE INTO ... USING ... ON ... WHEN MATCHED ... WHEN NOT MATCHED ...: Perform UPSERT (update or insert) operations efficiently.
@@ -390,7 +400,8 @@ ALTER TABLE my_catalog.gold_data.sales_transactions
    automatically adapts to data changes and query patterns. Define CLUSTERING BY (col1, col2) during CREATE TABLE. Run
    OPTIMIZE periodically to trigger clustering.
 3. Vaccum: Removes data files that are no longer referenced by the Delta Lake transaction log. VACUUM table_name RETAIN
-   7 HOURS; (Requires a RETAIN clause for safety, default is 7 days). Use with caution!
+   7 HOURS; (Requires a RETAIN clause for safety, default is 7 days). Use with caution! There is retentionDurationCheck
+   check featrure to avoid data loss.
 4. Photon Engine: Databricks' native vectorized query engine
 5. Caching:
 
@@ -401,9 +412,14 @@ ALTER TABLE my_catalog.gold_data.sales_transactions
 2. Constraints: supports standard SQL constraints like NOT NULL, CHECK, PRIMARY KEY, and FOREIGN KEY
 
 ```SQL
+-- only warnning,
 EXPECT (constraint_name) ON (condition): Simply monitors the quality. Records violating the condition are counted and reported in DLT logs and UI. The pipeline continues.
-EXPECT (constraint_name) ON (condition) EXPECTATIONS AS (FAIL UPDATE): Rows violating the condition are dropped from the target table, but the pipeline continues.
+
+-- drop record
 EXPECT (constraint_name) ON (condition) EXPECTATIONS AS (DROP ROW): Same as FAIL UPDATE, drops rows.
+
+-- fail processing
+EXPECT (constraint_name) ON (condition) EXPECTATIONS AS (FAIL UPDATE): Rows violating the condition are dropped from the target table, but the pipeline continues.
 EXPECT (constraint_name) ON (condition) EXPECTATIONS AS (FAIL BATCH): If any row violates the condition, the entire batch processing fails. This is for critical data quality rules where any bad data is unacceptable.
 ```
 
@@ -509,6 +525,27 @@ FROM
 
 ### Specific Data Handling
 
+- generated columns: GENERATED ALWAYS AS
+- Aggregate Functions
+- Numeric Functions
+- String Functions
+- JSON Functions
+- MAP Functions
+- Window Functions
+- Type Conversion Functions
+- CURRENT_DATABASE() / CURRENT_SCHEMA(): Current schema.
+- CURRENT_CATALOG(): Current catalog.
+- CURRENT_USER(): Current user.
+- VERSION(): Spark version.
+- INPUT_FILE_NAME(): Name of the input file for the current row.
+- UUID(): Generate a UUID.
+- TRANSFORM(array, func): Applies func to each element of array.
+- FILTER(array, func): Filters array elements using func.
+- EXISTS(array, func): Checks if func is true for any element.
+- AGGREGATE(array, start_value, merge_func, finish_func): Aggregates elements.
+- PIVOT
+- EXPLODE
+
 ## Data Curating & Modeling (Gold Layer)
 
 ### User Define Functions(UDF)
@@ -547,3 +584,22 @@ Performance Optimization for Aggregations
   not excessively high.
 - Approximate Aggregates:
 - Materialized Views: For frequently queried, complex aggregations, Materialized Views are an excellent choice
+
+## SQL Warehouses (SQL Endpoint)
+
+designed to provide a high-performance, cost-effective, and user-friendly experience for SQL analytics and Business
+Intelligence (BI) workloads. They are a distinct compute resource optimized for SQL.
+
+### Types of SQL Warehouses
+
+- Serverless SQL Warehouse (Recommended for most cases)
+- Pro SQL Warehouse
+- Classic SQL Warehouse
+
+Scale Up & Scale Out
+
+- if the queries are running sequentially then scale up(Size of the cluster from 2X-Small to 4X-Large)
+- if the queries are running concurrently or with more users then scale out(add more clusters).
+- A single cluster can only run up to 10 queries at a time
+- A warehouse can have more than one cluster
+- A single query will not span more than one cluster

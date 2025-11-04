@@ -30,7 +30,7 @@ In many modern Lakehouse architectures, you'll often see DLT pipelines running a
 This allows DLT to handle the core ETL logic reliably and automatically, while the parent Job orchestrates DLT with
 other pre- or post-processing tasks, external system integrations, or diverse workloads.
 
-## Databricks Jobs
+### Databricks Jobs
 
 Databricks Jobs is a general-purpose orchestration service for running arbitrary code on Databricks clusters. A "Job"
 can consist of one or more "Tasks," where each task can be a notebook, JAR, Python script, DLT pipeline, SQL file, or
@@ -44,6 +44,13 @@ When to use:
 4. complex batch jobs
 
 we can set Trigger, notification, permissions, Alerts
+
+#### Job Parameters
+
+- Job parameter: A key-value pair defined at the job level and pushed down to tasks.
+- Task parameter: A key-value pair or JSON array defined at the task level.
+- Dynamic value references: A syntax for references job conditions, metadata, and parameters when configuring tasks.
+- Task values: A syntax for capturing and referencing values generated during task runs.
 
 ### Delta Live Table
 
