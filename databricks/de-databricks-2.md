@@ -615,14 +615,19 @@ Performance Optimization for Aggregations
 
 ## SQL Warehouses (SQL Endpoint)
 
-designed to provide a high-performance, cost-effective, and user-friendly experience for SQL analytics and Business
-Intelligence (BI) workloads. They are a distinct compute resource optimized for SQL.
+Databricks SQL is a dedicated product for data warehousing on the Lakehouse. Designed to provide a high-performance,
+cost-effective, and user-friendly experience for SQL analytics and Business Intelligence (BI) workloads. They are a
+distinct compute resource optimized for SQL. Databricks SQL Warehouses are the compute engines (replacing old SQL
+Endpoints).
 
 ### Types of SQL Warehouses
 
-- Serverless SQL Warehouse (Recommended for most cases)
-- Pro SQL Warehouse
-- Classic SQL Warehouse
+- Serverless SQL Warehouse (Recommended for most cases): Databricks fully manages the compute infrastructure
+- Pro SQL Warehouse(Complex or Highly Concurrent Workloads, Specific Networking Needs): Databricks manages the cluster,
+  including auto-scaling, but you retain some control over underlying instance types and min/max cluster sizes. Supports
+  advanced features like workload management, query concurrency controls, and integration with specific networking
+  configurations (e.g., VNet injection in Azure).
+- Classic SQL Warehouse:Designed for smaller, less demanding workloads or for testing. has slower startup & scaling
 
 Scale Up & Scale Out
 
