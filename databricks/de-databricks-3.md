@@ -124,6 +124,11 @@ Execution Mode
 - Databricks SQL Alerts
 - System Tables for Advanced Monitoring and Alerts
 
+Supported Destinations:
+
+- email
+- webhook(Slack/Microsoft Teams/PagerDuty/OpsGenie/VictorOp...)
+
 ## Databricks Asset Bundles (DABs):
 
 A relatively new and highly recommended feature for managing, deploying, and running Databricks projects in a

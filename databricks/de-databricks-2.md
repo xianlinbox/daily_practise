@@ -203,6 +203,10 @@ AS SELECT
    );
 ```
 
+- cloudFiles.schemaEvolutionMode: addNewColumns (Default when no schema is provided)/rescue/failOnNewColumns/none
+- trigger in streaming: none(every 500 ms)/processingTime=<interval>/once=True (all in once)/availableNow=True(all in
+  micro batch)/continuous=<interval>(experimental)
+
 2. COPY INTO Command (Recommended for Idempotent Batch Ingestion from Object Storage)
 
 a SQL command introduced in Databricks that loads data from files in a specified cloud storage location into a Delta
@@ -528,10 +532,29 @@ FROM
   STREAM(LIVE.raw_clickstream);
 ```
 
+The options support for Spark streaming:
+
+1. spark.readStream()
+
+- General Structured Streaming Source Options:
+  maxFilesPerTrigger/ignoreChanges/startingTimestamp/maxBytesPerBatch/startingOffsets
+- Auto Loader Specific Options: cloudFiles.\*\*\*
+- Format-Specific Options for Auto Loader: csv(header, delimiter...)/
+
+the following method supported are: format/option/schema/load/table
+
+2. spark.writeStream()
+
+- General Structured Streaming Sink Options: checkpointLocation/outputMode/trigger
+- Delta Lake Specific Sink Options: mergeSchema/maxRecordsPerFile..
+- Kafka Specific Sink Options: kafka.bootstrap.servers/topic/serializer
+
+the following method supported are: format/option/outputMode/trigger/queryName/toTable/foreachBatch/forEach
+
 ### Specific Data Handling
 
 - generated columns: GENERATED ALWAYS AS
-- Aggregate Functions
+- Aggregate Functions: agg() can specify multiple aggregation functions
 - Numeric Functions
 - String Functions
 - JSON Functions

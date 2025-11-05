@@ -60,6 +60,18 @@ language can config at the whole level. at each cell, we can use magic command t
 
 Databricks also provide some utils like dbutils.fs, dbutils.secret, dbutils.widgets
 
+Limitations of Notebookw:
+
+- Revision snapshot autosaving, manual saving, and cloning are supported for all notebooks up to 100 MB.
+- Import and export is supported for IPYNB notebooks up to 100 MB.
+- Import and export is supported for DBC archive, HTML, R Markdown, and source notebooks up to 10 MB.
+- Individual notebook cells have an input limit of 6 MB.
+- Table results are limited to 10,000 rows or 2 MB,
+- Job clusters have a maximum notebook output size of 30 MB.
+- The maximum cell output size defaults to 10 MB.
+- The debugger works only with Python. It does not support Scala or R.
+- The debugger does not support stepping into Python libraries.
+
 ### Cluster
 
 When code is done, it will be run in the spark cluster(the compute resource). In Databrciks, there are 2 kinds of
@@ -67,6 +79,7 @@ cluster:
 
 1. All Purpose Cluster: manually created, expensive, shared among users, good for interactive workload, persistent
 2. Job Cluster:created by jobs,terminated at the end of job, cheaper, good for automation.
+3. Serverless Compute: Owned and managed by Databricks, restricted language support, as it is limited to Python and SQL.
 
 Cluster has a bunch of configuration:
 
@@ -77,7 +90,16 @@ Cluster has a bunch of configuration:
 5. VM Type & Size: memory, cpu, Gpu
 6. Policy: set restricts to user/Group
 
-### Liquid Clustering
+- Liquid Clustering
+
+designed to progressively optimize the physical layout of data within Delta tables by organizing it according to
+specified clustering keys, typically columns that are frequently queried. This ensures that data is stored in a way that
+enhances the performance of queries by reducing the amount of data read during execution.
+
+- Instances
+
+Ad hoc and interactive analysis benefits greatly from Storage Optimized instances, which can leverage Delta caching to
+accelerate performance.
 
 ## Unity Catalog
 
@@ -116,4 +138,4 @@ The main concepts under Unity Catalog:
 - Provider: The organization or Databricks account that owns and manages the data being shared.
 - Recipent: The organization, Databricks account, or user that consumes the data shared by a provider.
 
-To be continue...
+1.  To be continue...
