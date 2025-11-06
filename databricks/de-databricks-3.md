@@ -52,6 +52,10 @@ we can set Trigger, notification, permissions, Alerts
 - Dynamic value references: A syntax for references job conditions, metadata, and parameters when configuring tasks.
 - Task values: A syntax for capturing and referencing values generated during task runs.
 
+#### Controls
+
+- Retries must be set individually at the task level by set "max_retries"
+
 ### Delta Live Table
 
 DLT is a framework for building highly reliable, maintainable, and testable ETL/ELT pipelines. You declaratively define
@@ -75,7 +79,12 @@ Execution Mode
 - continuous: the pipeline continuously runs until manually stopped to process new data as it arrives in data sources to
   keep the target tables up to date throughout the pipeline execution.
 
-### Databricks SQL Warehouse
+Annotation @dlt:
+
+- @dlt.table: Defines a materialized Delta table
+- @dlt.streaming_table: Defines a materialized Delta table that is specifically designed to be incrementally and
+  continuously updated from a streaming source.
+- @dlt.view: Defines a temporary view
 
 ## Goverance
 
@@ -207,6 +216,8 @@ targets:
 Then we can use DataBricks cli to interact with a databricks workspace
 
 ```shell
+databricks bundle init: initializes a new bundle project with starter configuration
+databricks bundle sync: syncs local project files with the Databricks workspace for rapid iteration.
 databricks bundle validate: Checks the databricks.yml for syntax errors.
 databricks bundle deploy --target <env>: Deploys all defined resources (jobs, pipelines, UC objects) to the specified environment.
 databricks bundle run <job-or-pipeline-key> --target <env>: Triggers a specific job or pipeline defined in the bundle.

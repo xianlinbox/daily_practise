@@ -135,6 +135,12 @@ To share live Delta tables or volumes between Databricks workspaces, Delta Shari
 1. Provider Side: Creates a Share in their Unity Catalog, adds tables/volumes to it, and defines a Recipient.
 2. Recipient Side: Creates a Foreign Catalog in their Unity Catalog from the received share.
 
+Limitations:
+
+- Open Sharing protocal can only share data. Databricks-to-Databricks supports sharing notebooks, dashboards, ML models,
+  and volumes.
+- Recipients cannot modify or write back to provider data.
+
 ```SQL
 -- Step 1: Create a recipient (if not already done by provider)
 -- This is typically handled by the provider in their UC metastore.
@@ -309,6 +315,9 @@ Loader or COPY INTO
 SHOW Catalog/Schema/TABLES... [IN ...]
 SHOW Grant On ...
 DESCRIBE TABLE/History catalog.schema.table_name;
+Describe extended: -- Provides comprehensive metadata about the table's schema, general properties, and physical storage location, along with custom table properties. It's an extended view of the table's definition and configuration.
+
+describe detail: -- provides detailed, low-level metadata about the physical state and operational history of a Delta Lake table, only applicable to Delta Lake tables.
 
 ```
 
@@ -568,11 +577,15 @@ the following method supported are: format/option/outputMode/trigger/queryName/t
 - INPUT_FILE_NAME(): Name of the input file for the current row.
 - UUID(): Generate a UUID.
 - TRANSFORM(array, func): Applies func to each element of array.
+- TRANSFORM_KEYs/VALUEs: Applies func to each element of map.
 - FILTER(array, func): Filters array elements using func.
 - EXISTS(array, func): Checks if func is true for any element.
 - AGGREGATE(array, start_value, merge_func, finish_func): Aggregates elements.
-- PIVOT
-- EXPLODE
+- PIVOT: transform rows into columns
+- EXPLODE: unnest or flatten array or map columns into multiple rows
+- COUNT_IF: counts how many times a condition is TRUE. This directly counts
+- INITCAP
+- flatten
 
 ## Data Curating & Modeling (Gold Layer)
 
