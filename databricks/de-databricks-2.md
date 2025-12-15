@@ -168,6 +168,9 @@ Data Lake Storage Gen2, or Google Cloud Storage). It's designed to simplify and 
 of data from external file systems into Delta Lake tables, forming the foundation of many Bronze layer pipelines in a
 Lakehouse architecture. Support both file listing and file notification
 
+when working with JSON, CSV, or XML, as these formats do not encode data types. All columns including nested fields are
+inferred as STRING unless configured infer the schema explicitly.
+
 Suitable for: continuous, high-volume, low-latency streaming scenarios
 
 An example:
@@ -434,10 +437,10 @@ ALTER TABLE my_catalog.gold_data.sales_transactions
 EXPECT (constraint_name) ON (condition): Simply monitors the quality. Records violating the condition are counted and reported in DLT logs and UI. The pipeline continues.
 
 -- drop record
-EXPECT (constraint_name) ON (condition) EXPECTATIONS AS (DROP ROW): Same as FAIL UPDATE, drops rows.
+EXPECT (constraint_name) ON (condition) EXPECTATIONS AS (DROP ROW): just drop the row
 
 -- fail processing
-EXPECT (constraint_name) ON (condition) EXPECTATIONS AS (FAIL UPDATE): Rows violating the condition are dropped from the target table, but the pipeline continues.
+EXPECT (constraint_name) ON (condition) EXPECTATIONS AS (FAIL UPDATE): fail the task
 EXPECT (constraint_name) ON (condition) EXPECTATIONS AS (FAIL BATCH): If any row violates the condition, the entire batch processing fails. This is for critical data quality rules where any bad data is unacceptable.
 ```
 
@@ -583,6 +586,7 @@ the following method supported are: format/option/outputMode/trigger/queryName/t
 - AGGREGATE(array, start_value, merge_func, finish_func): Aggregates elements.
 - PIVOT: transform rows into columns
 - EXPLODE: unnest or flatten array or map columns into multiple rows
+- COUNT: ignores nulls by design in SQL
 - COUNT_IF: counts how many times a condition is TRUE. This directly counts
 - INITCAP
 - flatten
