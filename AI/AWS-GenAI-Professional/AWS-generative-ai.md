@@ -49,7 +49,7 @@ Knowledge Base(RAG)
 
 Agents
 
-Guardrails
+Guardrails support multimodal toxicity detection for images
 
 #### Model Evaluation:
 

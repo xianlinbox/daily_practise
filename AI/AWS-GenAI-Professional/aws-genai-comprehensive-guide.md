@@ -112,17 +112,135 @@ workflows that handle multi-step processing.
 ## Bedrock
 
 - Inference API
+- Prompt Management
 - Knowledge base integration (database:open search, document:s3)
 - Agents
-- Model Evaluation
+
+2. Model Evaluation
+
+- Automatic model evaluation jobs have a quota of 1,000 prompts for each dataset.
+
+3. Intelligent Prompt Routing
+
+- Quality thresholds for model selection
+- Cost constraints for optimization
+- Latency requirements for time-sensitive applications
+- Automatic failover between models
+- Combine explicit routing logic with Intelligent Prompt Routing for comprehensive optimization
 
 ## SageMaker
 
-## Opean Search
+1. Data Wrangler
+
+- profile and validate data interactively to complement automated validation workflows
+
+## AgentCore
+
+- Episodic memory:enhance prompt management by preserving context across complex agent workflows.
+- enhances data validation workflows with composable services that work with any framework and model.
+- Orchestration: Adopt a loop framework (LangGraph/Strands).
+- State: Replace DynamoDB calls with AgentCore Memory SDK.
+- Identity: Configure OIDC/Cognito in the AgentCore Console.
+- Timeouts: Remove logic designed to work around Lambda 15m limits.
+- IAM: Move permissions from Lambda Role to AgentCore Role.
+
+## Vector Storages
+
+### Indexing Algorithm
+
+- HNSW(Hierarchical Navigable Small World): build slow but search fast, recommended
+- IVF(Inverted File): build fast, uses less memory but search less accuracy
+
+### Performance Consideration:
+
+- Dimensionality Impact: 1024 vs 10240
+- Precision Trade-offs: float32 vs float16
+- Index Structure: HNSW vs IVF vs LSH
+- Memory Requirements
+- Sharding: horizontally increase the nodes
+
+### Search Strategy
+
+Coarse-to-fine search and semantic filtering layers
+
+1. Coarse filtering stage
+2. Approximate search stage
+3. Fine-grained ranking stage
+4. Result assembly stage
+
+### Knowledge Bases
+
+1. Chunking Strategy
+
+- Default: balances chunk size with semantic coherence. detecting natural boundaries while maintaining around 300 token
+  targets.
+- Fixed Size
+- Hierarchical Chunking: Split text to parent-child chunks, find by child chunk, retrieve parent chunk. it will cause
+  data redundancy.
+- Semantic Chunking: use embedding model to analyzes the text, create chunk when similarity drops.Chunks are variable
+  sizes. One chunk might be short (a quick definition), and the next might be long (a detailed story), but each chunk
+  represents one complete thought.
+
+### Opean Search
+
+### S3 vector store
+
+### pgvector for PostgreSQL
+
+### AWS Marketplace and partner provided spcific vector database(Pinecone)
+
+## Glue
+
+AWS Glue Data Quality delivers enterprise-scale validation capabilities through its powerful Data Quality Definition
+Language (DQDL).
+
+## Comprehend
+
+- provides built-in entity recognition for common entity types and supports custom entity models for domain-specific
+  requirements.
+- provides confidence scores for each detected entity. You use these scores to filter and validate entity extraction
+  results.
+- Can be pre-trained to recognize specific types of documents relevant to your domain: You provide the data, and Amazon
+  Comprehend manages the training, tuning, and hosting of the model infrastructure.
+
+## Amazon Transcribe
+
+- converts speech to text, providing a foundation for processing audio content in multimodal workflows.
+
+## CloudWatch
+
+1. CloudWatch monitor data quality metrics across your entire foundation model pipeline. CloudWatch provides the
+   infrastructure to collect, analyze, and act on metrics from AWS Glue, SageMaker, Lambda, and other services in your
+   validation workflow.
+
+## Amazon Q business
+
+a fully managed, generative-AI-powered assistant that can answer questions, provide summaries, and generate content
+based on your company's enterprise data.
+
+- No Coding Required
+- uses a high-performance semantic search engine (derived from Amazon Kendra technology) to index your data.
+- respects the Access Control Lists (ACLs) of your data sources.
+- requires AWS IAM Identity Center (formerly SSO) to map these enterprise identities
+- comes with 40+ pre-built connectors to ingest data without writing ETL scripts, like Common Sources, Web Crawler,
+  Custom Connector
+- support acting on data source using Plugins. like create ticket in jira.
+- can turn a conversation into a standalone mini-app. other users don't need to re-create the whole prompt.
+- support guardrail
+- pay per user month ($20/user/month for pro)
 
 # Non Functional requirement
 
+## Context Window Management
+
+1. Truncated
+
+- Sliding window
+- Compression/summarization
+- Importance-based
+- Hybrid approach
+
 1. scaling
-2. Monitoring
-3. Security
-4. Goverance
+1. Monitoring
+1. Security
+1. Goverance
