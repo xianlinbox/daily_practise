@@ -128,6 +128,12 @@ workflows that handle multi-step processing.
 - Automatic failover between models
 - Combine explicit routing logic with Intelligent Prompt Routing for comprehensive optimization
 
+4. Bedrock Data Automation
+
+- blueprint: Extraction retrieves field values, but can't split complex strings.Normalization standardizes field
+  formats. Transformation can split complex fields into structured components. Validation helps enforce constraints
+  after transformation.
+
 ## SageMaker
 
 1. Data Wrangler
@@ -143,6 +149,13 @@ workflows that handle multi-step processing.
 - Identity: Configure OIDC/Cognito in the AgentCore Console.
 - Timeouts: Remove logic designed to work around Lambda 15m limits.
 - IAM: Move permissions from Lambda Role to AgentCore Role.
+
+### Strands agent vs Agent squad
+
+- Use AWS Strands when: You need to build a smart agent that can use tools (APIs, Databases) to solve open-ended
+  problems.
+- Use AWS Agent Squad when: You have 3+ different bots (e.g., an HR bot, an IT bot, and a Sales bot) and you want to
+  unify them under a single chat interface without building a massive "God Mode" prompt.
 
 ## Vector Storages
 

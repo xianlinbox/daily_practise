@@ -472,3 +472,6 @@ within the Amazon Bedrock ecosystem.
 
 Bluerpints: a pre-defined, reusable, and often templated architectural patterns or solutions that enable you to quickly
 and consistently deploy common data automation workflows for Amazon Bedrock.
+
+- S3 event notification can't trigger BDA or step functions, it need to through event bridge
+- BDA has limitations for complex media processing workflows
